@@ -1,3 +1,4 @@
+import { expect, test } from '@jest/globals';
 import Goal, { beginOfWeek } from './Goal';
 
 test('begin-of-week', () => {
