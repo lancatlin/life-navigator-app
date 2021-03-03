@@ -5,8 +5,8 @@ class Task {
     Object.assign(this, props);
   }
 
-  times(now) {
-    return timeToBinary(now, this.startTime, this.endTime);
+  times(now, hours) {
+    return timeToBinary(now, hours, this.startTime, this.endTime);
   }
 }
 

@@ -8,7 +8,6 @@ test('test-times-convertion', () => {
     endTime: new Date(2021, 0, 1, 2, 15),
   });
   // expect from 1:10 to 2:20
-  let expectResult = BigInt('0b000000011111110000');
-  expectResult <<= (21n + 6n * 24n) * 6n;
-  expect(task.times(now).toString(2)).toStrictEqual(expectResult.toString(2));
+  const expectResult = BigInt('0b000000011111110000');
+  expect(task.times(now, 3).toString(2)).toStrictEqual(expectResult.toString(2));
 });
