@@ -1,6 +1,8 @@
+import { ceilTime } from './utils';
+
 class Scheduler {
   constructor(now, hours, goals = []) {
-    this.now = now;
+    this.now = ceilTime(now);
     this.hours = hours;
     this.goals = goals;
     this.tasks = [];

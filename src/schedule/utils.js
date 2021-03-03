@@ -1,9 +1,10 @@
+const timeUnit = 1000 * 60 * 10; // ten minutes
 const timeToBinary = (now, hours, startTime = null, endTime = null) => {
   const begin = startTime
-    ? Math.floor(getTimeIndex(startTime - now))
+    ? Math.floor((startTime - now) / timeUnit)
     : 0;
   const end = endTime
-    ? Math.ceil(getTimeIndex(endTime - now))
+    ? Math.ceil((endTime - now) / timeUnit)
     : 24 * 6;
   let result = BigInt(0);
   for (let i = 0; i < hours * 6; i += 1) {
@@ -13,6 +14,9 @@ const timeToBinary = (now, hours, startTime = null, endTime = null) => {
   return result;
 };
 
-const getTimeIndex = (t) => t / (1000 * 60 * 10);
+const ceilTime = (t) => {
+  const left = t % timeUnit;
+  return left === 0 ? t : t - left + timeUnit;
+};
 
-export { timeToBinary };
+export { timeToBinary, ceilTime };
