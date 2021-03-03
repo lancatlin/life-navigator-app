@@ -1,9 +1,9 @@
 class Scheduler {
-  constructor(goals, now) {
+  constructor(now, hours, goals = []) {
     this.now = now;
+    this.hours = hours;
     this.goals = goals;
     this.tasks = [];
-    this.times = BigInt(2 ** (24 * 6 * 7) - 1);
   }
 
   sortGoals() {
@@ -15,9 +15,11 @@ class Scheduler {
   }
 
   remainingTimes() {
-    this.times = new Array(7).fill(BigInt(2 ** (24 * 6) - 1));
-    const beginDate = this.now.getDate();
-    this.tasks.forEach((task) => {});
+    let result = BigInt(2 ** (6 * this.hours) - 1);
+    this.tasks.forEach((task) => {
+      result &= ~task.times(this.now, this.hours);
+    });
+    return result;
   }
 }
 

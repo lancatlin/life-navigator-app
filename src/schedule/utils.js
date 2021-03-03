@@ -15,4 +15,4 @@ const timeToBinary = (now, hours, startTime = null, endTime = null) => {
 
 const getTimeIndex = (t) => t / (1000 * 60 * 10);
 
-export default timeToBinary;
+export { timeToBinary };

@@ -1,4 +1,4 @@
-import timeToBinary from './utils';
+import { timeToBinary } from './utils';
 
 class Task {
   constructor(props) {
