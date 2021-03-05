@@ -24,3 +24,15 @@ test('test-remaining-times', () => {
 
   expect(goal.remainingTimes(now)).toBe(3);
 });
+
+test('loadSession', () => {
+  // test from 11:00 ~ 14:00
+  const now = new Date(2021, 0, 1, 12); // Friday
+  const hours = 3;
+  const goal = new Goal({
+    session: new Array(7).fill(0b100000000000101111111111), // from 8:00 to 17:00
+  });
+  // expect to have one unavailable hour and two free hours
+  expect(goal.loadSession(now, hours).toString(2))
+    .toBe('111111000000111111');
+});
