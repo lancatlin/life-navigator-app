@@ -27,12 +27,20 @@ test('test-remaining-times', () => {
 
 test('loadSession', () => {
   // test from 11:00 ~ 14:00
-  const now = new Date(2021, 0, 1, 12); // Friday
+  const now = new Date(2021, 0, 1, 22, 10); // Friday
   const hours = 3;
   const goal = new Goal({
-    session: new Array(7).fill(0b100000000000101111111111), // from 8:00 to 17:00
+    session: [
+      0b100000000000101111111110, // from Friday 22:00 to Saturday 01:00
+      0b100000000000101111111110,
+      0b100000000000101111111110,
+      0b100000000000101111111110,
+      0b100000000000101111111110,
+      0b100000000000101111111110,
+      0b010000000000000000000000,
+    ],
   });
   // expect to have one unavailable hour and two free hours
   expect(goal.loadSession(now, hours).toString(2))
-    .toBe('111111000000111111');
+    .toBe('111110000000000001');
 });
