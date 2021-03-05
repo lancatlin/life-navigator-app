@@ -33,15 +33,9 @@ test('loadSession', () => {
   const goal = new Goal({
     session: [
       0b010000000000000000000000,
-      0b100000000000101111111110,
-      0b100000000000101111111110,
-      0b100000000000101111111110,
-      0b100000000000101111111110,
-      0b100000000000101111111110,
-      0b100000000000101111111110,
+      ...new Array(6).fill(0b100000000000101111111110),
     ],
   });
-  // expect to have one unavailable hour and two free hours
   expect(goal.loadSession(now, hours).toString(2))
     .toBe('111110000000000001');
 });
