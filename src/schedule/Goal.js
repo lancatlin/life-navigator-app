@@ -18,7 +18,6 @@ class Goal {
       const day = (beginDay + Math.floor(i / 24)) % 7;
       const hour = i % 24;
       const current = (this.session[day] >> (23 - hour)) % 2;
-      console.log(day, hour, BigInt(this.session[day]).toString(2), current);
       result += current === 1 ? 0b111111n : 0n;
     }
     result >>= BigInt(6 - beginMunites);

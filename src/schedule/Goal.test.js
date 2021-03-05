@@ -27,17 +27,18 @@ test('test-remaining-times', () => {
 
 test('loadSession', () => {
   // test from 11:00 ~ 14:00
-  const now = new Date(2021, 0, 1, 22, 10); // Friday
+  const now = new Date(2021, 0, 2, 22, 10); // Saturday
   const hours = 3;
+  // from Saturday 22:00 to Sunday 01:00
   const goal = new Goal({
     session: [
-      0b100000000000101111111110, // from Friday 22:00 to Saturday 01:00
-      0b100000000000101111111110,
-      0b100000000000101111111110,
-      0b100000000000101111111110,
-      0b100000000000101111111110,
-      0b100000000000101111111110,
       0b010000000000000000000000,
+      0b100000000000101111111110,
+      0b100000000000101111111110,
+      0b100000000000101111111110,
+      0b100000000000101111111110,
+      0b100000000000101111111110,
+      0b100000000000101111111110,
     ],
   });
   // expect to have one unavailable hour and two free hours
