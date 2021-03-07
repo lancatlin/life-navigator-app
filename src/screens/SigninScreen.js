@@ -1,5 +1,4 @@
 import React from 'react'
-import { Text, Button, Inuput } from 'react-native-elements'
 import { StyleSheet } from 'react-native'
 import Sign from '../components/Sign'
 

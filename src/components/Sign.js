@@ -1,7 +1,8 @@
 import React from 'react'
-import { Text, Button, Input } from 'react-native-elements'
-import { View, StyleSheet } from 'react-native'
+import { Text, Input } from 'react-native-elements'
+import { View, TouchableOpacity,  StyleSheet } from 'react-native'
 import Spacer from './Spacer'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const Sign = ({ title, ButtonText }) => {
     return (
@@ -12,17 +13,22 @@ const Sign = ({ title, ButtonText }) => {
             <Input label='Email' />
             <Input label='Password' />
             <Spacer>
-                <Button 
+                <TouchableOpacity 
                     title={ButtonText}
-                    type= 'outline'
                     style={styles.Button1} 
                 />
             </Spacer>
             <Spacer>
-                <Button title='Google Login' />
+                <TouchableOpacity 
+                    title='Google Login' 
+                    style={styles.Button2}
+                />
             </Spacer>
             <Spacer>
-                <Button title='Facebook Login' />
+                <TouchableOpacity 
+                    title='Facebook Login'
+                    style={styles.Button3} 
+                />
             </Spacer>
         </View>
     )
@@ -36,9 +42,30 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     Button1: {
-        color: 'red',
-        TextC
-    }
+        fontSize: 20,
+        width: 30,
+        height: 10,
+        backgroundColor: 'white',
+        borderRadius: 4,
+        borderColor: 'black'
+    },
+    Button2: {
+        fontSize: 10,
+        width: 30,
+        height: 10,
+        backgroundColor: 'crimson',
+        borderRadius: 4,
+        borderColor: 'darkred'
+    },
+    Button3: {
+        fontSize: 10,
+        width: 30,
+        height: 10,
+        backgroundColor: 'cyan',
+        borderRadius: 4,
+        borderColor: 'darkblue'
+    },
+    
 })
 
 export default Sign
