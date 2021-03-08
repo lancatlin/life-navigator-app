@@ -2,9 +2,8 @@ import React from 'react'
 import { Text, Input } from 'react-native-elements'
 import { View, TouchableOpacity,  StyleSheet } from 'react-native'
 import Spacer from './Spacer'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 
-const Sign = ({ title, ButtonText }) => {
+const Sign = ({ ButtonText }) => {
     return (
         <View style={styles.border}>
             <Spacer>
@@ -13,22 +12,19 @@ const Sign = ({ title, ButtonText }) => {
             <Input label='Email' />
             <Input label='Password' />
             <Spacer>
-                <TouchableOpacity 
-                    title={ButtonText}
-                    style={styles.Button1} 
-                />
-            </Spacer>
+                <TouchableOpacity style={styles.Button1}>
+                    <Text>{ButtonText}</Text>
+                </TouchableOpacity>
+            </Spacer> 
             <Spacer>
-                <TouchableOpacity 
-                    title='Google Login' 
-                    style={styles.Button2}
-                />
-            </Spacer>
+                <TouchableOpacity style={styles.Button2}>
+                    <Text>Google Login</Text>
+                </TouchableOpacity>
+            </Spacer> 
             <Spacer>
-                <TouchableOpacity 
-                    title='Facebook Login'
-                    style={styles.Button3} 
-                />
+                <TouchableOpacity style={styles.Button3}>
+                    <Text>Facebook Login</Text>
+                </TouchableOpacity>
             </Spacer>
         </View>
     )
@@ -43,24 +39,21 @@ const styles = StyleSheet.create({
     },
     Button1: {
         fontSize: 20,
-        width: 30,
-        height: 10,
+        height: 100,
         backgroundColor: 'white',
         borderRadius: 4,
         borderColor: 'black'
     },
     Button2: {
         fontSize: 10,
-        width: 30,
-        height: 10,
+        height: 100,
         backgroundColor: 'crimson',
         borderRadius: 4,
         borderColor: 'darkred'
     },
     Button3: {
         fontSize: 10,
-        width: 30,
-        height: 10,
+        height: 100,
         backgroundColor: 'cyan',
         borderRadius: 4,
         borderColor: 'darkblue'
