@@ -9,7 +9,18 @@ import HomeScreen from './src/screens/HomeScreen';
 import GoalsScreen from './src/screens/GoalsScreen';
 import GoalDetailScreen from './src/screens/GoalDetailScreen';
 
+import GoalCreateScreen from './src/screens/GoalCreateScreen';
+import sessionScreen from './src/screens/sessionScreen';
+
 const Stack = createStackNavigator();
+
+const StackCreate = () => (
+  <Stack.Navigator initialRouteName="Create">
+    <Stack.Screen name="Create" component={GoalCreateScreen} />
+    <Stack.Screen name="Create Session" component={sessionScreen} />
+  </Stack.Navigator>
+);
+
 const Tab = createBottomTabNavigator();
 
 const goalsFlow = () => (
@@ -22,9 +33,10 @@ const goalsFlow = () => (
 export default () => (
   <NavigationContainer>
     <Tab.Navigator>
-      <Tab.Screen name="Sign in" component={AuthScreen} />
+      <Tab.Screen name="Create" component={StackCreate} />
+      <Tab.Screen name="Auth" component={AuthScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Goals" component={goalsFlow} />
-    </Tab.Navigator> 
+    </Tab.Navigator>
   </NavigationContainer>
 );
