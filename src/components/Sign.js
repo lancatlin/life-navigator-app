@@ -3,7 +3,7 @@ import { Text, Input } from 'react-native-elements'
 import { View, TouchableOpacity,  StyleSheet } from 'react-native'
 import Spacer from './Spacer'
 
-const Sign = ({ ButtonText }) => {
+const Sign = ({ title, ButtonText }) => {
     return (
         <View style={styles.border}>
             <Spacer>
@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     Button1: {
-        fontSize: 20,
-        height: 100,
+        fontSize: 10,
+        height: 50,
         backgroundColor: 'white',
         borderRadius: 4,
         borderColor: 'black'

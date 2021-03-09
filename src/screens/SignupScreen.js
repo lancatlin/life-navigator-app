@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import Sign from '../components/Sign'
 
-const SignupScreen = () => {
+const SignupScreen = ({ title, ButtonText }) => {
     return(
         <>
             <Sign 

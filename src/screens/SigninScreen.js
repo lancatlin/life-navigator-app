@@ -1,15 +1,15 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, ScrollView } from 'react-native'
 import Sign from '../components/Sign'
 
 const SigninScreen = ({ title, ButtonText }) => {
     return(
-        <>
-            <Sign 
-                title='Signin' 
+        <ScrollView>
+            <Sign title='Signin' 
+            
                 ButtonText='Login'
             />
-        </>
+        </ScrollView>
     )
 }
 
