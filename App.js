@@ -16,6 +16,7 @@ export default () => (
   <NavigationContainer>
     <Tab.Navigator>
       <Tab.Screen name="Sign in" component={SigninScreen} />
+      <Tab.Screen name="Sign up" component={SignupScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
     </Tab.Navigator>
   </NavigationContainer>
