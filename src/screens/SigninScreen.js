@@ -5,8 +5,8 @@ import Sign from '../components/Sign'
 const SigninScreen = ({ title, ButtonText }) => {
     return(
         <ScrollView>
-            <Sign title='Signin' 
-            
+            <Sign 
+                title='Signin' 
                 ButtonText='Login'
             />
         </ScrollView>
