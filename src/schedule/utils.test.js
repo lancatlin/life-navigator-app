@@ -14,6 +14,6 @@ test('session-to-binary', () => {
     0b010000000000000000000000,
     ...new Array(6).fill(0b100000000000101111111110),
   ];
-  expect(sessionToBinary(session, now, hours).toString(2))
+  expect(sessionToBinary(now, hours, session).toString(2))
     .toBe('111110000000000001');
 });

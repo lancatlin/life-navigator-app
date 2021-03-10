@@ -12,7 +12,7 @@ class Goal {
   }
 
   remainingTimes(now, hours, availableTime) {
-    return sessionToBinary(this.session, now, hours) & availableTime;
+    return sessionToBinary(now, hours, this.session) & availableTime;
   }
 
   scheduleOneTask(now, hours, availableTime) {

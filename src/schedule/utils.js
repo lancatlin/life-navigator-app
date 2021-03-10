@@ -25,7 +25,7 @@ const beginOfWeek = (date) => {
   return new Date(date.setDate(first));
 };
 
-const sessionToBinary = (session, now, hours) => {
+const sessionToBinary = (now, hours, session) => {
   const beginDay = now.getDay();
   const beginHour = now.getHours();
   const beginMunites = now.getMinutes() / 10;
