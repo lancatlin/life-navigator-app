@@ -39,22 +39,22 @@ test('schedule-tasks-once', () => {
       id: 2,
       name: '#2',
       frequency: 2,
-      eachTime: 3,
+      eachTime: 2.5,
       expireAt: new Date(2021, 0, 10),
       session: afternoon,
     }),
   ]);
-  const tasks = scheduler.Schedule();
+  const tasks = scheduler.schedule();
   expect(tasks).toStrictEqual([
-    new Task({
-      goalId: 2,
-      startTime: new Date(2021, 0, 1, 12),
-      endTime: new Date(2021, 0, 1, 15),
-    }),
     new Task({
       goalId: 1,
       startTime: new Date(2021, 0, 1, 6),
       endTime: new Date(2021, 0, 1, 8),
     }),
+    new Task({
+      goalId: 2,
+      startTime: new Date(2021, 0, 1, 12),
+      endTime: new Date(2021, 0, 1, 14, 30),
+    }),
   ]);
-});
+}, 1000);
