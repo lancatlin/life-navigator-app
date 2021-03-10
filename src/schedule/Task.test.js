@@ -14,12 +14,11 @@ test('test-times-convertion', () => {
 
 test('test-set-time-from-time-unit', () => {
   const now = new Date(2021, 0, 1, 8);
-  const task = Task.createTaskFromTimeUnit(now, 6, 18);
-  const t = new Task({
-    startTime: new Date(2021, 0, 1, 9),
-    endTime: new Date(2021, 0, 1, 11),
-  });
-  expect(task).toStrictEqual(t);
+  const task = Task.createTaskFromTimeUnit(now, 8, 21);
+  expect(task).toStrictEqual(new Task({
+    startTime: new Date(2021, 0, 1, 9, 20),
+    endTime: new Date(2021, 0, 1, 11, 30),
+  }));
   // check whether now has been changed.
   expect(now).toStrictEqual(new Date(2021, 0, 1, 8));
 });
