@@ -1,5 +1,6 @@
 import { expect, test } from '@jest/globals';
 import Goal from './Goal';
+import Task from './Task';
 import { timeToBinary } from './utils';
 
 test('test-remaining-frequency', () => {
@@ -52,5 +53,8 @@ test('schedule-one-task', () => {
   );
   // expect a task from 10:00 to 12:00
   expect(goal.scheduleOneTask(now, hours, availableTime))
-    .toBe('000000111111111111000000');
+    .toStrictEqual(new Task({
+      startTime: new Date(2021, 0, 1, 10),
+      endTime: new Date(2021, 0, 1, 12),
+    }));
 });

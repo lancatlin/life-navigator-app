@@ -16,16 +16,13 @@ class Goal {
   }
 
   scheduleOneTask(now, hours, availableTime) {
-    console.log(now, hours);
     const remaining = this.remainingTimes(now, hours, availableTime);
-    console.log(remaining.toString(2));
     let count = 0;
-    for (let i = hours * 6; i >= 0; i -= 1) {
-      const current = (remaining >> BigInt(i)) % 2n;
+    for (let i = 0; i < hours * 6; i += 1) {
+      const current = (remaining >> BigInt(24 - i)) % 2n;
       count = current === 1n ? count + 1 : 0;
-      console.log(count);
       if (count === this.eachTime * 6) {
-        return new Task().setTimeFromTimeUnit(now, i - count + 1, i);
+        return Task.createTaskFromTimeUnit(now, i - count, i);
       }
     }
     return null;
