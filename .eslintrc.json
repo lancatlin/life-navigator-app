@@ -20,6 +20,7 @@
     ],
     "rules": {
         "no-use-before-define": "off",
-        "no-bitwise": "off"
+        "no-bitwise": "off",
+        "no-restricted-syntax":"off"
     }
 }
