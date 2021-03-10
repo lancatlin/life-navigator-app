@@ -41,6 +41,13 @@ const sessionToBinary = (now, hours, session) => {
   return result % BigInt(2 ** (hours * 6));
 };
 
+const displayBinary = (binary, length) => {
+  const n = 1n << BigInt(length);
+  const result = (n + binary).toString(2).slice(1);
+  console.log(result, result.length);
+  return result;
+};
+
 export {
-  timeToBinary, ceilTime, beginOfWeek, sessionToBinary,
+  timeToBinary, ceilTime, beginOfWeek, sessionToBinary, displayBinary,
 };

@@ -1,5 +1,5 @@
 import { test, expect } from '@jest/globals';
-import { beginOfWeek, sessionToBinary } from './utils';
+import { beginOfWeek, displayBinary, sessionToBinary } from './utils';
 
 test('begin-of-week', () => {
   expect(beginOfWeek(new Date(2021, 0, 1))).toStrictEqual(new Date(2020, 11, 27));
@@ -16,4 +16,9 @@ test('session-to-binary', () => {
   ];
   expect(sessionToBinary(now, hours, session).toString(2))
     .toBe('111110000000000001');
+});
+
+test('display-binary', () => {
+  const binary = 0b00110010n;
+  expect(displayBinary(binary, 8)).toBe('00110010');
 });
