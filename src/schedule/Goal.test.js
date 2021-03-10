@@ -30,8 +30,27 @@ test('remaining-time-binary', () => {
   });
   const availableTime = timeToBinary(
     now, hours,
-    new Date(2021, 0, 1, 15),
+    new Date(2021, 0, 1, 12),
     new Date(2021, 0, 1, 16),
   );
-  expect(goal.remainingTimes(availableTime, now, hours).toString(2)).toBe('111111000000000000');
+  expect(goal.remainingTimes(now, hours, availableTime).toString(2))
+    .toBe('111111000000000000');
+});
+
+test('schedule-one-task', () => {
+  const now = new Date(2021, 0, 1, 9);
+  const hours = 4;
+  const goal = new Goal({
+    frequency: 1,
+    eachTime: 2,
+    session: new Array(7).fill(0b000000001111111100000000),
+  });
+  const availableTime = timeToBinary(
+    now, hours,
+    new Date(2021, 0, 1, 10),
+    new Date(2021, 0, 1, 15),
+  );
+  // expect a task from 10:00 to 12:00
+  expect(goal.scheduleOneTask(now, hours, availableTime))
+    .toBe('000000111111111111000000');
 });
