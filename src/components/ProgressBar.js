@@ -5,7 +5,7 @@ const ProgressBar = ({ progress }) => {
   return (
     <View style={styles.progressBarBackgroundStyle}>
       <View style={styles.progressBarStyle} width={3.75*progress}>
-        <Text>{progress}</Text>
+        <Text style={styles.progressTextStyle}>{progress}%</Text>
       </View>
     </View>
   );
@@ -25,7 +25,14 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
+    justifyContent: 'center',
     backgroundColor: 'rgba(145, 190, 240, 1.0)'
+  },
+  progressTextStyle: {
+    alignSelf: 'flex-end',
+    marginRight: 3,
+    color: 'white',
+    fontSize: 20
   }
 });
 
