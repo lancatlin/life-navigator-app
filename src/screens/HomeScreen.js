@@ -12,27 +12,25 @@ const fakeData = [
 
 const HomeScreen = () => {
   return (
-    <View style={styles.viewStyle}>
-      <Text style={styles.topTextStyle}>Upcoming Events</Text>
-      <AntDesign
-        name="clockcircleo"
-        size={250}
-        style={styles.clockStyle}
-      />
-      <FlatList //NOT SCROLLABLE!!!
+    <>
+      <View>
+        <Text style={styles.topTextStyle}>Upcoming Events</Text>
+        <AntDesign
+          name="clockcircleo"
+          style={styles.clockStyle}
+        />
+      </View>
+      <FlatList
         style={styles.listStyle}
         data={fakeData}
         keyExtractor={item => item.title}
         renderItem={({ item }) => <Text style={styles.textStyle}>{item.title}</Text>}
       />
-      </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  viewStyle: {
-    marginHorizontal: 20
-  },
   topTextStyle: {
     fontSize: 35,
     marginTop: 55,
@@ -40,11 +38,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   clockStyle: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    fontSize: 200
   },
   listStyle: {
-    marginVertical: 50
-
+    marginTop: 50,
+    margin: 20
   },
   textStyle: {
     backgroundColor: 'rgba(145, 190, 240, 0.3)',
