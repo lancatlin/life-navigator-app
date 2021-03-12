@@ -28,6 +28,9 @@ class Goal {
   }
 
   scheduleOneTask(now, hours, availableTime) {
+    if (this.remainingFrequency(now) === 0) {
+      return null;
+    }
     const remaining = this.remainingTimes(now, hours, availableTime);
     let count = 0;
     for (let i = 0; i < hours * 6; i += 1) {

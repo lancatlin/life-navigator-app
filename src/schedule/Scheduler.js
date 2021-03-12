@@ -27,7 +27,6 @@ class Scheduler {
   schedule() {
     this.sortGoals();
     this.tasks = [];
-    displayBinary(this.remainingTimes(), this.hours * 6);
     let changed = true;
     while (changed) {
       changed = false;
@@ -39,7 +38,6 @@ class Scheduler {
           this.tasks.push(task);
           changed = true;
         }
-        displayBinary(this.remainingTimes(), this.hours * 6);
       }
     }
     this.sortTasks();

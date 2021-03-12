@@ -22,7 +22,7 @@ const ceilTime = (t) => {
 
 const beginOfWeek = (date) => {
   const first = date.getDate() - date.getDay();
-  return new Date(date.setDate(first));
+  return new Date(new Date(date).setDate(first));
 };
 
 const sessionToBinary = (now, hours, session) => {

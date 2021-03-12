@@ -61,9 +61,9 @@ test('schedule-tasks-once', () => {
   ]);
 }, 1000);
 
-test('schedule-tasks-twice', () => {
+test('schedule-tasks-multiple', () => {
   const now = new Date(2021, 0, 1, 5);
-  const hours = 48;
+  const hours = 72;
 
   // 6:00 to 12:00
   const morning = new Array(7).fill(0b000000111111000000000000);
@@ -79,12 +79,18 @@ test('schedule-tasks-twice', () => {
       eachTime: 2,
       expireAt: new Date(2021, 0, 14),
       session: morning,
-      tasks: [],
+      tasks: [
+        new Task({
+          goalId: 1,
+          startTime: new Date(2020, 11, 31, 8),
+          endTime: new Date(2020, 11, 31, 10),
+        }),
+      ],
     }),
     new Goal({
       id: 2,
       name: '#2',
-      frequency: 2,
+      frequency: 3,
       eachTime: 2.5,
       expireAt: new Date(2021, 0, 10),
       session: afternoon,
@@ -112,6 +118,11 @@ test('schedule-tasks-twice', () => {
       goalId: 2,
       startTime: new Date(2021, 0, 2, 12),
       endTime: new Date(2021, 0, 2, 14, 30),
+    }),
+    new Task({
+      goalId: 2,
+      startTime: new Date(2021, 0, 3, 12),
+      endTime: new Date(2021, 0, 3, 14, 30),
     }),
   ]);
 }, 1000);
