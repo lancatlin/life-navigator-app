@@ -28,13 +28,16 @@ class Scheduler {
     this.sortGoals();
     this.tasks = [];
     displayBinary(this.remainingTimes(), this.hours * 6);
-    for (let i = 0; i < 1; i += 1) {
+    let changed = true;
+    while (changed) {
+      changed = false;
       for (const goal of this.goals) {
         const task = goal.scheduleOneTask(
           this.now, this.hours, this.remainingTimes(),
         );
         if (task) {
           this.tasks.push(task);
+          changed = true;
         }
         displayBinary(this.remainingTimes(), this.hours * 6);
       }

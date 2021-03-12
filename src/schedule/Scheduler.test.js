@@ -60,3 +60,58 @@ test('schedule-tasks-once', () => {
     }),
   ]);
 }, 1000);
+
+test('schedule-tasks-twice', () => {
+  const now = new Date(2021, 0, 1, 5);
+  const hours = 48;
+
+  // 6:00 to 12:00
+  const morning = new Array(7).fill(0b000000111111000000000000);
+
+  // 12:00 to 18:00
+  const afternoon = new Array(7).fill(0b000000000000111111000000);
+
+  const scheduler = new Scheduler(now, hours, [
+    new Goal({
+      id: 1,
+      name: '#1',
+      frequency: 3,
+      eachTime: 2,
+      expireAt: new Date(2021, 0, 14),
+      session: morning,
+      tasks: [],
+    }),
+    new Goal({
+      id: 2,
+      name: '#2',
+      frequency: 2,
+      eachTime: 2.5,
+      expireAt: new Date(2021, 0, 10),
+      session: afternoon,
+      tasks: [],
+    }),
+  ]);
+  const tasks = scheduler.schedule();
+  expect(tasks).toStrictEqual([
+    new Task({
+      goalId: 1,
+      startTime: new Date(2021, 0, 1, 6),
+      endTime: new Date(2021, 0, 1, 8),
+    }),
+    new Task({
+      goalId: 2,
+      startTime: new Date(2021, 0, 1, 12),
+      endTime: new Date(2021, 0, 1, 14, 30),
+    }),
+    new Task({
+      goalId: 1,
+      startTime: new Date(2021, 0, 2, 6),
+      endTime: new Date(2021, 0, 2, 8),
+    }),
+    new Task({
+      goalId: 2,
+      startTime: new Date(2021, 0, 2, 12),
+      endTime: new Date(2021, 0, 2, 14, 30),
+    }),
+  ]);
+}, 1000);
