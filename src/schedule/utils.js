@@ -50,6 +50,13 @@ const displayBinary = (binary, length) => {
 
 const newTimes = (hours) => (1n << BigInt(hours * 6)) - 1n;
 
+const tomorrow = (date) => {
+  const result = new Date(
+    new Date(date).setDate(date.getDate() + 1),
+  );
+  result.setHours(0, 0, 0, 0);
+  return result;
+};
 export {
   timeToBinary,
   ceilTime,
@@ -57,4 +64,5 @@ export {
   sessionToBinary,
   displayBinary,
   newTimes,
+  tomorrow,
 };
