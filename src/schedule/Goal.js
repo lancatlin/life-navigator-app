@@ -22,7 +22,9 @@ class Goal {
       const current = (remaining >> BigInt(hours * 6 - i)) % 2n;
       count = current === 1n ? count + 1 : 0;
       if (count === this.eachTime * 6) {
-        return Task.createTaskFromTimeUnit(now, i - count, i);
+        return Task.createTaskFromTimeUnit(
+          now, i - count, i, { goalId: this.id },
+        );
       }
     }
     return null;
