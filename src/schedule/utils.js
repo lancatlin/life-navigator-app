@@ -6,7 +6,7 @@ const timeToBinary = (now, hours, startTime = null, endTime = null) => {
     : 0;
   const end = endTime
     ? Math.ceil((endTime - now) / timeUnit)
-    : 24 * 6;
+    : hours * 6;
   let result = BigInt(0);
   for (let i = 0; i < hours * 6; i += 1) {
     result <<= 1n;

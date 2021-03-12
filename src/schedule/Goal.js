@@ -14,7 +14,9 @@ class Goal {
   }
 
   remainingTimes(now, hours, availableTime) {
-    return sessionToBinary(now, hours, this.session) & availableTime;
+    return sessionToBinary(now, hours, this.session)
+      & availableTime
+      & ~this.ignoreTimes(now, hours);
   }
 
   ignoreTimes(now, hours) {

@@ -38,6 +38,26 @@ test('remaining-time-binary', () => {
     .toBe('111111000000000000');
 });
 
+test('remaining-time-include-tasks', () => {
+  const now = new Date(2021, 0, 1, 20);
+  const hours = 5;
+  const goal = new Goal({
+    session: new Array(7).fill((1 << 24) - 1),
+    tasks: [
+      new Task({
+        startTime: new Date(2021, 0, 1, 22),
+        endTime: new Date(2021, 0, 1, 23),
+      }),
+    ],
+  });
+  const availableTime = timeToBinary(
+    now, hours,
+    new Date(2021, 0, 1, 21),
+  );
+  expect(displayBinary(goal.remainingTimes(now, hours, availableTime), hours * 6))
+    .toBe('000000111111000000000000111111');
+});
+
 test('schedule-one-task', () => {
   const now = new Date(2021, 0, 1, 9);
   const hours = 4;
