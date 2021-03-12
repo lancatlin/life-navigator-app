@@ -1,6 +1,6 @@
 import { test, expect } from '@jest/globals';
 import {
-  beginOfWeek, displayBinary, freeTimes, newTimes, sessionToBinary,
+  beginOfWeek, displayBinary, newTimes, sessionToBinary, tomorrow,
 } from './utils';
 
 test('begin-of-week', () => {
@@ -27,4 +27,11 @@ test('display-binary', () => {
 
 test('new-times', () => {
   expect(newTimes(3)).toBe(BigInt(0b111111111111111111));
+});
+
+test('tomorrow', () => {
+  const date = new Date(2021, 0, 1, 9, 32, 32);
+  expect(tomorrow(date))
+    .toStrictEqual(new Date(2021, 0, 2));
+  expect(date).toStrictEqual(new Date(2021, 0, 1, 9, 32, 32));
 });
