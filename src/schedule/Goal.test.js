@@ -1,7 +1,7 @@
 import { expect, test } from '@jest/globals';
 import Goal from './Goal';
 import Task from './Task';
-import { timeToBinary } from './utils';
+import { timeToBinary, displayBinary } from './utils';
 
 test('test-remaining-frequency', () => {
   const now = new Date(2021, 0, 1); // Friday
@@ -83,4 +83,29 @@ test('schedule-one-task-2', () => {
       startTime: new Date(2021, 0, 1, 11),
       endTime: new Date(2021, 0, 1, 13, 30),
     }));
+});
+
+test('goal-ignore-times', () => {
+  const now = new Date(2021, 0, 1, 20);
+  const hours = 4 + 24;
+  const goal = new Goal({
+    tasks: [
+      new Task({
+        startTime: new Date(2021, 0, 1, 17),
+        endTime: new Date(2021, 0, 1, 19),
+      }),
+      new Task({
+        startTime: new Date(2021, 0, 2, 12),
+        endTime: new Date(2021, 0, 2, 15),
+      }),
+    ],
+  });
+  expect(goal.ignoreTimes(now, hours).toString(2))
+    .toBe(`111111111111111111111111${
+      displayBinary(timeToBinary(
+        new Date(2021, 0, 2),
+        24,
+        new Date(2021, 0, 2, 12),
+        new Date(2021, 0, 3),
+      ), 24 * 6)}`);
 });

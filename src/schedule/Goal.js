@@ -1,5 +1,5 @@
 import Task from './Task';
-import { beginOfWeek, newTimes, sessionToBinary } from './utils';
+import { beginOfWeek, sessionToBinary } from './utils';
 
 class Goal {
   constructor(props) {
@@ -18,9 +18,9 @@ class Goal {
   }
 
   ignoreTimes(now, hours) {
-    let result = newTimes(hours);
+    let result = 0n;
     for (const task of this.tasks) {
-      result &= task.ignoreTimes();
+      result |= task.ignoreTimes(now, hours);
     }
     return result;
   }
