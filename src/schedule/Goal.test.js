@@ -61,18 +61,19 @@ test('schedule-one-task', () => {
 
 test('schedule-one-task-2', () => {
   const now = new Date(2021, 0, 1, 9);
-  const hours = 4;
+  const hours = 5;
   const goal = new Goal({
     frequency: 1,
     eachTime: 2.5,
     session: new Array(7).fill(0b000000000001111111100000),
+    // from 11:00 to 19:00
   });
   const availableTime = timeToBinary(
     now, hours,
     new Date(2021, 0, 1, 1),
     new Date(2021, 0, 1, 15, 30),
   );
-  // expect a task from 10:00 to 12:00
+  // expect from 11:00 to 13:30
   expect(goal.scheduleOneTask(now, hours, availableTime))
     .toStrictEqual(new Task({
       startTime: new Date(2021, 0, 1, 11),

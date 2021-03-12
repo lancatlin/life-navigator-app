@@ -19,7 +19,7 @@ class Goal {
     const remaining = this.remainingTimes(now, hours, availableTime);
     let count = 0;
     for (let i = 0; i < hours * 6; i += 1) {
-      const current = (remaining >> BigInt(24 - i)) % 2n;
+      const current = (remaining >> BigInt(hours * 6 - i)) % 2n;
       count = current === 1n ? count + 1 : 0;
       if (count === this.eachTime * 6) {
         return Task.createTaskFromTimeUnit(now, i - count, i);
