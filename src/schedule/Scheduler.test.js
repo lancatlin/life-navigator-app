@@ -34,6 +34,7 @@ test('schedule-tasks-once', () => {
       eachTime: 2,
       expireAt: new Date(2021, 0, 14),
       session: morning,
+      tasks: [],
     }),
     new Goal({
       id: 2,
@@ -42,6 +43,7 @@ test('schedule-tasks-once', () => {
       eachTime: 2.5,
       expireAt: new Date(2021, 0, 10),
       session: afternoon,
+      tasks: [],
     }),
   ]);
   const tasks = scheduler.schedule();

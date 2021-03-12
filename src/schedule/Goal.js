@@ -1,9 +1,11 @@
 import Task from './Task';
-import { beginOfWeek, sessionToBinary } from './utils';
+import { beginOfWeek, newTimes, sessionToBinary } from './utils';
 
 class Goal {
   constructor(props) {
-    Object.assign(this, props);
+    const { tasks, ...properties } = props;
+    Object.assign(this, properties);
+    this.tasks = tasks ? [...props.tasks] : [];
   }
 
   remainingFrequency(now) {
@@ -15,6 +17,14 @@ class Goal {
     return sessionToBinary(now, hours, this.session) & availableTime;
   }
 
+  ignoreTimes(now, hours) {
+    let result = newTimes(hours);
+    for (const task of this.tasks) {
+      result &= task.ignoreTimes();
+    }
+    return result;
+  }
+
   scheduleOneTask(now, hours, availableTime) {
     const remaining = this.remainingTimes(now, hours, availableTime);
     let count = 0;
@@ -22,9 +32,11 @@ class Goal {
       const current = (remaining >> BigInt(hours * 6 - i)) % 2n;
       count = current === 1n ? count + 1 : 0;
       if (count === this.eachTime * 6) {
-        return Task.createTaskFromTimeUnit(
+        const task = Task.createTaskFromTimeUnit(
           now, i - count, i, { goalId: this.id },
         );
+        this.tasks.push(task);
+        return task;
       }
     }
     return null;

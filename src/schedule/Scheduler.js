@@ -1,4 +1,4 @@
-import { ceilTime, displayBinary } from './utils';
+import { ceilTime, displayBinary, newTimes } from './utils';
 
 class Scheduler {
   constructor(now, hours, goals = []) {
@@ -17,7 +17,7 @@ class Scheduler {
   }
 
   remainingTimes() {
-    let result = (1n << BigInt(this.hours * 6)) - 1n;
+    let result = newTimes(this.hours);
     this.tasks.forEach((task) => {
       result &= ~task.times(this.now, this.hours);
     });

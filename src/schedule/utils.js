@@ -48,6 +48,13 @@ const displayBinary = (binary, length) => {
   return result;
 };
 
+const newTimes = (hours) => (1n << BigInt(hours * 6)) - 1n;
+
 export {
-  timeToBinary, ceilTime, beginOfWeek, sessionToBinary, displayBinary,
+  timeToBinary,
+  ceilTime,
+  beginOfWeek,
+  sessionToBinary,
+  displayBinary,
+  newTimes,
 };
