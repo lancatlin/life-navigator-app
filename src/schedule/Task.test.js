@@ -1,5 +1,6 @@
 import { expect, test } from '@jest/globals';
 import Task from './Task';
+import { displayBinary } from './utils';
 
 test('test-times-convertion', () => {
   const now = new Date(2021, 0, 1);
@@ -21,4 +22,16 @@ test('test-set-time-from-time-unit', () => {
   }));
   // check whether now has been changed.
   expect(now).toStrictEqual(new Date(2021, 0, 1, 8));
+});
+
+test('ignore-times', () => {
+  const now = new Date(2021, 0, 1, 20);
+  const hours = 5;
+  const task = new Task({
+    startTime: new Date(2021, 0, 1, 21),
+    endTime: new Date(2021, 0, 1, 22),
+  });
+  expect(displayBinary(task.ignoreTimes(now, hours), hours * 6)).toBe(
+    '000000111111111111111111000000',
+  );
 });

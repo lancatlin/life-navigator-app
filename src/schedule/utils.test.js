@@ -34,4 +34,6 @@ test('tomorrow', () => {
   expect(tomorrow(date))
     .toStrictEqual(new Date(2021, 0, 2));
   expect(date).toStrictEqual(new Date(2021, 0, 1, 9, 32, 32));
+  expect(tomorrow(new Date(2021, 11, 31, 12)))
+    .toStrictEqual(new Date(2022, 0, 1));
 });
