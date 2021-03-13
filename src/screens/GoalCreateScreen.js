@@ -6,8 +6,10 @@ import {
   Button,
   TouchableOpacity,
   TextInput,
+  Modal,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { DatePicker, CalendarList } from 'react-native-common-date-picker';
 const GoalCreateScreen = (props) => {
   return (
     <View>
@@ -24,6 +26,11 @@ const GoalCreateScreen = (props) => {
           placeholder=" Expire Date"
         ></TextInput>
       </View>
+      <DatePicker
+        confirm={(date) => {
+          console.warn(date);
+        }}
+      />
       <View style={styles.view3}>
         <AntDesign name="checksquare" size={24} color="blue"></AntDesign>
         <Text style={styles.DurationText}> Duartion </Text>
