@@ -3,11 +3,11 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ProgressBar from '../components/ProgressBar';
 
-const GoalDetailScreen = ({ navigation }) => {
+const GoalDetailScreen = ({ navigation, route }) => {
   return (
     <View style={styles.containerStyle}>
       <View style={{ flexDirection: 'row' }}>
-        <Text style={styles.expireTextStyle}>Expire at </Text>
+        <Text style={styles.expireTextStyle}>Expire at {route.params.expireTime}</Text>
         <View>
           <TouchableOpacity style={styles.buttonStyle}>
             <Ionicons
@@ -19,7 +19,7 @@ const GoalDetailScreen = ({ navigation }) => {
         </View>
       </View>
       <ProgressBar
-        progress={50}
+        progress={route.params.progress}
       />
     </View>
   );

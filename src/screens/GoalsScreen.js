@@ -33,7 +33,7 @@ const GoalsScreen = ({ navigation }) => {
         data={fakeGoal}
         keyExtractor={item => item.goal}
         renderItem={({ item }) =>
-          <TouchableOpacity onPress={() => navigation.navigate("Detail")}>
+          <TouchableOpacity onPress={() => navigation.navigate("Detail", {goal: item.goal, expireTime: item.expireTime, progress: item.progress })}>
             <View style={styles.itemStyle}>
               <View style={{flexDirection: 'row'}}>
                 <View style={{flex: 1}}>
