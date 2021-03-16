@@ -1,22 +1,24 @@
 import React, { useState } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Switch } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Switch, Modal } from 'react-native'
 
 
 const SettingScreen = () =>{
+
     const [isEnabled, setIsEnabled] = useState(false)
     const toggleSwitch = () => setIsEnabled(previousState => !previousState)
+    const [open, setOpen] = useState(false)
+    
+    const themeColorModalOpen = () => {
+        setOpen(true)
+    }
+
+    const themeColorModalClose = () =>{
+        setOpen(false)
+    }
 
     return (
-        
         <View>
-            <View style={styles.header}>
-                <Text style={styles.topTitle}>Settings</Text>
-            </View>
-
-            <View>
-                <Text style={styles.midleTitle}> Appearance </Text>
-            </View>
-
+            <Text style={styles.midleTitle}> Appearance </Text>
             <View style={styles.row}>
                 <Text style={styles.options}> Dark Mode </Text>
                 <Switch
@@ -28,51 +30,50 @@ const SettingScreen = () =>{
                     value={isEnabled}
                 />
             </View>
-
             <View style={styles.row}>
                 <Text style={styles.options}> Theme Color </Text>
-                <TouchableOpacity style={styles.color}/>
+                <TouchableOpacity 
+                    style={styles.color}
+                    onPress={themeColorModalOpen}
+                />
+                <Modal 
+                    visible={open}
+                    transparent={true}
+                    onRequestClose={themeColorModalClose}
+                    animationType='fade'
+                >
+                    <View style={styles.modal}>
+                        <View style={styles.modalText}>
+                            <Text>hi</Text>
+                        </View>
+                    </View>
+                </Modal>
+                
             </View>
-
-            <View>
-                <Text style={styles.midleTitle}> Session </Text>
-            </View>
-
+            <Text style={styles.midleTitle}> Session </Text>
             <View style={styles.row}>
                 <Text style={styles.options}> Begin Time </Text>
                 <TouchableOpacity style={styles.time}>
                     <Text style={styles.buttonText}> Begin Time </Text>
                 </TouchableOpacity>
             </View>
-
             <View style={styles.row}>
                 <Text style={styles.options}> End Time </Text>
                 <TouchableOpacity style={styles.time}>
                     <Text style={styles.buttonText}> End Time </Text>
                 </TouchableOpacity>
             </View>
-
-            <View style={styles.center}>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}> Use Sleep Time as Default </Text>
-                </TouchableOpacity>
-            </View>
-
+        <View style={styles.center}>
+            <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}> Use Sleep Time as Default </Text>
+            </TouchableOpacity>
         </View>
+    </View>
     )
 }
 
 
 const styles = StyleSheet.create({
-    header: {
-        backgroundColor: 'green',
-        height: 70
-    },
-    topTitle: {
-        top: 20,
-        fontSize: 25,
-        alignSelf: 'center'
-    },
     midleTitle: {
         margin: 20,
         top: 20,
@@ -125,6 +126,17 @@ const styles = StyleSheet.create({
     },
     switch: {
         right: 23
+    },
+    modal: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)'
+    },
+    modalText: {
+        height: 600,
+        width: 350,
+        backgroundColor: 'white'
     }
 })
 
