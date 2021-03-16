@@ -32,6 +32,11 @@ const goalsFlow = () => (
   </Stack.Navigator>
 );
 
+const settings = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Settings" component={SettingScreen} options={{ headerTitleAlign: 'center' }} />
+  </Stack.Navigator>
+)
 export default () => (
   <NavigationContainer>
     <Tab.Navigator>
@@ -40,7 +45,7 @@ export default () => (
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Goals" component={goalsFlow} />
       <Tab.Screen name="Calender" component={CalenderScreen} />
-      <Tab.Screen name="Settings" component={SettingScreen} />
+      <Tab.Screen name="Settings" component={settings} />
     </Tab.Navigator>
   </NavigationContainer>
 );
