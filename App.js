@@ -28,7 +28,7 @@ const Tab = createBottomTabNavigator();
 const goalsFlow = () => (
   <Stack.Navigator>
     <Stack.Screen name="Goals List" component={GoalsScreen} options={{ headerTitleAlign: 'center' }} />
-    <Stack.Screen name="Detail" component={GoalDetailScreen} options={{ headerTitleAlign: 'center' }} />
+    <Stack.Screen name="Detail" component={GoalDetailScreen} options={({ route }) => ({ headerTitleAlign: 'center', title: route.params.goal })} />
   </Stack.Navigator>
 );
 
