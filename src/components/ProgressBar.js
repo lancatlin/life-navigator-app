@@ -1,15 +1,16 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
-const ProgressBar = ({ progress }) => {
-  return (
-    <View style={styles.progressBarBackgroundStyle}>
-      <View style={styles.progressBarStyle} width={3.75 * progress}>
-        <Text style={styles.progressTextStyle}>{progress}%</Text>
-      </View>
+const ProgressBar = ({ progress }) => (
+  <View style={styles.progressBarBackgroundStyle}>
+    <View style={styles.progressBarStyle} width={3.75 * progress}>
+      <Text style={styles.progressTextStyle}>
+        {progress}
+        %
+      </Text>
     </View>
-  )
-}
+  </View>
+);
 
 const styles = StyleSheet.create({
   progressBarBackgroundStyle: {
@@ -34,6 +35,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
   },
-})
+});
 
-export default ProgressBar
+export default ProgressBar;

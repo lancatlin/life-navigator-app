@@ -1,17 +1,17 @@
-import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
+import React from 'react';
+import {
+  View, Text, StyleSheet, TouchableOpacity,
+} from 'react-native';
+import { Ionicons } from 'react-native-vector-icons';
 
-const StartButton = () => {
-  return (
-    <View>
-      <TouchableOpacity style={styles.buttonStyle}>
-        <Ionicons name="rocket-outline" style={styles.iconStyle} />
-        <Text style={styles.startTextStyle}>Start now</Text>
-      </TouchableOpacity>
-    </View>
-  )
-}
+const StartButton = () => (
+  <View>
+    <TouchableOpacity style={styles.buttonStyle}>
+      <Ionicons name="rocket-outline" style={styles.iconStyle} />
+      <Text style={styles.startTextStyle}>Start now</Text>
+    </TouchableOpacity>
+  </View>
+);
 
 const styles = StyleSheet.create({
   buttonStyle: {
@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
   startTextStyle: {
     fontSize: 10,
   },
-})
+});
 
-export default StartButton
+export default StartButton;
