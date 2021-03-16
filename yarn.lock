@@ -7657,6 +7657,11 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
+react-native-common-date-picker@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/react-native-common-date-picker/-/react-native-common-date-picker-2.3.3.tgz#210e1cc659ea288a069a2427b4d32510c6517cd9"
+  integrity sha512-iJp4yIX/ACT8akPAjRASVUgffrrJCjk5naxcTPXFwONUYYgj3T+2N3oqF1IkKK8xXBT6qYaf/0pPJGQbu9QX9A==
+
 react-native-gesture-handler@~1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.8.0.tgz"

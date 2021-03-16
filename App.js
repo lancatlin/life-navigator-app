@@ -17,9 +17,9 @@ import SettingScreen from './src/screens/SettingScreen';
 const Stack = createStackNavigator();
 
 const StackCreate = () => (
-  <Stack.Navigator initialRouteName="Create">
-    <Stack.Screen name="Create" component={GoalCreateScreen} />
-    <Stack.Screen name="Create Session" component={sessionScreen} />
+  <Stack.Navigator initialRouteName="Create session">
+    <Stack.Screen name="Create session" component={GoalCreateScreen} />
+    <Stack.Screen name="Parent Session" component={sessionScreen} />
   </Stack.Navigator>
 );
 
