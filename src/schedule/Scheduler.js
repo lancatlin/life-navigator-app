@@ -1,4 +1,4 @@
-import { ceilTime } from './utils';
+import { ceilTime, displayBinary, newTimes } from './utils';
 
 class Scheduler {
   constructor(now, hours, goals = []) {
@@ -17,11 +17,31 @@ class Scheduler {
   }
 
   remainingTimes() {
-    let result = BigInt(2 ** (6 * this.hours) - 1);
+    let result = newTimes(this.hours);
     this.tasks.forEach((task) => {
       result &= ~task.times(this.now, this.hours);
     });
     return result;
+  }
+
+  schedule() {
+    this.sortGoals();
+    this.tasks = [];
+    let changed = true;
+    while (changed) {
+      changed = false;
+      for (const goal of this.goals) {
+        const task = goal.scheduleOneTask(
+          this.now, this.hours, this.remainingTimes(),
+        );
+        if (task) {
+          this.tasks.push(task);
+          changed = true;
+        }
+      }
+    }
+    this.sortTasks();
+    return this.tasks;
   }
 }
 
