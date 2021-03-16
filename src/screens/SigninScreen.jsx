@@ -6,7 +6,7 @@ const SigninScreen = () => (
   <ScrollView>
     <Sign
       title="Signin"
-      ButtonText="Login"
+      buttonText="Login"
     />
   </ScrollView>
 );

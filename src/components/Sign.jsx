@@ -3,7 +3,7 @@ import { Text, Input } from 'react-native-elements';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import Spacer from './Spacer';
 
-const Sign = ({ title, buttonText }) => (
+const Sign = ({ title, buttonText }) => {
   <View style={styles.border}>
     <Spacer>
       <Text h3 style={styles.header}>{title}</Text>
@@ -25,12 +25,12 @@ const Sign = ({ title, buttonText }) => (
         <Text style={styles.Text2}>Facebook Login</Text>
       </TouchableOpacity>
     </Spacer>
-  </View>
-);
+  </View>;
+};
 
 const styles = StyleSheet.create({
   border: {
-    marginTop: 20,
+    marginTop: 40,
   },
   header: {
     marginBottom: 10,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: 'black',
     borderWidth: 1,
-
+    justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
   },
