@@ -1,21 +1,21 @@
-import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import StartButton from '../components/StartButton'
-import ProgressBar from '../components/ProgressBar'
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import StartButton from '../components/StartButton';
+import ProgressBar from '../components/ProgressBar';
 
-const GoalDetailScreen = ({ navigation, route }) => {
-  return (
-    <View style={styles.containerStyle}>
-      <View style={{ flexDirection: 'row' }}>
-        <Text style={styles.expireTextStyle}>
-          Expire at {route.params.expireTime}
-        </Text>
-        <StartButton />
-      </View>
-      <ProgressBar progress={route.params.progress} />
+const GoalDetailScreen = ({ route }) => (
+  <View style={styles.containerStyle}>
+    <View style={{ flexDirection: 'row' }}>
+      <Text style={styles.expireTextStyle}>
+        Expire at
+        {' '}
+        {route.params.expireTime}
+      </Text>
+      <StartButton />
     </View>
-  )
-}
+    <ProgressBar progress={route.params.progress} />
+  </View>
+);
 
 const styles = StyleSheet.create({
   containerStyle: {
@@ -37,6 +37,6 @@ const styles = StyleSheet.create({
   startTextStyle: {
     fontSize: 10,
   },
-})
+});
 
-export default GoalDetailScreen
+export default GoalDetailScreen;

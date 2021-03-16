@@ -6,67 +6,65 @@ import {
   Button,
   TouchableOpacity,
   TextInput,
-  Modal,
 } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import { DatePicker, CalendarList } from 'react-native-common-date-picker';
-const GoalCreateScreen = (props) => {
-  return (
-    <View>
-      <TextInput style={styles.NameInput} placeholder=" Name" />
-      <View style={styles.view}>
-        <Text style={styles.ParentText}> Parent Goal </Text>
-        <TextInput style={styles.ParentInput} placeholder=" Choose Goal" />
-      </View>
-      <View style={styles.view2}>
-        <AntDesign name="checksquare" size={24} color="blue"></AntDesign>
-        <Text style={styles.ExpireText}> Expire at </Text>
-        <TextInput
-          style={styles.ExpireDate}
-          placeholder=" Expire Date"
-        ></TextInput>
-      </View>
-      <DatePicker
-        confirm={(date) => {
-          console.warn(date);
-        }}
-      />
-      <View style={styles.view3}>
-        <AntDesign name="checksquare" size={24} color="blue"></AntDesign>
-        <Text style={styles.DurationText}> Duartion </Text>
-        <TextInput style={styles.DurationInput} />
-        <Text style={styles.TimeText}> h</Text>
-        <TextInput style={styles.DurationInput} />
-        <Text style={styles.TimeText}> m</Text>
-      </View>
-      <View style={styles.view4}>
-        <Text style={styles.FrequencyText}> Frequency </Text>
-        <TextInput style={styles.FrequencyInput} />
-        <Text style={styles.FrequencyText}> / week</Text>
-      </View>
-      <View style={styles.view5}>
-        <Text style={styles.EachTime}> Each Time </Text>
-        <TextInput style={styles.EachInput}></TextInput>
-        <Text style={styles.TimeText}> h</Text>
-        <TextInput style={styles.EachInput}></TextInput>
-        <Text style={styles.TimeText}> m</Text>
-      </View>
-      <View style={styles.view6}>
-        <Text style={styles.PreferredText}> Prefferedtime </Text>
-        <TextInput style={styles.PreferredInput} placeholder=" Choose time" />
-      </View>
-      <Button
-        title="Parent Session"
-        onPress={() => props.navigation.navigate('Parent Session')}
-      ></Button>
-      <View style={styles.view7}>
-        <TouchableOpacity onPress={() => console.log('Pressed')}>
-          <Text style={styles.CreateTitle}> Create </Text>
-        </TouchableOpacity>
-      </View>
+import { AntDesign } from 'react-native-vector-icons';
+import { DatePicker } from 'react-native-common-date-picker';
+
+const GoalCreateScreen = (props) => (
+  <View>
+    <TextInput style={styles.NameInput} placeholder=" Name" />
+    <View style={styles.view}>
+      <Text style={styles.ParentText}> Parent Goal </Text>
+      <TextInput style={styles.ParentInput} placeholder=" Choose Goal" />
     </View>
-  );
-};
+    <View style={styles.view2}>
+      <AntDesign name="checksquare" size={24} color="blue" />
+      <Text style={styles.ExpireText}> Expire at </Text>
+      <TextInput
+        style={styles.ExpireDate}
+        placeholder=" Expire Date"
+      />
+    </View>
+    <DatePicker
+      confirm={(date) => {
+        console.warn(date);
+      }}
+    />
+    <View style={styles.view3}>
+      <AntDesign name="checksquare" size={24} color="blue" />
+      <Text style={styles.DurationText}> Duartion </Text>
+      <TextInput style={styles.DurationInput} />
+      <Text style={styles.TimeText}> h</Text>
+      <TextInput style={styles.DurationInput} />
+      <Text style={styles.TimeText}> m</Text>
+    </View>
+    <View style={styles.view4}>
+      <Text style={styles.FrequencyText}> Frequency </Text>
+      <TextInput style={styles.FrequencyInput} />
+      <Text style={styles.FrequencyText}> / week</Text>
+    </View>
+    <View style={styles.view5}>
+      <Text style={styles.EachTime}> Each Time </Text>
+      <TextInput style={styles.EachInput} />
+      <Text style={styles.TimeText}> h</Text>
+      <TextInput style={styles.EachInput} />
+      <Text style={styles.TimeText}> m</Text>
+    </View>
+    <View style={styles.view6}>
+      <Text style={styles.PreferredText}> Prefferedtime </Text>
+      <TextInput style={styles.PreferredInput} placeholder=" Choose time" />
+    </View>
+    <Button
+      title="Parent Session"
+      onPress={() => props.navigation.navigate('Parent Session')}
+    />
+    <View style={styles.view7}>
+      <TouchableOpacity onPress={() => console.log('Pressed')}>
+        <Text style={styles.CreateTitle}> Create </Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+);
 
 const styles = StyleSheet.create({
   NameInput: {

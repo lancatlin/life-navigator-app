@@ -1,6 +1,8 @@
-import React from 'react'
-import { View, Text, StyleSheet, FlatList } from 'react-native'
-import { AntDesign } from '@expo/vector-icons'
+import React from 'react';
+import {
+  View, Text, StyleSheet, FlatList,
+} from 'react-native';
+import { AntDesign } from 'react-native-vector-icons';
 
 const fakeData = [
   { title: 'Calculus' },
@@ -8,26 +10,24 @@ const fakeData = [
   { title: 'Exercise' },
   { title: 'Walk the dog' },
   { title: 'Physics' },
-]
+];
 
-const HomeScreen = () => {
-  return (
-    <>
-      <View>
-        <Text style={styles.topTextStyle}>Upcoming Events</Text>
-        <AntDesign name="clockcircleo" style={styles.clockStyle} />
-      </View>
-      <FlatList
-        style={styles.listStyle}
-        data={fakeData}
-        keyExtractor={(item) => item.title}
-        renderItem={({ item }) => (
-          <Text style={styles.textStyle}>{item.title}</Text>
-        )}
-      />
-    </>
-  )
-}
+const HomeScreen = () => (
+  <>
+    <View>
+      <Text style={styles.topTextStyle}>Upcoming Events</Text>
+      <AntDesign name="clockcircleo" style={styles.clockStyle} />
+    </View>
+    <FlatList
+      style={styles.listStyle}
+      data={fakeData}
+      keyExtractor={(item) => item.title}
+      renderItem={({ item }) => (
+        <Text style={styles.textStyle}>{item.title}</Text>
+      )}
+    />
+  </>
+);
 
 const styles = StyleSheet.create({
   topTextStyle: {
@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
   },
-})
+});
 
-export default HomeScreen
+export default HomeScreen;

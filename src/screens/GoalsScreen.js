@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 import {
   View,
   Text,
   StyleSheet,
   FlatList,
   TouchableOpacity,
-} from 'react-native'
-import StartButton from '../components/StartButton'
-import ProgressBar from '../components/ProgressBar'
+} from 'react-native';
+import StartButton from '../components/StartButton';
+import ProgressBar from '../components/ProgressBar';
 
 const fakeGoal = [
   {
@@ -30,42 +30,38 @@ const fakeGoal = [
     expireTime: '2021/02/22',
     progress: 72,
   },
-]
+];
 
-const GoalsScreen = ({ navigation }) => {
-  return (
-    <View>
-      <FlatList
-        data={fakeGoal}
-        keyExtractor={(item) => item.goal}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('Detail', {
-                goal: item.goal,
-                expireTime: item.expireTime,
-                progress: item.progress,
-              })
-            }
-          >
-            <View style={styles.itemStyle}>
-              <View style={{ flexDirection: 'row' }}>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.goalTextStyle}>{item.goal}</Text>
-                  <Text style={styles.expireTextStyle}>
-                    Expire at {item.expireTime}
-                  </Text>
-                </View>
-                <StartButton />
+const GoalsScreen = ({ navigation }) => (
+  <View>
+    <FlatList
+      data={fakeGoal}
+      keyExtractor={(item) => item.goal}
+      renderItem={({ item }) => (
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Detail', {
+            goal: item.goal,
+            expireTime: item.expireTime,
+            progress: item.progress,
+          })}
+        >
+          <View style={styles.itemStyle}>
+            <View style={{ flexDirection: 'row' }}>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.goalTextStyle}>{item.goal}</Text>
+                <Text style={styles.expireTextStyle}>
+                  {`Expire at ${item.expireTime}`}
+                </Text>
               </View>
-              <ProgressBar progress={item.progress} />
+              <StartButton />
             </View>
-          </TouchableOpacity>
-        )}
-      />
-    </View>
-  )
-}
+            <ProgressBar progress={item.progress} />
+          </View>
+        </TouchableOpacity>
+      )}
+    />
+  </View>
+);
 
 const styles = StyleSheet.create({
   itemStyle: {
@@ -91,6 +87,6 @@ const styles = StyleSheet.create({
   startTextStyle: {
     fontSize: 10,
   },
-})
+});
 
-export default GoalsScreen
+export default GoalsScreen;
