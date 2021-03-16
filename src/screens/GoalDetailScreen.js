@@ -7,9 +7,7 @@ const GoalDetailScreen = ({ route }) => (
   <View style={styles.containerStyle}>
     <View style={{ flexDirection: 'row' }}>
       <Text style={styles.expireTextStyle}>
-        Expire at
-        {' '}
-        {route.params.expireTime}
+        {`Expire at ${route.params.expireTime}`}
       </Text>
       <StartButton />
     </View>
