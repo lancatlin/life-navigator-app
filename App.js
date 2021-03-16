@@ -1,10 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AuthScreen from './src/screens/AuthScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import SigninScreen from './src/screens/SigninScreen';
 import SignupScreen from './src/screens/SignupScreen';
@@ -49,7 +46,6 @@ export default () => (
       <Tab.Screen name="Preefered" component={PrefferedTimeScreen} />
       <Tab.Screen name="TimeSetting" component={TimeSettingScreen} />
       <Tab.Screen name="Create" component={StackCreate} />
-      <Tab.Screen name="Auth" component={AuthScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Goals" component={goalsFlow} />
       <Tab.Screen name="Calender" component={CalenderScreen} />

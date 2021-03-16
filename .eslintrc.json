@@ -22,7 +22,6 @@
         "no-use-before-define": "off",
         "no-bitwise": "off",
         "no-restricted-syntax":"off",
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/prop-types": [0]
     }
 }
