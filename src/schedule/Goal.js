@@ -38,7 +38,7 @@ class Goal {
       count = current === 1n ? count + 1 : 0;
       if (count === this.eachTime * 6) {
         const task = Task.createTaskFromTimeUnit(
-          now, i - count, i, { goalId: this.id },
+          now, i - count, i, { goalId: this.id, name: this.name },
         );
         this.tasks.push(task);
         return task;

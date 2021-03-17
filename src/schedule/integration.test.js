@@ -1,7 +1,8 @@
-import { test, expect } from '@jest/globals';
+import { test } from '@jest/globals';
 import Goal from './Goal';
 import Scheduler from './Scheduler';
 import { hoursToSessions } from './utils';
+import TaskShower from './TaskShower';
 
 const now = new Date(2021, 0, 1);
 
@@ -20,7 +21,7 @@ const goals = [
     expireAt: new Date(2021, 0, 1, 30),
     duration: 20,
     frequency: 5,
-    eachTime: 1,
+    eachTime: 2,
     session: day,
   }),
   new Goal({
@@ -41,10 +42,45 @@ const goals = [
     eachTime: 1,
     session: allDay,
   }),
+  new Goal({
+    id: 4,
+    name: 'Reading',
+    expireAt: new Date(2021, 0, 1, 25),
+    duration: null,
+    frequency: 5,
+    eachTime: 1,
+    session: night,
+  }),
+  new Goal({
+    id: 5,
+    name: 'Writing',
+    expireAt: null,
+    duration: null,
+    frequency: 2,
+    eachTime: 4,
+    session: morning,
+  }),
+  new Goal({
+    id: 6,
+    name: 'Physics',
+    expireAt: new Date(2021, 0, 1, 18),
+    duration: 15,
+    frequency: 4,
+    eachTime: 2,
+    session: afternoon,
+  }),
+  new Goal({
+    id: 7,
+    name: 'Netflix',
+    eachTime: 2,
+    frequency: 3,
+    session: night,
+  }),
 ];
 
 test('integration-no-existed-tasks', () => {
   const scheduler = new Scheduler(now, hours, goals);
   const tasks = scheduler.schedule();
-  console.log(tasks);
+  const shower = new TaskShower(now, tasks);
+  console.log(shower.outputTable());
 });

@@ -41,8 +41,9 @@ class TaskShower {
     const d = new Date(this.now);
 
     for (let i = 0; i < 7; i += 1) {
+      const dateString = `${d.toLocaleDateString()} ${d.getDay()}`;
       d.setDate(d.getDate() + 1);
-      t.insertColumn(i, [d.toLocaleDateString(), ...table[i]]);
+      t.insertColumn(i, [dateString, ...table[i]]);
     }
     return t.toString();
   }
