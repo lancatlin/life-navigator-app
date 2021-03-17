@@ -57,6 +57,16 @@ const tomorrow = (date) => {
   result.setHours(0, 0, 0, 0);
   return result;
 };
+
+const hoursToSessions = (start, end) => {
+  let result = 0;
+  for (let i = 0; i < 24; i += 1) {
+    result <<= 1;
+    result += start <= i && i < end ? 1 : 0;
+  }
+  return result;
+};
+
 export {
   timeToBinary,
   ceilTime,
@@ -65,4 +75,5 @@ export {
   displayBinary,
   newTimes,
   tomorrow,
+  hoursToSessions,
 };
