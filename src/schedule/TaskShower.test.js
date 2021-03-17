@@ -1,5 +1,5 @@
 import { test, expect } from '@jest/globals';
-import ShowTasks from './ShowTasks';
+import TaskShower from './TaskShower';
 import Task from './Task';
 
 test('test-show-tasks', () => {
@@ -21,5 +21,6 @@ test('test-show-tasks', () => {
       endTime: new Date(2021, 0, 1, 10),
     }),
   ];
-  console.log(ShowTasks(now, tasks));
+  const shower = new TaskShower(now, tasks);
+  console.log(shower.outputTable());
 });
