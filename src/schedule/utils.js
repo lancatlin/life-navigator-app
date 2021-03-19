@@ -67,6 +67,8 @@ const hoursToSessions = (start, end) => {
   return result;
 };
 
+const timeUnitToDate = (now, i) => new Date(new Date(now).setMinutes(now.getMinutes() + i * 10));
+
 export {
   timeToBinary,
   ceilTime,
@@ -76,4 +78,5 @@ export {
   newTimes,
   tomorrow,
   hoursToSessions,
+  timeUnitToDate,
 };
