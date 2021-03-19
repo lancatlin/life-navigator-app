@@ -74,6 +74,7 @@ test('schedule-one-task', () => {
   expect(goal.scheduleOneTask(now, hours, availableTime))
     .toStrictEqual(new Task({
       goalId: 1,
+      name: undefined,
       startTime: new Date(2021, 0, 1, 10, 10),
       endTime: new Date(2021, 0, 1, 12, 40),
     }));
@@ -98,6 +99,7 @@ test('schedule-one-task-2', () => {
   expect(goal.scheduleOneTask(now, hours, availableTime))
     .toStrictEqual(new Task({
       goalId: 1,
+      name: undefined,
       startTime: new Date(2021, 0, 1, 11),
       endTime: new Date(2021, 0, 1, 13, 30),
     }));
