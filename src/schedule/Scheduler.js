@@ -1,4 +1,4 @@
-import { ceilTime, displayBinary, newTimes } from './utils';
+import { ceilTime, newTimes } from './utils';
 
 class Scheduler {
   constructor(now, hours, goals = []) {
