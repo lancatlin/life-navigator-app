@@ -37,11 +37,7 @@ const settings = () => (
   <Stack.Navigator>
     <Stack.Screen name="Settings" component={SettingScreen} options={{ headerTitleAlign: 'center' }} />
   </Stack.Navigator>
-<<<<<<< HEAD
-)
-=======
 );
->>>>>>> bf07d68a12c19b4b9493c9a1c93bba9195eec9cd
 export default () => (
   <NavigationContainer>
     <Tab.Navigator>
