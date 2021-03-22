@@ -1,6 +1,7 @@
 import { expect, test } from '@jest/globals';
 import Goal from './Goal';
-import { timeToBinary } from './utils';
+import Task from './Task';
+import { timeToBinary, displayBinary } from './utils';
 
 test('test-remaining-frequency', () => {
   const now = new Date(2021, 0, 1); // Friday
@@ -30,8 +31,101 @@ test('remaining-time-binary', () => {
   });
   const availableTime = timeToBinary(
     now, hours,
-    new Date(2021, 0, 1, 15),
+    new Date(2021, 0, 1, 12),
     new Date(2021, 0, 1, 16),
   );
-  expect(goal.remainingTimes(availableTime, now, hours).toString(2)).toBe('111111000000000000');
+  expect(goal.remainingTimes(now, hours, availableTime).toString(2))
+    .toBe('111111000000000000');
+});
+
+test('remaining-time-include-tasks', () => {
+  const now = new Date(2021, 0, 1, 20);
+  const hours = 5;
+  const goal = new Goal({
+    session: new Array(7).fill((1 << 24) - 1),
+    tasks: [
+      new Task({
+        startTime: new Date(2021, 0, 1, 22),
+        endTime: new Date(2021, 0, 1, 23),
+      }),
+    ],
+  });
+  const availableTime = timeToBinary(
+    now, hours,
+    new Date(2021, 0, 1, 21),
+  );
+  expect(displayBinary(goal.remainingTimes(now, hours, availableTime), hours * 6))
+    .toBe('000000111111000000000000111111');
+});
+
+test('schedule-one-task', () => {
+  const now = new Date(2021, 0, 1, 9);
+  const hours = 4;
+  const goal = new Goal({
+    id: 1,
+    frequency: 1,
+    eachTime: 2.5,
+    session: new Array(7).fill(0b000000001111111100000000),
+  });
+  const availableTime = timeToBinary(
+    now, hours,
+    new Date(2021, 0, 1, 10, 10),
+    new Date(2021, 0, 1, 15),
+  );
+  // expect a task from 10:00 to 12:00
+  expect(goal.scheduleOneTask(now, hours, availableTime))
+    .toStrictEqual(new Task({
+      goalId: 1,
+      startTime: new Date(2021, 0, 1, 10, 10),
+      endTime: new Date(2021, 0, 1, 12, 40),
+    }));
+});
+
+test('schedule-one-task-2', () => {
+  const now = new Date(2021, 0, 1, 9);
+  const hours = 5;
+  const goal = new Goal({
+    id: 1,
+    frequency: 1,
+    eachTime: 2.5,
+    session: new Array(7).fill(0b000000000001111111100000),
+    // from 11:00 to 19:00
+  });
+  const availableTime = timeToBinary(
+    now, hours,
+    new Date(2021, 0, 1, 1),
+    new Date(2021, 0, 1, 15, 30),
+  );
+  // expect from 11:00 to 13:30
+  expect(goal.scheduleOneTask(now, hours, availableTime))
+    .toStrictEqual(new Task({
+      goalId: 1,
+      startTime: new Date(2021, 0, 1, 11),
+      endTime: new Date(2021, 0, 1, 13, 30),
+    }));
+});
+
+test('goal-ignore-times', () => {
+  const now = new Date(2021, 0, 1, 20);
+  const hours = 4 + 24;
+  const goal = new Goal({
+    tasks: [
+      new Task({
+        startTime: new Date(2021, 0, 1, 17),
+        endTime: new Date(2021, 0, 1, 19),
+      }),
+      new Task({
+        startTime: new Date(2021, 0, 2, 12),
+        endTime: new Date(2021, 0, 2, 15),
+      }),
+    ],
+  });
+  expect(goal.ignoreTimes(now, hours).toString(2))
+    .toBe(`111111111111111111111111${
+      displayBinary(timeToBinary(
+        new Date(2021, 0, 2),
+        24,
+        new Date(2021, 0, 2, 12),
+        new Date(2021, 0, 3),
+      ), 24 * 6)}`);
 });
