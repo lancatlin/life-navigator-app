@@ -19,11 +19,11 @@ const GoalDetailScreen = ({ route }) => (
     <ProgressBar progress={route.params.progress} />
     <View style={styles.timeSetContainerStyle}>
       <Text style={styles.timeSetTextStyle}>Elapsed Time</Text>
-      <TextInput style={styles.textInputStyle} />
+      <TextInput style={styles.textInputStyle} autoCapitalize="none" autoCorrect={false} />
     </View>
     <View style={styles.timeSetContainerStyle}>
       <Text style={styles.timeSetTextStyle}>Remaining Time</Text>
-      <TextInput style={styles.textInputStyle} />
+      <TextInput style={styles.textInputStyle} autoCapitalize="none" autoCorrect={false} />
     </View>
   </View>
 );
