@@ -8,6 +8,7 @@ import {
   TextInput,
 } from 'react-native';
 import { Checkbox } from 'react-native-paper';
+import { Foundation } from '@expo/vector-icons';
 
 const GoalCreateScreen = (props) => {
   const [checked, setChecked] = React.useState(false);
@@ -27,6 +28,9 @@ const GoalCreateScreen = (props) => {
         style={styles.ExpireDate}
         placeholder=" Expire Date"
       />
+      <TouchableOpacity onPress={() => console.log('Pressed')}>
+        <Foundation name="calendar" size={35} color="black" /> 
+      </TouchableOpacity>
     </View>
     <View style={styles.view3}>
       <Checkbox
@@ -96,7 +100,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1.8,
     height: 30,
-    width: 170,
+    width: 120,
     letterSpacing: 2,
   },
   view3: {
