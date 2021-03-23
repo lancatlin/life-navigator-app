@@ -49,6 +49,7 @@ const NewSessionScreen = () => {
       <FlatList
         keyExtractor={(time) => time.day}
         data={times}
+        keyExtractor={(item, index) => (`${index}1`)}
         numColumns={7}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.set}>
@@ -71,6 +72,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 0.6,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   set: {
@@ -79,6 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 0.6,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
