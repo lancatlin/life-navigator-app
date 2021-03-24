@@ -23,6 +23,16 @@ class Session {
     result %= (1n << BigInt(hours * 6));
     return new TimeBinary(now, hours, result);
   }
+
+  static fromHours(start, end, props) {
+    let result = 0;
+    for (let i = 0; i < 24; i += 1) {
+      result <<= 1;
+      result += start <= i && i < end ? 1 : 0;
+    }
+
+    return new Session({ times: new Array(7).fill(result), ...props });
+  }
 }
 
 export default Session;
