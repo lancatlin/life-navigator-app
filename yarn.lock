@@ -7743,6 +7743,11 @@ react-native-appearance@^0.3.4:
     invariant "^2.2.4"
     use-subscription "^1.0.0"
 
+react-native-common-date-picker@^2.3.4:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/react-native-common-date-picker/-/react-native-common-date-picker-2.3.4.tgz#08dae9016dfd35e9969c8bf8dc76604585286f02"
+  integrity sha512-qRjEDM/+HwHP7GTFoEvG0hYDTBSpR5aXnDR+KKDS8XuuGZucSK9sna02jER5BpZZyJNNe33n7eLTa86I78WZTQ==
+
 react-native-element@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-native-element/-/react-native-element-1.2.1.tgz#02165505422e2521a58e5c1d6845af67fcf3b04b"
