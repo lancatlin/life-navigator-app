@@ -1,4 +1,4 @@
-import { test, expect } from '@jest/globals';
+import { test } from '@jest/globals';
 import TaskShower from './TaskShower';
 import Task from './Task';
 

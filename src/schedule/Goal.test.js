@@ -1,7 +1,8 @@
 import { expect, test } from '@jest/globals';
 import Goal from './Goal';
 import Task from './Task';
-import { timeToBinary, displayBinary } from './utils';
+import TimeBinary from './TimeBinary';
+import Session from './Session';
 
 test('test-remaining-frequency', () => {
   const now = new Date(2021, 0, 1); // Friday
@@ -25,14 +26,14 @@ test('remaining-time-binary', () => {
   const now = new Date(2021, 0, 1, 15);
   const hours = 3;
   const goal = new Goal({
-    session: new Array(7).fill(0b000000001111111110000000),
+    session: Session.fromHours(8, 17),
   });
-  const availableTime = timeToBinary(
+  const availableTime = TimeBinary.fromTime(
     now, hours,
     new Date(2021, 0, 1, 12),
     new Date(2021, 0, 1, 16),
   );
-  expect(goal.remainingTimes(now, hours, availableTime).toString(2))
+  expect(goal.remainingTimes(now, hours, availableTime).print())
     .toBe('111111000000000000');
 });
 
@@ -40,7 +41,7 @@ test('remaining-time-include-tasks', () => {
   const now = new Date(2021, 0, 1, 20);
   const hours = 5;
   const goal = new Goal({
-    session: new Array(7).fill((1 << 24) - 1),
+    session: Session.fromHours(0, 24),
     tasks: [
       new Task({
         startTime: new Date(2021, 0, 1, 22),
@@ -48,11 +49,11 @@ test('remaining-time-include-tasks', () => {
       }),
     ],
   });
-  const availableTime = timeToBinary(
+  const availableTime = TimeBinary.fromTime(
     now, hours,
     new Date(2021, 0, 1, 21),
   );
-  expect(displayBinary(goal.remainingTimes(now, hours, availableTime), hours * 6))
+  expect(goal.remainingTimes(now, hours, availableTime).print())
     .toBe('000000111111000000000000111111');
 });
 
@@ -63,9 +64,9 @@ test('schedule-one-task', () => {
     id: 1,
     frequency: 1,
     eachTime: 2.5,
-    session: new Array(7).fill(0b000000001111111100000000),
+    session: Session.fromHours(8, 17),
   });
-  const availableTime = timeToBinary(
+  const availableTime = TimeBinary.fromTime(
     now, hours,
     new Date(2021, 0, 1, 10, 10),
     new Date(2021, 0, 1, 15),
@@ -87,10 +88,12 @@ test('schedule-one-task-2', () => {
     id: 1,
     frequency: 1,
     eachTime: 2.5,
-    session: new Array(7).fill(0b000000000001111111100000),
+    session: new Session(
+      { times: new Array(7).fill(0b000000000001111111100000) },
+    ),
     // from 11:00 to 19:00
   });
-  const availableTime = timeToBinary(
+  const availableTime = TimeBinary.fromTime(
     now, hours,
     new Date(2021, 0, 1, 1),
     new Date(2021, 0, 1, 15, 30),
@@ -120,12 +123,12 @@ test('goal-ignore-times', () => {
       }),
     ],
   });
-  expect(goal.ignoreTimes(now, hours).toString(2))
+  expect(goal.ignoreTimes(now, hours).print())
     .toBe(`111111111111111111111111${
-      displayBinary(timeToBinary(
+      TimeBinary.fromTime(
         new Date(2021, 0, 2),
         24,
         new Date(2021, 0, 2, 12),
         new Date(2021, 0, 3),
-      ), 24 * 6)}`);
+      ).print()}`);
 });

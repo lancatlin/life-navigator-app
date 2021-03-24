@@ -1,18 +1,18 @@
 import { test } from '@jest/globals';
 import Goal from './Goal';
 import Scheduler from './Scheduler';
-import { hoursToSessions } from './utils';
 import TaskShower from './TaskShower';
+import Session from './Session';
 
 const now = new Date(2021, 0, 1);
 
 const hours = 24 * 7;
 
-const morning = new Array(7).fill(hoursToSessions(8, 12));
-const afternoon = new Array(7).fill(hoursToSessions(13, 18));
-const day = new Array(7).fill(hoursToSessions(8, 18));
-const night = new Array(7).fill(hoursToSessions(19, 23));
-const allDay = new Array(7).fill(hoursToSessions(8, 23));
+const morning = Session.fromHours(8, 12);
+const afternoon = Session.fromHours(13, 18);
+const day = Session.fromHours(8, 18);
+const night = Session.fromHours(19, 23);
+const allDay = Session.fromHours(8, 23);
 
 const goals = [
   new Goal({

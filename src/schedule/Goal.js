@@ -1,5 +1,6 @@
 import Task from './Task';
-import { beginOfWeek, sessionToBinary } from './utils';
+import { beginOfWeek } from './utils';
+import TimeBinary from './TimeBinary';
 
 class Goal {
   constructor(props) {
@@ -14,15 +15,15 @@ class Goal {
   }
 
   remainingTimes(now, hours, availableTime) {
-    return sessionToBinary(now, hours, this.session)
-      & availableTime
-      & ~this.ignoreTimes(now, hours);
+    return this.session.toBinary(now, hours)
+      .mix(availableTime)
+      .mix(this.ignoreTimes(now, hours).not());
   }
 
   ignoreTimes(now, hours) {
-    let result = 0n;
+    let result = new TimeBinary(now, hours, 0n);
     for (const task of this.tasks) {
-      result |= task.ignoreTimes(now, hours);
+      result = task.ignoreTimes(now, hours).union(result);
     }
     return result;
   }
@@ -31,7 +32,7 @@ class Goal {
     if (this.remainingFrequency(now) === 0) {
       return null;
     }
-    const remaining = this.remainingTimes(now, hours, availableTime);
+    const remaining = this.remainingTimes(now, hours, availableTime).binary;
     let count = 0;
     for (let i = 0; i < hours * 6; i += 1) {
       const current = (remaining >> BigInt(hours * 6 - i)) % 2n;
