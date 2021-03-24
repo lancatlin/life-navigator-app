@@ -20,11 +20,6 @@ test('session-to-binary', () => {
     .toBe('111110000000000001');
 });
 
-test('display-binary', () => {
-  const binary = 0b00110010n;
-  expect(displayBinary(binary, 8)).toBe('00110010');
-});
-
 test('new-times', () => {
   expect(newTimes(3)).toBe(BigInt(0b111111111111111111));
 });

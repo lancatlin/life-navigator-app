@@ -22,3 +22,8 @@ test('time-to-binary', () => {
   ).print())
     .toBe('111111000000000000000000000000');
 });
+
+test('display-binary', () => {
+  const binary = new TimeBinary(null, 2, 0b001100101100n);
+  expect(binary.print()).toBe('001100101100');
+});
