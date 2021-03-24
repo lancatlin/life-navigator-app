@@ -22,14 +22,10 @@ test('schedule-tasks-once', () => {
   const hours = 10;
 
   // 6:00 to 12:00
-  const morning = new Session(
-    { times: new Array(7).fill(0b000000111111000000000000) },
-  );
+  const morning = Session.fromHours(6, 12);
 
   // 12:00 to 18:00
-  const afternoon = new Session(
-    { times: new Array(7).fill(0b000000000000111111000000) },
-  );
+  const afternoon = Session.fromHours(12, 18);
 
   const scheduler = new Scheduler(now, hours, [
     new Goal({
@@ -73,14 +69,10 @@ test('schedule-tasks-multiple', () => {
   const hours = 72;
 
   // 6:00 to 12:00
-  const morning = new Session(
-    { times: new Array(7).fill(0b000000111111000000000000) },
-  );
+  const morning = Session.fromHours(6, 12);
 
   // 12:00 to 18:00
-  const afternoon = new Session(
-    { times: new Array(7).fill(0b000000000000111111000000) },
-  );
+  const afternoon = Session.fromHours(12, 18);
 
   const scheduler = new Scheduler(now, hours, [
     new Goal({

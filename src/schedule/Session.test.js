@@ -15,3 +15,8 @@ test('session-to-binary', () => {
   expect(session.toBinary(now, hours).print())
     .toBe('111110000000000001');
 });
+
+test('hours-to-session', () => {
+  expect(Session.fromHours(6, 12).times)
+    .toStrictEqual(new Array(7).fill(0b000000111111000000000000));
+});

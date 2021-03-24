@@ -26,7 +26,7 @@ test('remaining-time-binary', () => {
   const now = new Date(2021, 0, 1, 15);
   const hours = 3;
   const goal = new Goal({
-    session: new Session({ times: new Array(7).fill(0b000000001111111110000000) }),
+    session: Session.fromHours(8, 17),
   });
   const availableTime = TimeBinary.fromTime(
     now, hours,
@@ -41,9 +41,7 @@ test('remaining-time-include-tasks', () => {
   const now = new Date(2021, 0, 1, 20);
   const hours = 5;
   const goal = new Goal({
-    session: new Session(
-      { times: new Array(7).fill((1 << 24) - 1) },
-    ),
+    session: Session.fromHours(0, 24),
     tasks: [
       new Task({
         startTime: new Date(2021, 0, 1, 22),
@@ -66,7 +64,7 @@ test('schedule-one-task', () => {
     id: 1,
     frequency: 1,
     eachTime: 2.5,
-    session: new Session({ times: new Array(7).fill(0b000000001111111100000000) }),
+    session: Session.fromHours(8, 17),
   });
   const availableTime = TimeBinary.fromTime(
     now, hours,

@@ -16,8 +16,7 @@ test('time-to-binary', () => {
   ).print())
     .toBe('000000111111111111111111111111');
   expect(TimeBinary.fromTime(
-    now, hours,
-    null,
+    now, hours, null,
     new Date(2021, 0, 1, 9),
   ).print())
     .toBe('111111000000000000000000000000');
@@ -26,4 +25,8 @@ test('time-to-binary', () => {
 test('display-binary', () => {
   const binary = new TimeBinary(null, 2, 0b001100101100n);
   expect(binary.print()).toBe('001100101100');
+});
+
+test('blank-times', () => {
+  expect(TimeBinary.blankTime(null, 3).print()).toBe('111111111111111111');
 });
