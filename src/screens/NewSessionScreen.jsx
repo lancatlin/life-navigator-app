@@ -15,23 +15,23 @@ const NewSessionScreen = () => {
     { day: 'Sun' },
   ];
   const times = [
-    { set: '' }, { set: '' }, { set: '' }, { set: '6:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '7:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '8:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '9:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '10:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '11:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '12:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '13:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '14:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '15:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '16:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '17:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '18:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '19:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '20:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '21:00' }, { set: '' }, { set: '' }, { set: '' },
-    { set: '' }, { set: '' }, { set: '' }, { set: '22:00' }, { set: '' }, { set: '' }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '6:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '7:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '8:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '9:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '10:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '11:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '12:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '13:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '14:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '15:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '16:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '17:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '18:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '19:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '20:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '21:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
+    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '22:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '' },
   ];
 
   return (
@@ -49,7 +49,7 @@ const NewSessionScreen = () => {
       <FlatList
         keyExtractor={(time) => time.day}
         data={times}
-        keyExtractor={(item, index) => (`${index}1`)}
+        keyExtractor={(item, index) => (`${index}1`)} // add key
         numColumns={7}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.set}>
