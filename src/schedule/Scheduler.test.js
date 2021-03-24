@@ -2,6 +2,7 @@ import { expect, test } from '@jest/globals';
 import Goal from './Goal';
 import Scheduler from './Scheduler';
 import Task from './Task';
+import Session from './Session';
 
 test('remaining-times', () => {
   // should begin from 0:10
@@ -13,7 +14,7 @@ test('remaining-times', () => {
     new Task({ startTime: new Date(2021, 0, 1, 4), endTime: new Date(2021, 0, 1, 4, 30) }),
   ];
   const expectResult = '111110000000000001111110001111';
-  expect(scheduler.remainingTimes().toString(2)).toStrictEqual(expectResult);
+  expect(scheduler.remainingTimes().print()).toStrictEqual(expectResult);
 });
 
 test('schedule-tasks-once', () => {
@@ -21,10 +22,14 @@ test('schedule-tasks-once', () => {
   const hours = 10;
 
   // 6:00 to 12:00
-  const morning = new Array(7).fill(0b000000111111000000000000);
+  const morning = new Session(
+    { times: new Array(7).fill(0b000000111111000000000000) },
+  );
 
   // 12:00 to 18:00
-  const afternoon = new Array(7).fill(0b000000000000111111000000);
+  const afternoon = new Session(
+    { times: new Array(7).fill(0b000000000000111111000000) },
+  );
 
   const scheduler = new Scheduler(now, hours, [
     new Goal({
@@ -68,10 +73,14 @@ test('schedule-tasks-multiple', () => {
   const hours = 72;
 
   // 6:00 to 12:00
-  const morning = new Array(7).fill(0b000000111111000000000000);
+  const morning = new Session(
+    { times: new Array(7).fill(0b000000111111000000000000) },
+  );
 
   // 12:00 to 18:00
-  const afternoon = new Array(7).fill(0b000000000000111111000000);
+  const afternoon = new Session(
+    { times: new Array(7).fill(0b000000000000111111000000) },
+  );
 
   const scheduler = new Scheduler(now, hours, [
     new Goal({

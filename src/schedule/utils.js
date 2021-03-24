@@ -10,8 +10,6 @@ const ceilTime = (t) => {
   return left === 0 ? t : t - left + timeUnit;
 };
 
-const newTimes = (hours) => (1n << BigInt(hours * 6)) - 1n;
-
 const tomorrow = (date) => {
   const result = new Date(
     new Date(date).setDate(date.getDate() + 1),
@@ -33,7 +31,6 @@ export {
   timeUnit,
   ceilTime,
   beginOfWeek,
-  newTimes,
   tomorrow,
   hoursToSessions,
 };

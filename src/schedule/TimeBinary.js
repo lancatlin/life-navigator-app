@@ -22,6 +22,10 @@ class TimeBinary {
     return new TimeBinary(now, hours, result);
   }
 
+  static blankTime(now, hours) {
+    return new TimeBinary(now, hours, (1n << BigInt(hours * 6)) - 1n);
+  }
+
   print(print = false) {
     const n = 1n << BigInt(this.hours * 6);
     const result = (n + this.binary).toString(2).slice(1);
