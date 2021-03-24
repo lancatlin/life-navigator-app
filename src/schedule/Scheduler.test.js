@@ -50,11 +50,13 @@ test('schedule-tasks-once', () => {
   expect(tasks).toStrictEqual([
     new Task({
       goalId: 1,
+      name: '#1',
       startTime: new Date(2021, 0, 1, 6),
       endTime: new Date(2021, 0, 1, 8),
     }),
     new Task({
       goalId: 2,
+      name: '#2',
       startTime: new Date(2021, 0, 1, 12),
       endTime: new Date(2021, 0, 1, 14, 30),
     }),
@@ -101,26 +103,31 @@ test('schedule-tasks-multiple', () => {
   expect(tasks).toStrictEqual([
     new Task({
       goalId: 1,
+      name: '#1',
       startTime: new Date(2021, 0, 1, 6),
       endTime: new Date(2021, 0, 1, 8),
     }),
     new Task({
       goalId: 2,
+      name: '#2',
       startTime: new Date(2021, 0, 1, 12),
       endTime: new Date(2021, 0, 1, 14, 30),
     }),
     new Task({
       goalId: 1,
+      name: '#1',
       startTime: new Date(2021, 0, 2, 6),
       endTime: new Date(2021, 0, 2, 8),
     }),
     new Task({
       goalId: 2,
+      name: '#2',
       startTime: new Date(2021, 0, 2, 12),
       endTime: new Date(2021, 0, 2, 14, 30),
     }),
     new Task({
       goalId: 2,
+      name: '#2',
       startTime: new Date(2021, 0, 3, 12),
       endTime: new Date(2021, 0, 3, 14, 30),
     }),
