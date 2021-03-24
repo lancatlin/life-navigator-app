@@ -1,6 +1,6 @@
 import { test, expect } from '@jest/globals';
 import {
-  beginOfWeek, displayBinary, hoursToSessions, newTimes, sessionToBinary, timeToBinary, tomorrow,
+  beginOfWeek, hoursToSessions, newTimes, sessionToBinary, tomorrow,
 } from './utils';
 
 test('begin-of-week', () => {
@@ -36,28 +36,6 @@ test('tomorrow', () => {
   expect(date).toStrictEqual(new Date(2021, 0, 1, 9, 32, 32));
   expect(tomorrow(new Date(2021, 11, 31, 12)))
     .toStrictEqual(new Date(2022, 0, 1));
-});
-
-test('time-to-binary', () => {
-  const now = new Date(2021, 0, 1, 8);
-  const hours = 5;
-  expect(displayBinary(timeToBinary(
-    now, hours,
-    new Date(2021, 0, 1, 9),
-    new Date(2021, 0, 1, 12),
-  ), hours * 6))
-    .toBe('000000111111111111111111000000');
-  expect(displayBinary(timeToBinary(
-    now, hours,
-    new Date(2021, 0, 1, 9),
-  ), hours * 6))
-    .toBe('000000111111111111111111111111');
-  expect(displayBinary(timeToBinary(
-    now, hours,
-    null,
-    new Date(2021, 0, 1, 9),
-  ), hours * 6))
-    .toBe('111111000000000000000000000000');
 });
 
 test('hours-to-session', () => {
