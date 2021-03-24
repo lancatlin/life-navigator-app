@@ -30,6 +30,18 @@ class TimeBinary {
     }
     return result;
   }
+
+  mix(t) {
+    return new TimeBinary(this.now, this.hours, this.binary & t.binary);
+  }
+
+  not() {
+    return new TimeBinary(this.now, this.hours, ~this.binary);
+  }
+
+  union(t) {
+    return new TimeBinary(this.now, this.hours, this.binary | t.binary);
+  }
 }
 
 export default TimeBinary;
