@@ -7,7 +7,8 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest",
-    "test:debug": "node --inspect node_modules/.bin/jest --watch --runInBand" 
+    "test:debug": "node --inspect node_modules/.bin/jest --watch --runInBand",
+    "lint": "eslint"
   },
   "jest": {
     "preset": "jest-expo"

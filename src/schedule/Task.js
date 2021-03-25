@@ -1,4 +1,5 @@
-import { timeToBinary, tomorrow } from './utils';
+import TimeBinary from './TimeBinary';
+import { tomorrow } from './utils';
 
 class Task {
   constructor(props) {
@@ -6,11 +7,11 @@ class Task {
   }
 
   times(now, hours) {
-    return timeToBinary(now, hours, this.startTime, this.endTime);
+    return TimeBinary.fromTime(now, hours, this.startTime, this.endTime);
   }
 
   ignoreTimes(now, hours) {
-    return timeToBinary(now, hours, this.startTime, tomorrow(this.startTime));
+    return TimeBinary.fromTime(now, hours, this.startTime, tomorrow(this.startTime));
   }
 
   static createTaskFromTimeUnit(now, start, end, props = null) {
