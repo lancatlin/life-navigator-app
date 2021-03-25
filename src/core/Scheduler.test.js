@@ -127,6 +127,12 @@ test('schedule-tasks-multiple', () => {
       endTime: new Date(2021, 0, 2, 14, 30),
     }),
     new Task({
+      goalId: 1,
+      name: '#1',
+      startTime: new Date(2021, 0, 3, 6),
+      endTime: new Date(2021, 0, 3, 8),
+    }),
+    new Task({
       goalId: 2,
       name: '#2',
       startTime: new Date(2021, 0, 3, 12),

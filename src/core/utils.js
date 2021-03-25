@@ -18,9 +18,12 @@ const tomorrow = (date) => {
   return result;
 };
 
+const timeUnitToDate = (now, i) => new Date(new Date(now).setMinutes(now.getMinutes() + i * 10));
+
 export {
   timeUnit,
   ceilTime,
   beginOfWeek,
   tomorrow,
+  timeUnitToDate,
 };

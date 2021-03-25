@@ -1,5 +1,5 @@
 import Task from './Task';
-import { beginOfWeek } from './utils';
+import { beginOfWeek, timeUnitToDate } from './utils';
 import TimeBinary from './TimeBinary';
 
 class Goal {
@@ -9,8 +9,8 @@ class Goal {
     this.tasks = tasks ? [...props.tasks] : [];
   }
 
-  remainingFrequency(now) {
-    const tasksExecuted = this.tasks.filter((task) => task.startTime > beginOfWeek(now));
+  remainingFrequency(t) {
+    const tasksExecuted = this.tasks.filter((task) => task.startTime > beginOfWeek(t));
     return this.frequency - tasksExecuted.length;
   }
 
@@ -29,15 +29,13 @@ class Goal {
   }
 
   scheduleOneTask(now, hours, availableTime) {
-    if (this.remainingFrequency(now) === 0) {
-      return null;
-    }
     const remaining = this.remainingTimes(now, hours, availableTime).binary;
     let count = 0;
     for (let i = 0; i < hours * 6; i += 1) {
       const current = (remaining >> BigInt(hours * 6 - i)) % 2n;
       count = current === 1n ? count + 1 : 0;
-      if (count === this.eachTime * 6) {
+      if (count === this.eachTime * 6
+        && this.remainingFrequency(timeUnitToDate(now, i - count)) > 0) {
         const task = Task.createTaskFromTimeUnit(
           now, i - count, i, { goalId: this.id, name: this.name },
         );
