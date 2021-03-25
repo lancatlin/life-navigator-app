@@ -6,73 +6,92 @@ import {
   Button,
   TouchableOpacity,
   TextInput,
-  Pressable,
+  ScrollView,
 } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import { Foundation } from '@expo/vector-icons';
-import { CalendarList } from 'react-native-common-date-picker';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const GoalCreateScreen = (props) => {
   const [checked, setChecked] = React.useState(false);
   const [checked2, setChecked2] = React.useState(false);
-  const [calendarvisiable, setcalendarvisiable] = React.useState(false)
+  const [isVisable, setisVisable] = React.useState(false);
+  const showDatePicker = () => {
+    setisVisable(true);
+  };
+  const hideDatePicker = () => {
+    setisVisable(false);
+  };
+
+  const handleConfirm = (date) => {
+    console.warn('A date has been picked: ', date);
+    hideDatePicker();
+  };
   return (
-    <View>
-      <TextInput style={styles.NameInput} placeholder=" Name" />
-      <View style={styles.view2}>
-        <Checkbox
-          status={checked ? 'checked' : 'unchecked'}
-          onPress={() => {
-            setChecked(!checked);
-          }}
-        />
-        <Text style={styles.ExpireText}> Expire at </Text>
-        <Pressable>
+    <ScrollView>
+      <View>
+        <TextInput style={styles.NameInput} placeholder=" Name" />
+        <View style={styles.view2}>
+          <Checkbox
+            status={checked ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setChecked(!checked);
+            }}
+          />
+          <Text style={styles.ExpireText}> Expire at </Text>
           <TextInput
             style={styles.ExpireDate}
             placeholder=" Expire Date"
           />
-        </Pressable>
-      </View>
-      <View style={styles.view3}>
-        <Checkbox
-          status={checked2 ? 'checked' : 'unchecked'}
-          onPress={() => {
-            setChecked2(!checked2);
-          }}
+          <TouchableOpacity onPress={showDatePicker}>
+            <Foundation name="calendar" size={35} color="black" />
+          </TouchableOpacity>
+          <DateTimePickerModal
+            isVisible={isVisable}
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
+          />
+        </View>
+        <View style={styles.view3}>
+          <Checkbox
+            status={checked2 ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setChecked2(!checked2);
+            }}
+          />
+          <Text style={styles.DurationText}> Duartion </Text>
+          <TextInput style={styles.DurationInput} />
+          <Text style={styles.TimeText}> h</Text>
+          <TextInput style={styles.DurationInput} />
+          <Text style={styles.TimeText}> m</Text>
+        </View>
+        <View style={styles.view4}>
+          <Text style={styles.FrequencyText}> Frequency </Text>
+          <TextInput style={styles.FrequencyInput} />
+          <Text style={styles.FrequencyText}> / week</Text>
+        </View>
+        <View style={styles.view5}>
+          <Text style={styles.EachTime}> Each Time </Text>
+          <TextInput style={styles.EachInput} />
+          <Text style={styles.TimeText}> h</Text>
+          <TextInput style={styles.EachInput} />
+          <Text style={styles.TimeText}> m</Text>
+        </View>
+        <View style={styles.view6}>
+          <Text style={styles.PreferredText}> Preffered time </Text>
+          <TextInput style={styles.PreferredInput} placeholder=" Choose time" />
+        </View>
+        <Button
+          title="Parent Session"
+          onPress={() => props.navigation.navigate('Parent Session')}
         />
-        <Text style={styles.DurationText}> Duartion </Text>
-        <TextInput style={styles.DurationInput} />
-        <Text style={styles.TimeText}> h</Text>
-        <TextInput style={styles.DurationInput} />
-        <Text style={styles.TimeText}> m</Text>
+        <View style={styles.view7}>
+          <TouchableOpacity onPress={() => console.log('Pressed')}>
+            <Text style={styles.CreateTitle}> Create </Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={styles.view4}>
-        <Text style={styles.FrequencyText}> Frequency </Text>
-        <TextInput style={styles.FrequencyInput} />
-        <Text style={styles.FrequencyText}> / week</Text>
-      </View>
-      <View style={styles.view5}>
-        <Text style={styles.EachTime}> Each Time </Text>
-        <TextInput style={styles.EachInput} />
-        <Text style={styles.TimeText}> h</Text>
-        <TextInput style={styles.EachInput} />
-        <Text style={styles.TimeText}> m</Text>
-      </View>
-      <View style={styles.view6}>
-        <Text style={styles.PreferredText}> Preffered time </Text>
-        <TextInput style={styles.PreferredInput} placeholder=" Choose time" />
-      </View>
-      <Button
-        title="Parent Session"
-        onPress={() => props.navigation.navigate('Parent Session')}
-      />
-      <View style={styles.view7}>
-        <TouchableOpacity onPress={() => console.log('Pressed')}>
-          <Text style={styles.CreateTitle}> Create </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
