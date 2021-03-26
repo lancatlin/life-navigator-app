@@ -19,8 +19,8 @@ const Stack = createStackNavigator();
 
 const StackCreate = () => (
   <Stack.Navigator initialRouteName="Create session">
-    <Stack.Screen name="Create session" component={GoalCreateScreen} />
-    <Stack.Screen name="Parent Session" component={sessionScreen} />
+    <Stack.Screen name="Create session" component={GoalCreateScreen} options={{ headerTitleAlign: 'center' }} />
+    <Stack.Screen name="Parent Session" component={sessionScreen} options={{ headerTitleAlign: 'center' }} />
   </Stack.Navigator>
 );
 
