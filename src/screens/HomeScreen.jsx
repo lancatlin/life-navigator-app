@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, Text, StyleSheet, FlatList,
+  View, Text, StyleSheet, FlatList, Dimensions,
 } from 'react-native';
 import { AntDesign } from 'react-native-vector-icons';
 
@@ -12,11 +12,13 @@ const fakeData = [
   { title: 'Physics' },
 ];
 
+const SCREEN_WIDTH = Dimensions.get('window').width;
+
 const HomeScreen = () => (
   <>
     <View>
       <Text style={styles.topTextStyle}>Upcoming Events</Text>
-      <AntDesign name="clockcircleo" style={styles.clockStyle} />
+      <AntDesign name="clockcircleo" style={styles.clockStyle} size={SCREEN_WIDTH * 0.7} />
     </View>
     <FlatList
       style={styles.listStyle}
@@ -38,7 +40,6 @@ const styles = StyleSheet.create({
   },
   clockStyle: {
     alignSelf: 'center',
-    fontSize: 200,
   },
   listStyle: {
     marginTop: 50,

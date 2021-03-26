@@ -1,5 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+} from 'react-native';
 import StartButton from '../components/StartButton';
 import ProgressBar from '../components/ProgressBar';
 
@@ -12,6 +17,14 @@ const GoalDetailScreen = ({ route }) => (
       <StartButton />
     </View>
     <ProgressBar progress={route.params.progress} />
+    <View style={styles.timeSetContainerStyle}>
+      <Text style={styles.timeSetTextStyle}>Elapsed Time</Text>
+      <TextInput style={styles.textInputStyle} autoCapitalize="none" autoCorrect={false} />
+    </View>
+    <View style={styles.timeSetContainerStyle}>
+      <Text style={styles.timeSetTextStyle}>Remaining Time</Text>
+      <TextInput style={styles.textInputStyle} autoCapitalize="none" autoCorrect={false} />
+    </View>
   </View>
 );
 
@@ -34,6 +47,22 @@ const styles = StyleSheet.create({
   },
   startTextStyle: {
     fontSize: 10,
+  },
+  timeSetContainerStyle: {
+    flexDirection: 'row',
+    marginVertical: 25,
+    marginHorizontal: 15,
+  },
+  timeSetTextStyle: {
+    fontSize: 22,
+    flex: 1,
+  },
+  textInputStyle: {
+    width: 150,
+    fontSize: 24,
+    padding: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: 'black',
   },
 });
 
