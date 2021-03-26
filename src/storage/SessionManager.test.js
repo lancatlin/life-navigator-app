@@ -64,3 +64,20 @@ test('update-session-partial', async () => {
     sessionKey, [sessions[0], Session.fromHours(9, 11, { id: 2, name: 'morning' })],
   );
 });
+
+test('delete-session', async () => {
+  const sessions = [Session.fromHours(8, 17, {
+    id: 1,
+    name: 'default',
+  }), Session.fromHours(8, 12, {
+    id: 2,
+    name: 'morning',
+  })];
+  AsyncStorage.getItem.mockReturnValue(sessions);
+
+  const manager = await SessionManager.create();
+  await manager.delete(2);
+  expect(AsyncStorage.setItem).toBeCalledWith(
+    sessionKey, sessions.slice(0, 1),
+  );
+});

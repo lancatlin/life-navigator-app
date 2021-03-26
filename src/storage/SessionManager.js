@@ -26,7 +26,8 @@ class SessionManager {
 
   async add(session) {
     try {
-      await AsyncStorage.setItem(sessionKey, [...this.sessions, session]);
+      this.sessions = [...this.sessions, session];
+      await AsyncStorage.setItem(sessionKey, this.sessions);
     } catch (err) {
       console.error(err);
     }
@@ -37,6 +38,15 @@ class SessionManager {
       this.sessions = this.sessions.map(
         (session) => (session.id === id ? { ...session, ...props } : session),
       );
+      await AsyncStorage.setItem(sessionKey, this.sessions);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async delete(id) {
+    try {
+      this.sessions = this.sessions.filter((session) => session.id !== id);
       await AsyncStorage.setItem(sessionKey, this.sessions);
     } catch (err) {
       console.error(err);
