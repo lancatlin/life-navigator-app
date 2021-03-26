@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Session from '../core/Session';
 import { sessionKey } from './keys';
 
 class SessionManager {
@@ -28,6 +27,17 @@ class SessionManager {
   async add(session) {
     try {
       await AsyncStorage.setItem(sessionKey, [...this.sessions, session]);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async update(id, props) {
+    try {
+      this.sessions = this.sessions.map(
+        (session) => (session.id === id ? { ...session, ...props } : session),
+      );
+      await AsyncStorage.setItem(sessionKey, this.sessions);
     } catch (err) {
       console.error(err);
     }

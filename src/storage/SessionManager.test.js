@@ -30,3 +30,37 @@ test('add-session', async () => {
   expect(AsyncStorage.setItem).toBeCalledWith(sessionKey, [...sessions, session]);
   expect(AsyncStorage.setItem).toHaveBeenCalledTimes(1);
 });
+
+test('update-session', async () => {
+  const sessions = [Session.fromHours(8, 17, {
+    id: 1,
+    name: 'default',
+  }), Session.fromHours(8, 12, {
+    id: 2,
+    name: 'morning',
+  })];
+  AsyncStorage.getItem.mockReturnValue(sessions);
+  const manager = await SessionManager.create();
+  const newSession = Session.fromHours(13, 17);
+  await manager.update(2, { name: 'afternoon', times: newSession.times });
+  expect(AsyncStorage.setItem).toBeCalledWith(
+    sessionKey, [sessions[0], Session.fromHours(13, 17, { id: 2, name: 'afternoon' })],
+  );
+});
+
+test('update-session-partial', async () => {
+  const sessions = [Session.fromHours(8, 17, {
+    id: 1,
+    name: 'default',
+  }), Session.fromHours(8, 12, {
+    id: 2,
+    name: 'morning',
+  })];
+  AsyncStorage.getItem.mockReturnValue(sessions);
+  const manager = await SessionManager.create();
+  const newSession = Session.fromHours(9, 11);
+  await manager.update(2, { times: newSession.times });
+  expect(AsyncStorage.setItem).toBeCalledWith(
+    sessionKey, [sessions[0], Session.fromHours(9, 11, { id: 2, name: 'morning' })],
+  );
+});

@@ -1,3 +1,2 @@
-export default {
-  sessionKey: '@sessions',
-};
+export const sessionKey = '@sessions';
+export default {};
