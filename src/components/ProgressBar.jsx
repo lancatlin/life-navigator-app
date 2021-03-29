@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import DashedLine from './DashedLine';
 
 const ProgressBar = ({ progress }) => (
   <View style={styles.progressBarBackgroundStyle}>
@@ -8,6 +9,7 @@ const ProgressBar = ({ progress }) => (
         {progress}
         %
       </Text>
+      <DashedLine progress={progress} />
     </View>
   </View>
 );
