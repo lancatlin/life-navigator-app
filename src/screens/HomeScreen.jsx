@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, Text, StyleSheet, FlatList, Dimensions,
+  View, Text, StyleSheet, FlatList, Dimensions, ScrollView,
 } from 'react-native';
 import { AntDesign } from 'react-native-vector-icons';
 
@@ -12,23 +12,24 @@ const fakeData = [
   { title: 'Physics' },
 ];
 
-const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const HomeScreen = () => (
-  <>
+  <ScrollView>
+    <Text style={styles.topTextStyle}>Upcoming Events</Text>
+    <AntDesign name="clockcircleo" style={styles.clockStyle} size={SCREEN_HEIGHT * 0.3} />
     <View>
-      <Text style={styles.topTextStyle}>Upcoming Events</Text>
-      <AntDesign name="clockcircleo" style={styles.clockStyle} size={SCREEN_WIDTH * 0.7} />
+      <FlatList
+        style={styles.listStyle}
+        data={fakeData}
+        keyExtractor={(item) => item.title}
+        renderItem={({ item }) => (
+          <Text style={styles.textStyle}>{item.title}</Text>
+        )}
+        nestedScrollEnabled
+      />
     </View>
-    <FlatList
-      style={styles.listStyle}
-      data={fakeData}
-      keyExtractor={(item) => item.title}
-      renderItem={({ item }) => (
-        <Text style={styles.textStyle}>{item.title}</Text>
-      )}
-    />
-  </>
+  </ScrollView>
 );
 
 const styles = StyleSheet.create({
