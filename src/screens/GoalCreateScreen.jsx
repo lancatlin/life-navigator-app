@@ -11,11 +11,13 @@ import {
 import { Checkbox } from 'react-native-paper';
 import { Foundation } from '@expo/vector-icons';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import moment from 'moment';
 
 const GoalCreateScreen = (props) => {
   const [checked, setChecked] = React.useState(false);
   const [checked2, setChecked2] = React.useState(false);
   const [isVisable, setisVisable] = React.useState(false);
+  const [chosenDate, setchosenDate] = React.useState('');
   const showDatePicker = () => {
     setisVisable(true);
   };
@@ -24,14 +26,14 @@ const GoalCreateScreen = (props) => {
   };
 
   const handleConfirm = (date) => {
-    console.warn('A date has been picked: ', date);
     hideDatePicker();
+    setchosenDate(moment(date).format('L'));
   };
   return (
     <ScrollView>
       <View>
         <TextInput style={styles.NameInput} placeholder=" Name" />
-        <View style={styles.view2}>
+        <View style={styles.view}>
           <Checkbox
             status={checked ? 'checked' : 'unchecked'}
             onPress={() => {
@@ -39,10 +41,9 @@ const GoalCreateScreen = (props) => {
             }}
           />
           <Text style={styles.ExpireText}> Expire at </Text>
-          <TextInput
-            style={styles.ExpireDate}
-            placeholder=" Expire Date"
-          />
+          <Text style={styles.ExpireDate}>
+            {chosenDate}
+          </Text>
           <TouchableOpacity onPress={showDatePicker}>
             <Foundation name="calendar" size={35} color="black" />
           </TouchableOpacity>
@@ -52,7 +53,7 @@ const GoalCreateScreen = (props) => {
             onCancel={hideDatePicker}
           />
         </View>
-        <View style={styles.view3}>
+        <View style={styles.view}>
           <Checkbox
             status={checked2 ? 'checked' : 'unchecked'}
             onPress={() => {
@@ -70,14 +71,14 @@ const GoalCreateScreen = (props) => {
           <TextInput style={styles.FrequencyInput} />
           <Text style={styles.FrequencyText}> / week</Text>
         </View>
-        <View style={styles.view5}>
+        <View style={styles.view}>
           <Text style={styles.EachTime}> Each Time </Text>
           <TextInput style={styles.EachInput} />
           <Text style={styles.TimeText}> h</Text>
           <TextInput style={styles.EachInput} />
           <Text style={styles.TimeText}> m</Text>
         </View>
-        <View style={styles.view6}>
+        <View style={styles.view}>
           <Text style={styles.PreferredText}> Preffered time </Text>
           <TextInput style={styles.PreferredInput} placeholder=" Choose time" />
         </View>
@@ -105,9 +106,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     alignSelf: 'center',
     fontSize: 18,
-    letterSpacing: 2,
   },
-  view2: {
+  view: {
+    margin: 15,
     width: 300,
     alignSelf: 'center',
     flexDirection: 'row',
@@ -122,14 +123,6 @@ const styles = StyleSheet.create({
     borderWidth: 1.8,
     height: 30,
     width: 120,
-    letterSpacing: 2,
-  },
-  view3: {
-    margin: 15,
-    width: 300,
-    alignSelf: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   DurationText: {
     fontSize: 20,
@@ -140,7 +133,6 @@ const styles = StyleSheet.create({
     borderWidth: 1.8,
     height: 30,
     width: 50,
-    letterSpacing: 2,
   },
   TimeText: {
     fontSize: 20,
@@ -160,32 +152,16 @@ const styles = StyleSheet.create({
     borderWidth: 1.8,
     height: 30,
     width: 70,
-    letterSpacing: 2,
-  },
-  view5: {
-    margin: 15,
-    width: 300,
-    alignSelf: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   EachInput: {
     borderColor: 'black',
     borderWidth: 1.8,
     height: 30,
     width: 60,
-    letterSpacing: 2,
   },
   EachTime: {
     fontSize: 20,
     flex: 0,
-  },
-  view6: {
-    margin: 15,
-    width: 300,
-    alignSelf: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   PreferredText: {
     fontSize: 20,
@@ -196,7 +172,6 @@ const styles = StyleSheet.create({
     borderWidth: 1.8,
     height: 30,
     width: 150,
-    letterSpacing: 2,
   },
   view7: {
     margin: 100,
