@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   TouchableOpacity,
   TextInput,
   ScrollView,
@@ -82,10 +81,6 @@ const GoalCreateScreen = (props) => {
           <Text style={styles.PreferredText}> Preffered time </Text>
           <TextInput style={styles.PreferredInput} placeholder=" Choose time" />
         </View>
-        <Button
-          title="Parent Session"
-          onPress={() => props.navigation.navigate('Parent Session')}
-        />
         <View style={styles.view7}>
           <TouchableOpacity onPress={() => console.log('Pressed')}>
             <Text style={styles.CreateTitle}> Create </Text>

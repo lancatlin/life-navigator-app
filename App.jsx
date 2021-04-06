@@ -14,6 +14,7 @@ import GoalCreateScreen from './src/screens/GoalCreateScreen';
 import sessionScreen from './src/screens/sessionScreen';
 import CalenderScreen from './src/screens/CalenderScreen';
 import SettingScreen from './src/screens/SettingScreen';
+import ExecuteScreen from './src/screens/ExecuteScreen';
 
 const Stack = createStackNavigator();
 
@@ -56,6 +57,7 @@ export default () => (
       <Tab.Screen name="Goals" component={goalsFlow} />
       <Tab.Screen name="Calender" component={calenderFlow} />
       <Tab.Screen name="Settings" component={settings} />
+      <Tab.Screen name="Execute" component={ExecuteScreen} />
     </Tab.Navigator>
   </NavigationContainer>
 );
