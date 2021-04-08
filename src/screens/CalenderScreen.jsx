@@ -5,84 +5,83 @@ import {
 
 const fakedata = [
   {
-    date: 'Tue',
-    day: '2',
-    schedule: ['Calculus', 'Codewars', 'Trigonmetry'],
+    "id": 1,
+    "name": "Calculus",
+    "goalId": 3,
+    "startTime": Date(2021, 2, 2, 9, 0),
+    "endTime": Date(2021, 2, 2, 11, 0),
   },
   {
-    date: 'Wed',
-    day: '3',
-    schedule: ['Calculus', 'Codewars', 'Trigonmetry'],
+    "id": 2,
+    "name": 'Codewars',
+    'goalId': 2,
+    'startTime': Date(2021, 2, 2, 13, 0),
+    'endTime': Date(2021, 2, 2, 15, 0)
   },
   {
-    date: 'Thu',
-    day: '4',
-    schedule: ['Calculus', 'Codewars', 'Trigonmetry'],
-    time: ['9:00 - 11: 00', '13:00 - 15:00', '15:30 - 17:30'],
+    "id": 3,
+    "name": 'Trigonmetry',
+    'goalId': 3,
+    'startTime': Date(2021, 2, 2, 15, 30),
+    'endTime': Date(2021, 2, 2, 17, 30)
+  },
+  {
+    "id": 4,
+    "name": "Calculus",
+    "goalId": 3,
+    "startTime": Date(2021, 2, 3, 9, 0),
+    "endTime": Date(2021, 2, 3, 11, 0),
+  },
+  {
+    "id": 5,
+    "name": 'Codewars',
+    'goalId': 2,
+    'startTime': Date(2021, 2, 3, 13, 0),
+    'endTime': Date(2021, 2, 3, 15, 0)
+  },
+  {
+    "id": 6,
+    "name": 'Trigonmetry',
+    'goalId': 3,
+    'startTime': Date(2021, 2, 3, 15, 30),
+    'endTime': Date(2021, 2, 3, 17, 30)
+  },
+  {
+    "id": 7,
+    "name": "Calculus",
+    "goalId": 3,
+    "startTime": Date(2021, 2, 4, 9, 0),
+    "endTime": Date(2021, 2, 4, 11, 0),
+  },
+  {
+    "id": 8,
+    "name": 'Codewars',
+    'goalId': 2,
+    'startTime': Date(2021, 2, 4, 13, 0),
+    'endTime': Date(2021, 2, 4, 15, 0)
+  },
+  {
+    "id": 9,
+    "name": 'Trigonmetry',
+    'goalId': 3,
+    'startTime': Date(2021, 2, 4, 15, 30),
+    'endTime': Date(2021, 2, 4, 17, 30)
   },
 ];
 const CalenderScreen = () => (
   <FlatList
     data={fakedata}
-    keyExtractor={(item) => item.date}
+    keyExtractor={(item) => item.id}
     renderItem={({ item }) => (
-      <View style={styles.drawer}>
-        <View style={styles.dateDrawer}>
-          <Text style={styles.day}>{item.date}</Text>
-          <Text style={styles.date}>{item.day}</Text>
-        </View>
-        <FlatList
-          data={item.schedule}
-          keyExtractor={(item) => item}
-          renderItem={({ item }) => (
-            <View style={styles.scheduleDrawer}>
-              <Text style={styles.Text}>{item}</Text>
-              <View style={styles.timeView}>
-                <Text style={styles.Text}>time</Text>
-              </View>
-            </View>
-          )}
-        />
+      <View>
+        <Text> { item.name } </Text>
       </View>
     )}
   />
 );
 
 const styles = StyleSheet.create({
-  drawer: {
-    flexDirection: 'row',
-  },
-  dateDrawer: {
-    left: 20,
-    alignItems: 'center',
-    width: '10%',
-  },
-  date: {
-    fontSize: 20,
-  },
-  day: {
-    fontSize: 17,
-  },
-  scheduleDrawer: {
-    left: 35,
-    backgroundColor: 'pink',
-    borderColor: 'red',
-    borderWidth: 1,
-    borderRadius: 15,
-    margin: 10,
-    height: 45,
-    alignItems: 'center',
-    flexDirection: 'row',
-    width: 300,
-  },
-  Text: {
-    fontSize: 17,
-    marginHorizontal: 5,
-  },
-  timeView: {
-    alignItems: 'flex-end',
-    flex: 1,
-  },
+  
 });
 
 export default CalenderScreen;
