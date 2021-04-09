@@ -6,65 +6,94 @@ import {
   Button,
   TouchableOpacity,
   TextInput,
+  ScrollView,
 } from 'react-native';
-import { AntDesign } from 'react-native-vector-icons';
-import { DatePicker } from 'react-native-common-date-picker';
+import { Checkbox } from 'react-native-paper';
+import { Foundation } from '@expo/vector-icons';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
-const GoalCreateScreen = (props) => (
-  <View>
-    <TextInput style={styles.NameInput} placeholder=" Name" />
-    <View style={styles.view}>
-      <Text style={styles.ParentText}> Parent Goal </Text>
-      <TextInput style={styles.ParentInput} placeholder=" Choose Goal" />
-    </View>
-    <View style={styles.view2}>
-      <AntDesign name="checksquare" size={24} color="blue" />
-      <Text style={styles.ExpireText}> Expire at </Text>
-      <TextInput
-        style={styles.ExpireDate}
-        placeholder=" Expire Date"
-      />
-    </View>
-    <DatePicker
-      confirm={(date) => {
-        console.warn(date);
-      }}
-    />
-    <View style={styles.view3}>
-      <AntDesign name="checksquare" size={24} color="blue" />
-      <Text style={styles.DurationText}> Duartion </Text>
-      <TextInput style={styles.DurationInput} />
-      <Text style={styles.TimeText}> h</Text>
-      <TextInput style={styles.DurationInput} />
-      <Text style={styles.TimeText}> m</Text>
-    </View>
-    <View style={styles.view4}>
-      <Text style={styles.FrequencyText}> Frequency </Text>
-      <TextInput style={styles.FrequencyInput} />
-      <Text style={styles.FrequencyText}> / week</Text>
-    </View>
-    <View style={styles.view5}>
-      <Text style={styles.EachTime}> Each Time </Text>
-      <TextInput style={styles.EachInput} />
-      <Text style={styles.TimeText}> h</Text>
-      <TextInput style={styles.EachInput} />
-      <Text style={styles.TimeText}> m</Text>
-    </View>
-    <View style={styles.view6}>
-      <Text style={styles.PreferredText}> Prefferedtime </Text>
-      <TextInput style={styles.PreferredInput} placeholder=" Choose time" />
-    </View>
-    <Button
-      title="Parent Session"
-      onPress={() => props.navigation.navigate('Parent Session')}
-    />
-    <View style={styles.view7}>
-      <TouchableOpacity onPress={() => console.log('Pressed')}>
-        <Text style={styles.CreateTitle}> Create </Text>
-      </TouchableOpacity>
-    </View>
-  </View>
-);
+const GoalCreateScreen = (props) => {
+  const [checked, setChecked] = React.useState(false);
+  const [checked2, setChecked2] = React.useState(false);
+  const [isVisable, setisVisable] = React.useState(false);
+  const showDatePicker = () => {
+    setisVisable(true);
+  };
+  const hideDatePicker = () => {
+    setisVisable(false);
+  };
+
+  const handleConfirm = (date) => {
+    console.warn('A date has been picked: ', date);
+    hideDatePicker();
+  };
+  return (
+    <ScrollView>
+      <View>
+        <TextInput style={styles.NameInput} placeholder=" Name" />
+        <View style={styles.view2}>
+          <Checkbox
+            status={checked ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setChecked(!checked);
+            }}
+          />
+          <Text style={styles.ExpireText}> Expire at </Text>
+          <TextInput
+            style={styles.ExpireDate}
+            placeholder=" Expire Date"
+          />
+          <TouchableOpacity onPress={showDatePicker}>
+            <Foundation name="calendar" size={35} color="black" />
+          </TouchableOpacity>
+          <DateTimePickerModal
+            isVisible={isVisable}
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
+          />
+        </View>
+        <View style={styles.view3}>
+          <Checkbox
+            status={checked2 ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setChecked2(!checked2);
+            }}
+          />
+          <Text style={styles.DurationText}> Duartion </Text>
+          <TextInput style={styles.DurationInput} />
+          <Text style={styles.TimeText}> h</Text>
+          <TextInput style={styles.DurationInput} />
+          <Text style={styles.TimeText}> m</Text>
+        </View>
+        <View style={styles.view4}>
+          <Text style={styles.FrequencyText}> Frequency </Text>
+          <TextInput style={styles.FrequencyInput} />
+          <Text style={styles.FrequencyText}> / week</Text>
+        </View>
+        <View style={styles.view5}>
+          <Text style={styles.EachTime}> Each Time </Text>
+          <TextInput style={styles.EachInput} />
+          <Text style={styles.TimeText}> h</Text>
+          <TextInput style={styles.EachInput} />
+          <Text style={styles.TimeText}> m</Text>
+        </View>
+        <View style={styles.view6}>
+          <Text style={styles.PreferredText}> Preffered time </Text>
+          <TextInput style={styles.PreferredInput} placeholder=" Choose time" />
+        </View>
+        <Button
+          title="Parent Session"
+          onPress={() => props.navigation.navigate('Parent Session')}
+        />
+        <View style={styles.view7}>
+          <TouchableOpacity onPress={() => console.log('Pressed')}>
+            <Text style={styles.CreateTitle}> Create </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
   NameInput: {
@@ -76,27 +105,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     alignSelf: 'center',
     fontSize: 18,
-    letterSpacing: 2,
-  },
-  view: {
-    margin: 15,
-    height: 40,
-    marginHorizontal: 14,
-    flexDirection: 'row',
-    width: 300,
-    alignSelf: 'center',
-    justifyContent: 'space-between',
-  },
-  ParentText: {
-    fontSize: 20,
-    flex: 0,
-  },
-  ParentInput: {
-    borderColor: 'black',
-    borderWidth: 1.8,
-    height: 30,
-    width: 100,
-    flex: 1,
     letterSpacing: 2,
   },
   view2: {
@@ -113,7 +121,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1.8,
     height: 30,
-    width: 170,
+    width: 120,
     letterSpacing: 2,
   },
   view3: {
@@ -139,7 +147,6 @@ const styles = StyleSheet.create({
     flex: 0,
   },
   view4: {
-    margin: 15,
     width: 300,
     alignSelf: 'center',
     flexDirection: 'row',
