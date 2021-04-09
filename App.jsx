@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -14,6 +14,8 @@ import GoalCreateScreen from './src/screens/GoalCreateScreen';
 import sessionScreen from './src/screens/sessionScreen';
 import CalenderScreen from './src/screens/CalenderScreen';
 import SettingScreen from './src/screens/SettingScreen';
+
+import { Provider as AuthProvider, Context as AuthContext } from './src/context/AuthContext';
 
 const Stack = createStackNavigator();
 
@@ -41,21 +43,36 @@ const settings = () => (
 
 const calenderFlow = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Calender" component={CalenderScreen} options={{ headerTitleAlign:'center' }}/>
+    <Stack.Screen name="Calender" component={CalenderScreen} options={{ headerTitleAlign: 'center' }} />
   </Stack.Navigator>
-)
-export default () => (
-  <NavigationContainer>
-    <Tab.Navigator>
-      <Tab.Screen name="Sign in" component={SigninScreen} />
-      <Tab.Screen name="Sign up" component={SignupScreen} />
-      <Tab.Screen name="Preefered" component={PrefferedTimeScreen} />
-      <Tab.Screen name="NewSession" component={NewSessionScreen} />
-      <Tab.Screen name="Create" component={StackCreate} />
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Goals" component={goalsFlow} />
-      <Tab.Screen name="Calender" component={calenderFlow} />
-      <Tab.Screen name="Settings" component={settings} />
-    </Tab.Navigator>
-  </NavigationContainer>
 );
+export default () => {
+  const state = useContext(AuthContext);
+  return (
+    <AuthProvider value={AuthContext}>
+      <NavigationContainer>
+        {
+        state.token
+          ? (
+            <Tab.Navigator>
+              <Tab.Screen name="Preefered" component={PrefferedTimeScreen} />
+              <Tab.Screen name="NewSession" component={NewSessionScreen} />
+              <Tab.Screen name="Create" component={StackCreate} />
+              <Tab.Screen name="Home" component={HomeScreen} />
+              <Tab.Screen name="Goals" component={goalsFlow} />
+              <Tab.Screen name="Calender" component={calenderFlow} />
+              <Tab.Screen name="Settings" component={settings} />
+            </Tab.Navigator>
+          )
+          : (
+            <Stack.Navigator>
+              <Stack.Screen name="Sign in" component={SigninScreen} />
+              <Stack.Screen name="Sign up" component={SignupScreen} />
+
+            </Stack.Navigator>
+          )
+      }
+      </NavigationContainer>
+    </AuthProvider>
+  );
+};
