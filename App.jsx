@@ -48,7 +48,7 @@ const calenderFlow = () => (
 );
 
 const App = () => {
-  const state = useContext(AuthContext);
+  const { state } = useContext(AuthContext);
   return (
     <NavigationContainer>
       {

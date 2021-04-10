@@ -2,26 +2,31 @@ import SecureStore from 'expo-secure-store';
 import createDataContext from './createDataContext';
 
 const reducer = (state, action) => {
+  console.log(action);
   switch (action.type) {
     case 'RESTORE_TOKEN':
       return {
         ...state,
-        token: state.payload,
+        token: action.payload,
         isLoading: false,
       };
 
     case 'SIGN_IN':
       return {
         ...state,
-        token: state.payload,
-        isSignout: false,
+        token: action.payload,
+      };
+
+    case 'SIGN_UP':
+      return {
+        ...state,
+        token: action.payload,
       };
 
     case 'SIGN_OUT':
       return {
         ...state,
         token: null,
-        isSignout: true,
       };
 
     default:
@@ -43,6 +48,10 @@ const signIn = (dispatch) => async () => {
   dispatch({ type: 'SIGN_IN', payload: 'dummy_token' });
 };
 
+const signUp = (dispatch) => async () => {
+  dispatch({ type: 'SIGN_UP', payload: 'dummy_token' });
+};
+
 const signOut = (dispatch) => async () => {
   dispatch({ type: 'SIGN_OUT' });
 };
@@ -52,6 +61,7 @@ export const { Context, Provider } = createDataContext(
   {
     restoreToken,
     signIn,
+    signUp,
     signOut,
   },
   {

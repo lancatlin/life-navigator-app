@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // import { StyleSheet } from 'react-native';
 import Sign from '../components/Sign';
+import { Context } from '../context/AuthContext';
 
-const SignupScreen = ({ navigation }) => (
-  <>
-    <Sign
-      title="Signup"
-      buttonText="Signup"
-      promptText="Already have an account? Sign in"
-      callback={() => navigation.navigate('Signin')}
-    />
-  </>
-);
+const SignupScreen = ({ navigation }) => {
+  const { signUp } = useContext(Context);
+  return (
+    <>
+      <Sign
+        title="Signup"
+        buttonText="Signup"
+        callback={signUp}
+        promptText="Already have an account? Sign in"
+        switchCallback={() => navigation.navigate('Signin')}
+      />
+    </>
+  );
+};
 
 // const styles = StyleSheet.create({});
 

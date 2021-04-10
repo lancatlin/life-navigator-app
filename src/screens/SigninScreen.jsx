@@ -1,17 +1,21 @@
-import React from 'react';
-import { ScrollView } from 'react-native';
+import React, { useContext } from 'react';
 import Sign from '../components/Sign';
+import { Context } from '../context/AuthContext';
 
-const SigninScreen = ({ navigation }) => (
-  <ScrollView>
-    <Sign
-      title="Signin"
-      buttonText="Sign in"
-      promptText="Don't have an account yet? Sign up"
-      callback={() => navigation.navigate('Signup')}
-    />
-  </ScrollView>
-);
+const SigninScreen = ({ navigation }) => {
+  const { signIn } = useContext(Context);
+  return (
+    <>
+      <Sign
+        title="Signin"
+        buttonText="Sign in"
+        callback={signIn}
+        promptText="Don't have an account yet? Sign up"
+        switchCallback={() => navigation.navigate('Signup')}
+      />
+    </>
+  );
+};
 
 // const styles = StyleSheet.create({});
 
