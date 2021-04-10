@@ -46,12 +46,12 @@ const calenderFlow = () => (
     <Stack.Screen name="Calender" component={CalenderScreen} options={{ headerTitleAlign: 'center' }} />
   </Stack.Navigator>
 );
-export default () => {
+
+const App = () => {
   const state = useContext(AuthContext);
   return (
-    <AuthProvider value={AuthContext}>
-      <NavigationContainer>
-        {
+    <NavigationContainer>
+      {
         state.token
           ? (
             <Tab.Navigator>
@@ -72,7 +72,10 @@ export default () => {
             </Stack.Navigator>
           )
       }
-      </NavigationContainer>
-    </AuthProvider>
+    </NavigationContainer>
   );
 };
+
+export default () => (
+  <AuthProvider value={AuthContext}><App /></AuthProvider>
+);
