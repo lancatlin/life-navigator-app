@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Text, Input } from 'react-native-elements';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import Spacer from './Spacer';
+import { Context } from '../context/AuthContext';
 
 const Sign = ({
   title, buttonText, callback, promptText, switchCallback,
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { errorMsg } = useContext(Context);
   return (
     <View style={styles.border}>
       <Spacer>
@@ -28,6 +30,9 @@ const Sign = ({
         autoCompleteType="off"
         secureTextEntry
       />
+      <Spacer>
+        <Text>{errorMsg}</Text>
+      </Spacer>
       <Spacer>
         <TouchableOpacity style={styles.Button1} onPress={() => callback(email, password)}>
           <Text style={styles.Text1}>{buttonText}</Text>

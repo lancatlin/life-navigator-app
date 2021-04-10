@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { test, expect } from '@jest/globals';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';

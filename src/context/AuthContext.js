@@ -1,5 +1,6 @@
-import SecureStore from 'expo-secure-store';
+import * as SecureStore from 'expo-secure-store';
 import createDataContext from './createDataContext';
+import api from '../api/api';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -16,16 +17,17 @@ const reducer = (state, action) => {
         token: action.payload,
       };
 
-    case 'SIGN_UP':
-      return {
-        ...state,
-        token: action.payload,
-      };
-
     case 'SIGN_OUT':
       return {
         ...state,
         token: null,
+        errorMsg: '',
+      };
+
+    case 'ERROR':
+      return {
+        ...state,
+        errorMsg: action.payload,
       };
 
     default:
@@ -43,12 +45,28 @@ const restoreToken = (dispatch) => async () => {
   }
 };
 
-const signIn = (dispatch) => async () => {
-  dispatch({ type: 'SIGN_IN', payload: 'dummy_token' });
+const signIn = (dispatch) => async (email, password) => {
+  try {
+    const response = await api.post('/signin', { email, password });
+    await SecureStore.setItemAsync('TOKEN', response.data.token);
+    dispatch({ type: 'SIGN_IN', payload: response.data.token });
+    console.log(response.data.token);
+  } catch (err) {
+    dispatch({ type: 'ERROR', action: err.message });
+    console.log(err);
+  }
 };
 
-const signUp = (dispatch) => async () => {
-  dispatch({ type: 'SIGN_UP', payload: 'dummy_token' });
+const signUp = (dispatch) => async (email, password) => {
+  try {
+    const response = await api.post('/signup', { email, password });
+    await SecureStore.setItemAsync('TOKEN', response.data.token);
+    dispatch({ type: 'SIGN_IN', payload: response.data.token });
+    console.log(response.data.token);
+  } catch (err) {
+    dispatch({ type: 'ERROR', action: err.message });
+    console.log(err);
+  }
 };
 
 const signOut = (dispatch) => async () => {
@@ -67,5 +85,6 @@ export const { Context, Provider } = createDataContext(
     token: null,
     isLoading: true,
     isSignout: true,
+    errorMsg: '',
   },
 );
