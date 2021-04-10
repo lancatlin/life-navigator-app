@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -48,7 +48,11 @@ const calenderFlow = () => (
 );
 
 const App = () => {
-  const { state } = useContext(AuthContext);
+  const { state, restoreToken } = useContext(AuthContext);
+
+  useEffect(() => {
+    restoreToken();
+  }, []);
   return (
     <NavigationContainer>
       {
