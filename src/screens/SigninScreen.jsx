@@ -1,16 +1,18 @@
 import React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import Sign from '../components/Sign';
 
-const SigninScreen = () => (
+const SigninScreen = ({ navigation }) => (
   <ScrollView>
     <Sign
       title="Signin"
-      buttonText="Login"
+      buttonText="Sign in"
+      promptText="Don't have an account yet? Sign up"
+      callback={() => navigation.navigate('Signup')}
     />
   </ScrollView>
 );
 
-const styles = StyleSheet.create({});
+// const styles = StyleSheet.create({});
 
 export default SigninScreen;

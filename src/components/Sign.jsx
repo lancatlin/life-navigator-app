@@ -3,7 +3,9 @@ import { Text, Input } from 'react-native-elements';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import Spacer from './Spacer';
 
-const Sign = ({ title, buttonText }) => (
+const Sign = ({
+  navigation, title, buttonText, promptText, callback,
+}) => (
   <View style={styles.border}>
     <Spacer>
       <Text h3 style={styles.header}>{title}</Text>
@@ -23,6 +25,11 @@ const Sign = ({ title, buttonText }) => (
     <Spacer>
       <TouchableOpacity style={styles.Button3}>
         <Text style={styles.Text2}>Facebook Login</Text>
+      </TouchableOpacity>
+    </Spacer>
+    <Spacer>
+      <TouchableOpacity onPress={callback}>
+        <Text style={styles.promptText}>{promptText}</Text>
       </TouchableOpacity>
     </Spacer>
   </View>
@@ -73,6 +80,10 @@ const styles = StyleSheet.create({
   },
   Text2: {
     fontSize: 15,
+  },
+  promptText: {
+    fontSize: 16,
+    alignSelf: 'center',
   },
 });
 

@@ -65,10 +65,9 @@ const App = () => {
             </Tab.Navigator>
           )
           : (
-            <Stack.Navigator>
-              <Stack.Screen name="Sign in" component={SigninScreen} />
-              <Stack.Screen name="Sign up" component={SignupScreen} />
-
+            <Stack.Navigator headerMode="none">
+              <Stack.Screen name="Signin" component={SigninScreen} />
+              <Stack.Screen name="Signup" component={SignupScreen} />
             </Stack.Navigator>
           )
       }
