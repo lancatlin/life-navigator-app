@@ -14,21 +14,61 @@ const fakeGoal = [
     goal: 'Study Calculus',
     expireTime: '2021/02/07',
     progress: 30,
+    subGoal: [
+      {
+        goal: 'CH2',
+        expireTime: '2021/02/05',
+      },
+      {
+        goal: 'CH3',
+        expireTime: '2021/02/07',
+      },
+    ],
   },
   {
     goal: 'Codewars',
     expireTime: '2021/02/08',
     progress: 35,
+    subGoal: [
+      {
+        goal: 'Python',
+        expireTime: '2021/02/05',
+      },
+      {
+        goal: 'C',
+        expireTime: '2021/02/08',
+      },
+    ],
   },
   {
     goal: 'Exercise',
     expireTime: '2021/02/09',
     progress: 69,
+    subGoal: [
+      {
+        goal: 'basketball',
+        expireTime: '2021/02/06',
+      },
+      {
+        goal: 'baseball',
+        expireTime: '2021/02/09',
+      },
+    ],
   },
   {
     goal: 'Study Physics',
     expireTime: '2021/02/22',
     progress: 72,
+    subGoal: [
+      {
+        goal: 'Hmm...',
+        expireTime: '2021/02/15',
+      },
+      {
+        goal: 'Not That Important',
+        expireTime: '2021/02/22',
+      },
+    ],
   },
 ];
 
@@ -43,6 +83,7 @@ const GoalsScreen = ({ navigation }) => (
             goal: item.goal,
             expireTime: item.expireTime,
             progress: item.progress,
+            subGoal: item.subGoal,
           })}
         >
           <View style={styles.itemStyle}>
