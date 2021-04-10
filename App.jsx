@@ -1,11 +1,13 @@
 import React, { useContext, useEffect } from 'react';
+import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import HomeScreen from './src/screens/HomeScreen';
 import SigninScreen from './src/screens/SigninScreen';
 import SignupScreen from './src/screens/SignupScreen';
-import PrefferedTimeScreen from './src/screens/PrefferedTimeScreen';
+import SessionsScreen from './src/screens/SessionsScreen';
 import NewSessionScreen from './src/screens/NewSessionScreen';
 import GoalsScreen from './src/screens/GoalsScreen';
 import GoalDetailScreen from './src/screens/GoalDetailScreen';
@@ -47,19 +49,25 @@ const calenderFlow = () => (
   </Stack.Navigator>
 );
 
+const queryClient = new QueryClient();
+
 const App = () => {
   const { state, restoreToken } = useContext(AuthContext);
 
   useEffect(() => {
     restoreToken();
   }, []);
+
+  if (state.isLoading) {
+    return <Text>Loading...</Text>;
+  }
   return (
     <NavigationContainer>
       {
         state.token
           ? (
             <Tab.Navigator>
-              <Tab.Screen name="Preefered" component={PrefferedTimeScreen} />
+              <Tab.Screen name="Preefered" component={SessionsScreen} />
               <Tab.Screen name="NewSession" component={NewSessionScreen} />
               <Tab.Screen name="Create" component={StackCreate} />
               <Tab.Screen name="Home" component={HomeScreen} />
@@ -80,5 +88,10 @@ const App = () => {
 };
 
 export default () => (
-  <AuthProvider value={AuthContext}><App /></AuthProvider>
+  <QueryClientProvider client={queryClient}>
+    <AuthProvider value={AuthContext}>
+      <App />
+    </AuthProvider>
+  </QueryClientProvider>
+
 );
