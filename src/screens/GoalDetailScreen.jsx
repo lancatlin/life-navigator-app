@@ -1,10 +1,10 @@
 import React from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   TextInput,
 } from 'react-native';
+import { Text } from 'react-native-elements';
 import StartButton from '../components/StartButton';
 import ProgressBar from '../components/ProgressBar';
 
