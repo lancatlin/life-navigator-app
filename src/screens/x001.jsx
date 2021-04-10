@@ -104,3 +104,9 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
 });
+const times = new Array(17).fill('');
+for (const i in times) {
+  times[i] = `${i}`;
+}
+let times = new Array(17 * 3).fill('');
+  times = times.map((_, i) => `${i}`);
