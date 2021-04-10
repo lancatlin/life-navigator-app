@@ -126,8 +126,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   Schedule_Time: {
-    alignContent: 'flex-end',
+    justifyContent: 'flex-end',
     flexDirection: 'row',
+    flex: 1
   }
 });
 
