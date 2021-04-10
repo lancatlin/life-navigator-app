@@ -1,10 +1,12 @@
 import React from 'react';
 import { Text } from 'react-native-elements';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  TouchableOpacity, StyleSheet, SafeAreaView,
+} from 'react-native';
 import Spacer from '../components/Spacer';
 
 const PrefferedTimeScreen = () => (
-  <View style={styles.border}>
+  <SafeAreaView style={styles.border}>
     <TouchableOpacity style={styles.TimeButton}>
       <Text>Morning</Text>
     </TouchableOpacity>
@@ -21,11 +23,12 @@ const PrefferedTimeScreen = () => (
         <Text>New</Text>
       </TouchableOpacity>
     </Spacer>
-  </View>
+  </SafeAreaView>
 );
 
 const styles = StyleSheet.create({
   border: {
+    flex: 1,
     marginTop: 40,
   },
   TimeButton: {

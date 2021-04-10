@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text } from 'react-native-elements';
 import {
-  View, FlatList, TouchableOpacity, StyleSheet,
+  SafeAreaView, FlatList, TouchableOpacity, StyleSheet,
 } from 'react-native';
 
 const NewSessionScreen = () => {
+  const [selected, setSelected] = useState();
   const weeks = [
     { day: 'Mon' },
     { day: 'Tue' },
@@ -35,29 +36,33 @@ const NewSessionScreen = () => {
   ];
 
   return (
-    <View style={styles.border}>
+    <SafeAreaView style={styles.border}>
       <FlatList
         keyExtractor={(week) => week.day}
         data={weeks}
         horizontal
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.day}>
+          <SafeAreaView style={styles.day}>
             <Text>{item.day}</Text>
-          </TouchableOpacity>
+          </SafeAreaView>
         )}
       />
       <FlatList
         keyExtractor={(time) => time.day}
         data={times}
         keyExtractor={(item, index) => (`${index}1`)} // add key
+        extraData={selected}
         numColumns={7}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.set}>
+          <TouchableOpacity
+            style={[styles.set, { backgroundColor }]}
+            onPress={() => setSelected(times.select)}
+          >
             <Text style={styles.text}>{item.set}</Text>
           </TouchableOpacity>
         )}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

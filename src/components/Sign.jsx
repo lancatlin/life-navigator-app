@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, Input } from 'react-native-elements';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { SafeAreaView, TouchableOpacity, StyleSheet } from 'react-native';
 import Spacer from './Spacer';
 
 const Sign = ({ title, buttonText }) => (
-  <View style={styles.border}>
+  <SafeAreaView style={styles.border}>
     <Spacer>
       <Text h3 style={styles.header}>{title}</Text>
     </Spacer>
@@ -25,11 +25,12 @@ const Sign = ({ title, buttonText }) => (
         <Text style={styles.Text2}>Facebook Login</Text>
       </TouchableOpacity>
     </Spacer>
-  </View>
+  </SafeAreaView>
 );
 
 const styles = StyleSheet.create({
   border: {
+    flex: 1,
     marginTop: 40,
   },
   header: {
