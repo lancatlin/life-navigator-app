@@ -2,7 +2,6 @@ import SecureStore from 'expo-secure-store';
 import createDataContext from './createDataContext';
 
 const reducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case 'RESTORE_TOKEN':
       return {

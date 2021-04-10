@@ -8,8 +8,8 @@ const SignupScreen = ({ navigation }) => {
   return (
     <>
       <Sign
-        title="Signup"
-        buttonText="Signup"
+        title="Sign up"
+        buttonText="Sign up"
         callback={signUp}
         promptText="Already have an account? Sign in"
         switchCallback={() => navigation.navigate('Signin')}

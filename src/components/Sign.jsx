@@ -26,6 +26,7 @@ const Sign = ({
         value={password}
         autoCorrect={false}
         autoCompleteType="off"
+        secureTextEntry
       />
       <Spacer>
         <TouchableOpacity style={styles.Button1} onPress={() => callback(email, password)}>

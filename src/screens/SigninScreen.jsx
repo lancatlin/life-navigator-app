@@ -7,7 +7,7 @@ const SigninScreen = ({ navigation }) => {
   return (
     <>
       <Sign
-        title="Signin"
+        title="Sign in"
         buttonText="Sign in"
         callback={signIn}
         promptText="Don't have an account yet? Sign up"
