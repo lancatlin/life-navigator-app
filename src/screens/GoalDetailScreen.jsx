@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  FlatList,
 } from 'react-native';
 import StartButton from '../components/StartButton';
 import ProgressBar from '../components/ProgressBar';
@@ -30,22 +29,6 @@ const GoalDetailScreen = ({ route }) => (
     </View>
     <View>
       <Text style={styles.subStyle}>Sub Goals</Text>
-      <FlatList
-        data={route.params.subGoal}
-        keyExtractor={(item) => item.goal}
-        renderItem={({ item }) => (
-          <View style={styles.itemStyle}>
-            <View style={{ flexDirection: 'row' }}>
-              <View style={{ flex: 1 }}>
-                <Text style={styles.goalTextStyle}>{item.goal}</Text>
-                <Text style={styles.expireTextStyle}>{`Expire at ${item.expireTime}`}</Text>
-              </View>
-              <StartButton />
-            </View>
-            <ProgressBar progress={30} />
-          </View>
-        )}
-      />
     </View>
   </>
 );
@@ -84,14 +67,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     borderColor: 'black',
     borderBottomWidth: 1,
-  },
-  itemStyle: {
-    padding: 15,
-    borderColor: 'black',
-    borderBottomWidth: 1,
-  },
-  goalTextStyle: {
-    fontSize: 32,
   },
 });
 

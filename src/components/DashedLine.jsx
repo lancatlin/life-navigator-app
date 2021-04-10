@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 
 const DashedLine = ({ progress }) => (
-  <View style={styles.dashedLineStyle}>
+  <View style={styles.dashedLineStyle} width={`${progress}%`}>
     <Text>{progress}</Text>
   </View>
 );
@@ -12,8 +12,7 @@ const DashedLine = ({ progress }) => (
 const styles = StyleSheet.create({
   dashedLineStyle: {
     position: 'absolute',
-    width: '100%',
-    height: 35,
+    height: 33,
     justifyContent: 'center',
     borderStyle: 'dashed',
     borderRightWidth: 1,
