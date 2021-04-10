@@ -67,7 +67,7 @@ const App = () => {
         state.token
           ? (
             <Tab.Navigator>
-              <Tab.Screen name="Preefered" component={SessionsScreen} />
+              <Tab.Screen name="Sessions" component={SessionsScreen} />
               <Tab.Screen name="NewSession" component={NewSessionScreen} />
               <Tab.Screen name="Create" component={StackCreate} />
               <Tab.Screen name="Home" component={HomeScreen} />
