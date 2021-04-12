@@ -12,7 +12,7 @@ const DashedLine = ({ progress }) => (
 const styles = StyleSheet.create({
   dashedLineStyle: {
     position: 'absolute',
-    height: 33,
+    height: 35,
     justifyContent: 'center',
     borderStyle: 'dashed',
     borderRightWidth: 1,

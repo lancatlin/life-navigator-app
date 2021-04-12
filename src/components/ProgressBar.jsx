@@ -5,12 +5,24 @@ import DashedLine from './DashedLine';
 const ProgressBar = ({ progress }) => (
   <View style={styles.containerStyle}>
     <View style={styles.progressBarBackgroundStyle}>
-      <View style={styles.progressBarStyle} width={`${progress}%`}>
-        <Text style={styles.progressTextStyle}>
-          {progress}
-          %
-        </Text>
+      <View style={styles.progressBarStyle} width={`${progress}%`} borderRadius={parseInt(progress, 10) > 96 ? 20 : 0}>
+        {parseInt(progress, 10) >= 8
+          ? (
+            <Text style={styles.progressTextStyle}>
+              {progress}
+              %
+            </Text>
+          )
+          : null}
       </View>
+      {parseInt(progress, 10) < 8
+        ? (
+          <Text style={styles.progressRightTextStyle}>
+            {progress}
+            %
+          </Text>
+        )
+        : null}
     </View>
     <DashedLine progress={progress} />
   </View>
@@ -25,6 +37,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   progressBarBackgroundStyle: {
+    flexDirection: 'row',
     width: '100%',
     height: 35,
     alignSelf: 'center',
@@ -45,6 +58,12 @@ const styles = StyleSheet.create({
     marginRight: 3,
     color: 'white',
     fontSize: 20,
+  },
+  progressRightTextStyle: {
+    marginLeft: 3,
+    marginTop: 1,
+    color: 'black',
+    fontSize: 24,
   },
 });
 
