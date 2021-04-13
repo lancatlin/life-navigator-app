@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text } from 'react-native-elements';
 import {
-  View, FlatList, TouchableOpacity, StyleSheet,
+  SafeAreaView, FlatList, TouchableOpacity, StyleSheet,
 } from 'react-native';
 
 const NewSessionScreen = () => {
+  const [selected, setSelected] = useState();
   const weeks = [
     { day: 'Mon' },
     { day: 'Tue' },
@@ -14,57 +15,61 @@ const NewSessionScreen = () => {
     { day: 'Sat' },
     { day: 'Sun' },
   ];
-  const times = [
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '6:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '7:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '8:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '9:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '10:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '11:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '12:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '13:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '14:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '15:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '16:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '17:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '18:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '19:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '20:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '21:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-    { set: '', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '22:00', select: false }, { set: '', select: false }, { set: '', select: false }, { set: '', select: false },
-  ];
+  const timeShows = [];
+  for (let j = 6; j < 23; j += 1) {
+    timeShows.push(`${j}:00`);
+  }
+  let times = new Array(17 * 7).fill('');
+  times = times.map((_, i) => `${i}`);
 
   return (
-    <View style={styles.border}>
+    <SafeAreaView style={styles.border}>
       <FlatList
         keyExtractor={(week) => week.day}
         data={weeks}
         horizontal
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.day}>
+          <SafeAreaView style={styles.day}>
             <Text>{item.day}</Text>
-          </TouchableOpacity>
+          </SafeAreaView>
+        )}
+      />
+
+      <FlatList
+        data={timeShows}
+        keyExtractor={(timeShow) => timeShow}// add key
+        renderItem={({ item }) => (
+          <SafeAreaView
+            style={styles.set}
+          >
+            <Text style={styles.text}>{item}</Text>
+          </SafeAreaView>
         )}
       />
       <FlatList
-        keyExtractor={(time) => time.day}
         data={times}
-        keyExtractor={(item, index) => (`${index}1`)} // add key
+        keyExtractor={(time) => time}
+        extraData={selected}
         numColumns={7}
-        renderItem={({ item }) => (
-          <TouchableOpacity style={styles.set}>
-            <Text style={styles.text}>{item.set}</Text>
-          </TouchableOpacity>
+        renderItem={() => (
+          <TouchableOpacity
+            style={styles.set}
+            activeOpacity={0.2}
+          />
         )}
       />
-    </View>
+
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   border: {
     marginTop: 30,
+    width: 350,
+    alignSelf: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   day: {
     height: 40,
@@ -75,14 +80,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  set: {
+  time: {
     height: 30,
     width: 50,
-    backgroundColor: 'white',
-    borderColor: 'black',
     borderWidth: 0.6,
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
+  },
+  set: {
+    height: 30,
+    width: 50,
+    borderWidth: 0.6,
+    justifyContent: 'center',
+    alignItems: 'center',
+
   },
   text: {
     fontSize: 13,
