@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Text, View, StyleSheet, TouchableOpacity, Switch, Modal,
 } from 'react-native';
+import { Context } from '../context/AuthContext';
 
 const SettingScreen = () => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -15,6 +16,8 @@ const SettingScreen = () => {
   const themeColorModalClose = () => {
     setOpen(false);
   };
+
+  const { signOut } = useContext(Context);
 
   return (
     <View>
@@ -68,6 +71,11 @@ const SettingScreen = () => {
           <Text style={styles.buttonText}> Use Sleep Time as Default </Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.center}>
+        <TouchableOpacity style={styles.button} onPress={signOut}>
+          <Text style={styles.buttonText}>Sign out</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -85,8 +93,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   button: {
-    top: 45,
-    padding: 20,
+    marginTop: 10,
+    padding: 10,
     paddingLeft: 20,
     paddingRight: 20,
     borderRadius: 9,
@@ -99,7 +107,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   center: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

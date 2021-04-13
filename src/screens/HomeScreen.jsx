@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, Text, StyleSheet, FlatList, Dimensions,
+  Text, StyleSheet, FlatList, Dimensions,
 } from 'react-native';
 import { AntDesign } from 'react-native-vector-icons';
 
@@ -12,34 +12,36 @@ const fakeData = [
   { title: 'Physics' },
 ];
 
-const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const HomeScreen = () => (
-  <>
-    <View>
-      <Text style={styles.topTextStyle}>Upcoming Events</Text>
-      <AntDesign name="clockcircleo" style={styles.clockStyle} size={SCREEN_WIDTH * 0.7} />
-    </View>
-    <FlatList
-      style={styles.listStyle}
-      data={fakeData}
-      keyExtractor={(item) => item.title}
-      renderItem={({ item }) => (
-        <Text style={styles.textStyle}>{item.title}</Text>
-      )}
-    />
-  </>
+  <FlatList
+    ListHeaderComponent={(
+      <>
+        <Text style={styles.topTextStyle}>Upcoming Events</Text>
+        <AntDesign name="clockcircleo" style={styles.clockStyle} size={SCREEN_HEIGHT * 0.3} />
+      </>
+  )}
+    style={styles.listStyle}
+    data={fakeData}
+    keyExtractor={(item) => item.title}
+    renderItem={({ item }) => (
+      <Text style={styles.textStyle}>{item.title}</Text>
+    )}
+    showsVerticalScrollIndicator={false}
+  />
 );
 
 const styles = StyleSheet.create({
   topTextStyle: {
     fontSize: 35,
-    marginTop: 55,
+    marginTop: 25,
     marginBottom: 25,
     alignSelf: 'center',
   },
   clockStyle: {
     alignSelf: 'center',
+    marginBottom: 30,
   },
   listStyle: {
     marginTop: 50,
