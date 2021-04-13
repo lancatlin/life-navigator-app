@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
-  View, Text, Modal, StyleSheet,
+  FlatList,
 } from 'react-native';
+import ScheduleDetail from '../components/ScheduleDetail';
 
 const fakedata = [
   {
@@ -69,38 +70,16 @@ const fakedata = [
   },
 ];
 
-function ModalOpen(id) {
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    for (let i = 0; i < fakedata.length; i += 1) {
-      if (fakedata[i].id === id) {
-        setOpen(true);
-        return (
-          <Modal
-            visible={open}
-            transparent
-            onRequestClose={setOpen(false)}
-            animationType="fade"
-          >
-            <View style={styles.modal}>
-              <View>
-                <Text> hi </Text>
-              </View>
-            </View>
-          </Modal>
-        );
-      }
-    }
-  });
-}
+const ScheduleScreen = () => (
+  <FlatList
+    data={fakedata}
+    keyExtractor={(item) => item.id.toString()}
+    renderItem={({ item }) => (
+      <ScheduleDetail
+        task={item}
+      />
+    )}
+  />
+);
 
-const styles = StyleSheet.create({
-  modal: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
-  },
-});
-
-export { ModalOpen, fakedata };
+export default ScheduleScreen;

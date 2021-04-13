@@ -1,67 +1,76 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  Text, View, StyleSheet, FlatList, TouchableOpacity,
+  View, Text, Modal, StyleSheet, TouchableOpacity,
 } from 'react-native';
-import { ModalOpen, fakedata } from '../components/CalenderDetail';
 
 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-function addZero(i) {
-  if (i < 10) {
-    i = `0${i}`;
-  }
-  return i;
+
+function getMonth(date) {
+  return monthNames[date.getMonth()];
 }
 
-const CalenderScreen = () => (
-  <FlatList
-    data={fakedata}
-    keyExtractor={(item) => item.id.toString()}
-    renderItem={({ item }) => (
-      <TouchableOpacity onPress={() => ModalOpen(1)}>
-        <View style={styles.Date_and_Schedule}>
+function ScheduleDetail({ task }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <View>
+      <TouchableOpacity onPress={() => setOpen(true)}>
+        <View style={styles.dateAndSchedule}>
           <View style={styles.Date}>
-            <Text>
-              {' '}
-              { monthNames[item.startTime.getMonth()] }
-              {' '}
-            </Text>
+            <Text style={{ color: 'black' }}>{ getMonth(task.startTime) }</Text>
             <Text style={{ fontSize: 16 }}>
-              {' '}
-              { item.startTime.getDate() }
-              {' '}
+              { task.startTime.getDate() }
             </Text>
           </View>
           <View style={styles.Schedule}>
             <View style={styles.Schedule_Name}>
               <Text style={{ fontSize: 16 }}>
-                {' '}
-                { item.name }
-                {' '}
+                { task.name }
               </Text>
             </View>
             <View style={styles.Schedule_Time}>
               <Text>
-                {' '}
-                { addZero(item.startTime.getHours()) }
-                :
-                { addZero(item.startTime.getMinutes()) }
-                {' '}
+                { task.startTime.toLocaleTimeString() }
                 -
-                {' '}
-                { addZero(item.endTime.getHours()) }
-                :
-                { addZero(item.endTime.getMinutes()) }
-                {' '}
+                { task.endTime.toLocaleTimeString() }
               </Text>
             </View>
           </View>
         </View>
       </TouchableOpacity>
-    )}
-  />
-);
+      <TaskModal
+        task={task}
+        open={open}
+        callback={() => setOpen(false)}
+      />
+    </View>
+  );
+}
+
+function TaskModal({ task, open, callback }) {
+  return (
+    <Modal
+      visible={open}
+      transparent
+      onRequestClose={callback}
+      animationType="fade"
+    >
+      <View style={styles.modal}>
+        <View>
+          <Text>{task.name}</Text>
+        </View>
+      </View>
+    </Modal>
+  );
+}
 
 const styles = StyleSheet.create({
+  modal: {
+    margin: 50,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+  },
   Date_and_Schedule: {
     flexDirection: 'row',
     marginTop: 20,
@@ -93,4 +102,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CalenderScreen;
+export default ScheduleDetail;
