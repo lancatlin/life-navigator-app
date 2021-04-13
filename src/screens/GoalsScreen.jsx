@@ -1,11 +1,11 @@
 import React from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   FlatList,
   TouchableOpacity,
 } from 'react-native';
+import { Text } from 'react-native-elements';
 import StartButton from '../components/StartButton';
 import ProgressBar from '../components/ProgressBar';
 
@@ -43,12 +43,13 @@ const GoalsScreen = ({ navigation }) => (
             goal: item.goal,
             expireTime: item.expireTime,
             progress: item.progress,
+            subGoal: item.subGoal,
           })}
         >
           <View style={styles.itemStyle}>
             <View style={{ flexDirection: 'row' }}>
               <View style={{ flex: 1 }}>
-                <Text style={styles.goalTextStyle}>{item.goal}</Text>
+                <Text h3>{item.goal}</Text>
                 <Text style={styles.expireTextStyle}>
                   {`Expire at ${item.expireTime}`}
                 </Text>
@@ -68,10 +69,6 @@ const styles = StyleSheet.create({
     padding: 15,
     borderColor: 'black',
     borderBottomWidth: 1,
-  },
-  goalTextStyle: {
-    fontSize: 32,
-    fontWeight: 'bold',
   },
   expireTextStyle: {
     fontSize: 16,
