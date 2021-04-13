@@ -32,15 +32,15 @@ const GoalCreateScreen = (props) => {
     <ScrollView>
       <View>
         <TextInput style={styles.NameInput} placeholder=" Name" />
-        <View style={styles.view}>
+        <View style={styles.view} justifyContent="space-between">
           <Checkbox
             status={checked ? 'checked' : 'unchecked'}
             onPress={() => {
               setChecked(!checked);
             }}
           />
-          <Text style={styles.ExpireText}> Expire at </Text>
-          <Text style={styles.ExpireDate}>
+          <Text style={styles.text}> Expire at </Text>
+          <Text style={styles.Expiredate} width={120}>
             {chosenDate}
           </Text>
           <TouchableOpacity onPress={showDatePicker}>
@@ -52,36 +52,36 @@ const GoalCreateScreen = (props) => {
             onCancel={hideDatePicker}
           />
         </View>
-        <View style={styles.view}>
+        <View style={styles.view} justifyContent="space-between">
           <Checkbox
             status={checked2 ? 'checked' : 'unchecked'}
             onPress={() => {
               setChecked2(!checked2);
             }}
           />
-          <Text style={styles.DurationText}> Duartion </Text>
-          <TextInput style={styles.DurationInput} />
-          <Text style={styles.TimeText}> h</Text>
-          <TextInput style={styles.DurationInput} />
-          <Text style={styles.TimeText}> m</Text>
-        </View>
-        <View style={styles.view4}>
-          <Text style={styles.FrequencyText}> Frequency </Text>
-          <TextInput style={styles.FrequencyInput} />
-          <Text style={styles.FrequencyText}> / week</Text>
+          <Text style={styles.text}> Duartion </Text>
+          <TextInput style={styles.input} width={50} />
+          <Text style={styles.text}> h</Text>
+          <TextInput style={styles.input} width={50} />
+          <Text style={styles.text}> m</Text>
         </View>
         <View style={styles.view}>
-          <Text style={styles.EachTime}> Each Time </Text>
-          <TextInput style={styles.EachInput} />
-          <Text style={styles.TimeText}> h</Text>
-          <TextInput style={styles.EachInput} />
-          <Text style={styles.TimeText}> m</Text>
+          <Text style={styles.text}> Frequency </Text>
+          <TextInput style={styles.input} width={70} />
+          <Text style={styles.text}> / week</Text>
         </View>
-        <View style={styles.view}>
-          <Text style={styles.PreferredText}> Preffered time </Text>
-          <TextInput style={styles.PreferredInput} placeholder=" Choose time" />
+        <View style={styles.view} justifyContent="space-between">
+          <Text style={styles.text}> Each Time </Text>
+          <TextInput style={styles.input} width={60} />
+          <Text style={styles.text}> h</Text>
+          <TextInput style={styles.input} width={60} />
+          <Text style={styles.text}> m</Text>
         </View>
-        <View style={styles.view7}>
+        <View style={styles.view} justifyContent="space-between">
+          <Text style={styles.text}> Preffered time </Text>
+          <TextInput style={styles.input} width={150} placeholder=" Choose time" />
+        </View>
+        <View style={styles.view} margin={100} alignItems="center" backgroundColor="#00ffff" borderRadius={15} width={110} height={50}>
           <TouchableOpacity onPress={() => console.log('Pressed')}>
             <Text style={styles.CreateTitle}> Create </Text>
           </TouchableOpacity>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.8,
     height: 40,
     width: 300,
-    marginHorizontal: 15,
+    flexDirection: 'row',
     alignSelf: 'center',
     fontSize: 18,
   },
@@ -107,74 +107,23 @@ const styles = StyleSheet.create({
     width: 300,
     alignSelf: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
   },
-  ExpireText: {
+  text: {
     fontSize: 20,
     flex: 0,
   },
-  ExpireDate: {
+  Expiredate: {
     borderColor: 'black',
     borderWidth: 1.8,
     height: 30,
     width: 120,
-  },
-  DurationText: {
+    textAlign: 'center',
     fontSize: 20,
-    flex: 0,
   },
-  DurationInput: {
+  input: {
     borderColor: 'black',
     borderWidth: 1.8,
     height: 30,
-    width: 50,
-  },
-  TimeText: {
-    fontSize: 20,
-    flex: 0,
-  },
-  view4: {
-    width: 300,
-    alignSelf: 'center',
-    flexDirection: 'row',
-  },
-  FrequencyText: {
-    fontSize: 20,
-    flex: 0,
-  },
-  FrequencyInput: {
-    borderColor: 'black',
-    borderWidth: 1.8,
-    height: 30,
-    width: 70,
-  },
-  EachInput: {
-    borderColor: 'black',
-    borderWidth: 1.8,
-    height: 30,
-    width: 60,
-  },
-  EachTime: {
-    fontSize: 20,
-    flex: 0,
-  },
-  PreferredText: {
-    fontSize: 20,
-    flex: 0,
-  },
-  PreferredInput: {
-    borderColor: 'black',
-    borderWidth: 1.8,
-    height: 30,
-    width: 150,
-  },
-  view7: {
-    margin: 100,
-    width: 150,
-    height: 40,
-    alignSelf: 'center',
-    backgroundColor: '#EEFFFF',
-    borderRadius: 15,
   },
   CreateTitle: {
     fontSize: 30,

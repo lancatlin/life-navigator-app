@@ -21,7 +21,6 @@ const Stack = createStackNavigator();
 const StackCreate = () => (
   <Stack.Navigator initialRouteName="Create session">
     <Stack.Screen name="Create session" component={GoalCreateScreen} options={{ headerTitleAlign: 'center' }} />
-    <Stack.Screen name="Parent Session" component={sessionScreen} options={{ headerTitleAlign: 'center' }} />
   </Stack.Navigator>
 );
 
@@ -42,9 +41,9 @@ const settings = () => (
 
 const calenderFlow = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Calender" component={CalenderScreen} options={{ headerTitleAlign:'center' }}/>
+    <Stack.Screen name="Calender" component={CalenderScreen} options={{ headerTitleAlign: 'center' }} />
   </Stack.Navigator>
-)
+);
 export default () => (
   <NavigationContainer>
     <Tab.Navigator>
