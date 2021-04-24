@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Text, Input } from 'react-native-elements';
-import { TouchableOpacity, StyleSheet } from 'react-native';
+import { TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import Spacer from './Spacer';
 import { Context } from '../context/AuthContext';
 
@@ -11,7 +11,7 @@ const Sign = ({
   const [password, setPassword] = useState('');
   const { errorMsg } = useContext(Context);
   return (
-    <View style={styles.border}>
+    <ScrollView style={styles.border}>
       <Spacer>
         <Text h3 style={styles.header}>{title}</Text>
       </Spacer>
@@ -53,7 +53,7 @@ const Sign = ({
           <Text style={styles.promptText}>{promptText}</Text>
         </TouchableOpacity>
       </Spacer>
-    </View>
+    </ScrollView>
   );
 };
 

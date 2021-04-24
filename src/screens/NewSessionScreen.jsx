@@ -47,6 +47,7 @@ const NewSessionScreen = () => {
         )}
       />
       <FlatList
+        style={{ position: 'absolute', top: 40 }}
         data={times}
         keyExtractor={(time) => time}
         extraData={selected}
@@ -54,7 +55,6 @@ const NewSessionScreen = () => {
         renderItem={() => (
           <TouchableOpacity
             style={styles.set}
-            activeOpacity={0.2}
           />
         )}
       />
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
   time: {
     height: 30,
     width: 50,
-    borderWidth: 0.6,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
