@@ -63,7 +63,7 @@ const App = () => {
   return (
     <NavigationContainer>
       {
-        state.token
+        true
           ? (
             <Tab.Navigator>
               <Tab.Screen name="Sessions" component={SessionsScreen} />
