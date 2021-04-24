@@ -47,7 +47,7 @@ const NewSessionScreen = () => {
         )}
       />
       <FlatList
-        style={{ position: 'absolute', top: 39.5 }}
+        style={{ position: 'absolute', top: 40 }}
         data={times}
         keyExtractor={(time) => time}
         extraData={selected}
@@ -65,7 +65,7 @@ const NewSessionScreen = () => {
 
 const styles = StyleSheet.create({
   border: {
-    marginTop: 8,
+    marginTop: 30,
     width: 350,
     alignSelf: 'center',
     alignItems: 'center',
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
 
   },
   text: {
-    fontSize: 11,
+    fontSize: 13,
   },
 
 });

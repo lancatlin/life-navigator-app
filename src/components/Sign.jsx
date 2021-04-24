@@ -21,6 +21,7 @@ const Sign = ({
         value={email}
         autoCorrect={false}
         autoCompleteType="off"
+        autoCapitalize="none"
       />
       <Input
         label="Password"
@@ -28,6 +29,7 @@ const Sign = ({
         value={password}
         autoCorrect={false}
         autoCompleteType="off"
+        autoCapitalize="none"
         secureTextEntry
       />
       <Spacer>

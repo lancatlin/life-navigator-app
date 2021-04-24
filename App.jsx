@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Text } from 'react-native';
+import { Text, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -48,6 +48,20 @@ const calenderFlow = () => (
   </Stack.Navigator>
 );
 
+const sessionsFlow = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Sessions" component={SessionsScreen} options={{ headerTitleAlign: 'center' }} />
+    <Stack.Screen
+      name="NewSession"
+      component={NewSessionScreen}
+      options={{
+        headerTitleAlign: 'center',
+      }}
+
+    />
+  </Stack.Navigator>
+);
+
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -66,8 +80,7 @@ const App = () => {
         state.token
           ? (
             <Tab.Navigator>
-              <Tab.Screen name="Sessions" component={SessionsScreen} />
-              <Tab.Screen name="NewSession" component={NewSessionScreen} />
+              <Tab.Screen name="Sessions" component={sessionsFlow} />
               <Tab.Screen name="Create" component={StackCreate} />
               <Tab.Screen name="Home" component={HomeScreen} />
               <Tab.Screen name="Goals" component={goalsFlow} />
