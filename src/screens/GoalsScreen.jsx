@@ -6,63 +6,51 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Text } from 'react-native-elements';
+import { useQuery } from 'react-query';
+import { fetchGoalList } from '../api/GoalsFetch';
 import StartButton from '../components/StartButton';
 import ProgressBar from '../components/ProgressBar';
 
-const fakeGoal = [
-  {
-    goal: 'Study Calculus',
-    expireTime: '2021/02/07',
-    progress: 30,
-  },
-  {
-    goal: 'Codewars',
-    expireTime: '2021/02/08',
-    progress: 35,
-  },
-  {
-    goal: 'Exercise',
-    expireTime: '2021/02/09',
-    progress: 69,
-  },
-  {
-    goal: 'Study Physics',
-    expireTime: '2021/02/22',
-    progress: 72,
-  },
-];
-
-const GoalsScreen = ({ navigation }) => (
-  <View>
-    <FlatList
-      data={fakeGoal}
-      keyExtractor={(item) => item.goal}
-      renderItem={({ item }) => (
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Detail', {
-            goal: item.goal,
-            expireTime: item.expireTime,
-            progress: item.progress,
-            subGoal: item.subGoal,
-          })}
-        >
-          <View style={styles.itemStyle}>
-            <View style={{ flexDirection: 'row' }}>
-              <View style={{ flex: 1 }}>
-                <Text h3>{item.goal}</Text>
-                <Text style={styles.expireTextStyle}>
-                  {`Expire at ${item.expireTime}`}
-                </Text>
+const GoalsScreen = ({ navigation }) => {
+  const {
+    isLoading, isError, error, data,
+  } = useQuery('goals', fetchGoalList);
+  console.log(data);
+  if (isLoading) {
+    return <><Text>Loading...</Text></>;
+  }
+  if (isError) {
+    console.log(error);
+  }
+  return (
+    <View>
+      <FlatList
+        data={data}
+        keyExtractor={(item) => item.goal}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Detail', {
+              goal: item,
+            })}
+          >
+            <View style={styles.itemStyle}>
+              <View style={{ flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                  <Text h3>{item.name}</Text>
+                  <Text style={styles.expireTextStyle}>
+                    {`Expire at ${item.expireAt}`}
+                  </Text>
+                </View>
+                <StartButton />
               </View>
-              <StartButton />
+              <ProgressBar progress={item.progress()} />
             </View>
-            <ProgressBar progress={item.progress} />
-          </View>
-        </TouchableOpacity>
-      )}
-    />
-  </View>
-);
+          </TouchableOpacity>
+        )}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   itemStyle: {

@@ -8,30 +8,33 @@ import { Text } from 'react-native-elements';
 import StartButton from '../components/StartButton';
 import ProgressBar from '../components/ProgressBar';
 
-const GoalDetailScreen = ({ route }) => (
-  <>
-    <View style={styles.containerStyle}>
-      <View style={{ flexDirection: 'row' }}>
-        <Text style={styles.expireTextStyle}>
-          {`Expire at ${route.params.expireTime}`}
-        </Text>
-        <StartButton />
+const GoalDetailScreen = ({ route }) => {
+  const { goal } = route.params;
+  return (
+    <>
+      <View style={styles.containerStyle}>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={styles.expireTextStyle}>
+            {`Expire at ${goal.expireAt}`}
+          </Text>
+          <StartButton />
+        </View>
+        <ProgressBar progress={goal.progress()} />
+        <View style={styles.timeSetContainerStyle}>
+          <Text style={styles.timeSetTextStyle}>Elapsed Time</Text>
+          <TextInput style={styles.textInputStyle} autoCapitalize="none" autoCorrect={false} />
+        </View>
+        <View style={styles.timeSetContainerStyle}>
+          <Text style={styles.timeSetTextStyle}>Remaining Time</Text>
+          <TextInput style={styles.textInputStyle} autoCapitalize="none" autoCorrect={false} />
+        </View>
       </View>
-      <ProgressBar progress={route.params.progress} />
-      <View style={styles.timeSetContainerStyle}>
-        <Text style={styles.timeSetTextStyle}>Elapsed Time</Text>
-        <TextInput style={styles.textInputStyle} autoCapitalize="none" autoCorrect={false} />
+      <View>
+        <Text style={styles.subStyle}>Sub Goals</Text>
       </View>
-      <View style={styles.timeSetContainerStyle}>
-        <Text style={styles.timeSetTextStyle}>Remaining Time</Text>
-        <TextInput style={styles.textInputStyle} autoCapitalize="none" autoCorrect={false} />
-      </View>
-    </View>
-    <View>
-      <Text style={styles.subStyle}>Sub Goals</Text>
-    </View>
-  </>
-);
+    </>
+  );
+};
 
 const styles = StyleSheet.create({
   containerStyle: {

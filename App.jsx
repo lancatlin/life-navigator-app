@@ -1,3 +1,4 @@
+import './shim';
 import React, { useContext, useEffect } from 'react';
 import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';

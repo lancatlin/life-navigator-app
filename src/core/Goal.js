@@ -4,9 +4,14 @@ import TimeBinary from './TimeBinary';
 
 class Goal {
   constructor(props) {
+    console.log(props);
     const { tasks, ...properties } = props;
     Object.assign(this, properties);
     this.tasks = tasks ? [...props.tasks] : [];
+  }
+
+  progress() {
+    return (this.executedTime / this.duration) * 100;
   }
 
   remainingFrequency(t) {
@@ -21,7 +26,7 @@ class Goal {
   }
 
   ignoreTimes(now, hours) {
-    let result = new TimeBinary(now, hours, 0n);
+    let result = new TimeBinary(now, hours, BigInt(0));
     for (const task of this.tasks) {
       result = task.ignoreTimes(now, hours).union(result);
     }
@@ -32,8 +37,8 @@ class Goal {
     const remaining = this.remainingTimes(now, hours, availableTime).binary;
     let count = 0;
     for (let i = 0; i < hours * 6; i += 1) {
-      const current = (remaining >> BigInt(hours * 6 - i)) % 2n;
-      count = current === 1n ? count + 1 : 0;
+      const current = (remaining >> BigInt(hours * 6 - i)) % BigInt(2);
+      count = current === BigInt(1) ? count + 1 : 0;
       if (count === this.eachTime * 6
         && this.remainingFrequency(timeUnitToDate(now, i - count)) > 0) {
         const task = Task.createTaskFromTimeUnit(

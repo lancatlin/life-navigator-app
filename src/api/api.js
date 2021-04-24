@@ -1,11 +1,12 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
-import * as SecureStore from 'expo-secure-store';
+// import * as SecureStore from 'expo-secure-store';
 
 const instance = axios.create({
-  baseURL: 'https://life.linchpins.cloud',
+  baseURL: 'http://192.168.0.185:3000',
 });
 
+/*
 instance.interceptors.request.use(
   async (config) => {
     const token = await SecureStore.getItemAsync('TOKEN');
@@ -18,5 +19,6 @@ instance.interceptors.request.use(
   },
   (err) => Promise.reject(err),
 );
+*/
 
 export default instance;
