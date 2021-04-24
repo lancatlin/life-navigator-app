@@ -7,63 +7,82 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
-import { Checkbox } from 'react-native-paper';
+import { CheckBox, Input } from 'react-native-elements';
 import { Foundation } from '@expo/vector-icons';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 
 const GoalCreateScreen = () => {
-  const [checked, setChecked] = React.useState(false);
-  const [checked2, setChecked2] = React.useState(false);
-  const [isVisable, setisVisable] = React.useState(false);
-  const [chosenDate, setchosenDate] = React.useState('');
+  const [hasExpired, setHasChecked] = React.useState(true);
+  const [checked2, setChecked2] = React.useState(true);
+  const [isVisible, setIsVisible] = React.useState(false);
+  const [chosenDate, setChosenDate] = React.useState('');
   const showDatePicker = () => {
-    setisVisable(true);
+    setIsVisible(true);
   };
   const hideDatePicker = () => {
-    setisVisable(false);
+    setIsVisible(false);
   };
 
   const handleConfirm = (date) => {
     hideDatePicker();
-    setchosenDate(moment(date).format('L'));
+    setChosenDate(moment(date).format('L'));
   };
   return (
     <ScrollView>
       <View>
-        <TextInput style={styles.NameInput} placeholder=" Name" />
+        <Input placeholder=" Name" />
         <View style={styles.view} justifyContent="space-between">
-          <Checkbox
-            status={checked ? 'checked' : 'unchecked'}
+          <CheckBox
+            title="Expire at"
+            checked={hasExpired}
             onPress={() => {
-              setChecked(!checked);
+              setHasChecked(!hasExpired);
             }}
           />
-          <Text style={styles.text}> Expire at </Text>
-          <Text style={styles.Expiredate} width={120}>
-            {chosenDate}
-          </Text>
-          <TouchableOpacity onPress={showDatePicker}>
-            <Foundation name="calendar" size={35} color="black" />
-          </TouchableOpacity>
-          <DateTimePickerModal
-            isVisible={isVisable}
-            onConfirm={handleConfirm}
-            onCancel={hideDatePicker}
-          />
+          { hasExpired
+            ? (
+              <>
+                <TouchableOpacity
+                  onPress={showDatePicker}
+                  style={{ flexDirection: 'row' }}
+                  disabled={!hasExpired}
+                >
+                  <Foundation name="calendar" size={35} color="black" style={{ paddingRight: 5 }} />
+                  <Text style={styles.expireDate} width={120}>
+                    {chosenDate}
+                  </Text>
+                </TouchableOpacity>
+                <DateTimePickerModal
+                  isVisible={isVisible}
+                  onConfirm={handleConfirm}
+                  onCancel={hideDatePicker}
+                />
+              </>
+            )
+            : null}
+
         </View>
         <View style={styles.view} justifyContent="space-between">
-          <Checkbox
-            status={checked2 ? 'checked' : 'unchecked'}
+          <CheckBox
+            title="Duartion"
+            checked={checked2}
             onPress={() => {
               setChecked2(!checked2);
             }}
           />
-          <Text style={styles.text}> Duartion </Text>
-          <TextInput style={styles.input} width={50} />
-          <Text style={styles.text}> h</Text>
-          <TextInput style={styles.input} width={50} />
-          <Text style={styles.text}> m</Text>
+          {
+            checked2
+              ? (
+                <>
+                  <TextInput style={styles.input} width={50} />
+                  <Text style={styles.text}> h</Text>
+                  <TextInput style={styles.input} width={50} />
+                  <Text style={styles.text}> m</Text>
+                </>
+              )
+              : null
+          }
         </View>
         <View style={styles.view}>
           <Text style={styles.text}> Frequency </Text>
@@ -78,12 +97,12 @@ const GoalCreateScreen = () => {
           <Text style={styles.text}> m</Text>
         </View>
         <View style={styles.view} justifyContent="space-between">
-          <Text style={styles.text}> Preffered time </Text>
+          <Text style={styles.text}> Session </Text>
           <TextInput style={styles.input} width={150} placeholder=" Choose time" />
         </View>
         <View style={styles.view} margin={100} alignItems="center" backgroundColor="#00ffff" borderRadius={15} width={110} height={50}>
           <TouchableOpacity onPress={() => console.log('Pressed')}>
-            <Text style={styles.CreateTitle}> Create </Text>
+            <Text style={styles.createTitle}> Create </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -92,7 +111,7 @@ const GoalCreateScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  NameInput: {
+  nameInput: {
     margin: 15,
     borderColor: 'black',
     borderWidth: 1.8,
@@ -103,7 +122,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   view: {
-    margin: 15,
+    marginBottom: 5,
     width: 300,
     alignSelf: 'center',
     flexDirection: 'row',
@@ -112,7 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     flex: 0,
   },
-  Expiredate: {
+  expireDate: {
     borderColor: 'black',
     borderWidth: 1.8,
     height: 30,
@@ -125,7 +144,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.8,
     height: 30,
   },
-  CreateTitle: {
+  createTitle: {
     fontSize: 30,
     textAlign: 'center',
   },
