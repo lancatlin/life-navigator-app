@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Text } from 'react-native-elements';
 import {
-  SafeAreaView, FlatList, TouchableOpacity, StyleSheet,
+  SafeAreaView, FlatList, TouchableOpacity, StyleSheet, TextInput, ScrollView,
 } from 'react-native';
+import { Entypo } from '@expo/vector-icons';
 
 const NewSessionScreen = () => {
+  const [name, setName] = useState();
   const [selected, setSelected] = useState();
   const weeks = [
     { day: 'Mon' },
@@ -23,49 +25,93 @@ const NewSessionScreen = () => {
   times = times.map((_, i) => `${i}`);
 
   return (
-    <SafeAreaView style={styles.border}>
-      <FlatList
-        keyExtractor={(week) => week.day}
-        data={weeks}
-        horizontal
-        renderItem={({ item }) => (
-          <SafeAreaView style={styles.day}>
-            <Text>{item.day}</Text>
-          </SafeAreaView>
-        )}
-      />
-
-      <FlatList
-        data={timeShows}
-        keyExtractor={(timeShow) => timeShow}// add key
-        renderItem={({ item }) => (
-          <SafeAreaView
-            style={styles.set}
-          >
-            <Text style={styles.text}>{item}</Text>
-          </SafeAreaView>
-        )}
-      />
-      <FlatList
-        style={{ position: 'absolute', top: 39.5 }}
-        data={times}
-        keyExtractor={(time) => time}
-        extraData={selected}
-        numColumns={7}
-        renderItem={() => (
-          <TouchableOpacity
-            style={styles.set}
+    <SafeAreaView>
+      <SafeAreaView style={styles.setNameStyle}>
+        <SafeAreaView style={styles.inputStyle}>
+          <TextInput
+            style={styles.inputTextStyle}
+            onChangeText={setName}
+            value={name}
+            placeholder="Session"
+            autoCorrect={false}
+            autoCompleteType="off"
+            autoCapitalize="none"
           />
-        )}
-      />
+        </SafeAreaView>
+        <TouchableOpacity style={styles.iconStyle}>
+          <Entypo name="check" size={35} />
+        </TouchableOpacity>
+      </SafeAreaView>
+
+      <ScrollView>
+        <SafeAreaView style={styles.border}>
+
+          <FlatList
+            keyExtractor={(week) => week.day}
+            data={weeks}
+            horizontal
+            renderItem={({ item }) => (
+              <SafeAreaView style={styles.day}>
+                <Text>{item.day}</Text>
+              </SafeAreaView>
+            )}
+          />
+          <FlatList
+            data={timeShows}
+            keyExtractor={(timeShow) => timeShow}// add key
+            renderItem={({ item }) => (
+              <SafeAreaView
+                style={styles.set}
+              >
+                <Text style={styles.text}>{item}</Text>
+              </SafeAreaView>
+            )}
+          />
+          <FlatList
+            style={{ position: 'absolute', top: 40 }}
+            data={times}
+            keyExtractor={(time) => time}
+            extraData={selected}
+            numColumns={7}
+            renderItem={() => (
+              <TouchableOpacity
+                style={styles.set}
+              />
+            )}
+          />
+
+        </SafeAreaView>
+      </ScrollView>
 
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  border: {
+  setNameStyle: {
+    flexDirection: 'row',
+    backgroundColor: '#C3ECF8',
+  },
+  inputStyle: {
     marginTop: 8,
+    backgroundColor: 'white',
+    height: 50,
+    borderRadius: 5,
+    marginHorizontal: 15,
+    width: 250,
+    alignSelf: 'center',
+    marginBottom: 8,
+  },
+  inputTextStyle: {
+    flex: 1,
+    fontSize: 20,
+  },
+  iconStyle: {
+    alignSelf: 'center',
+    marginHorizontal: 15,
+  },
+  border: {
+    marginTop: 5,
     width: 350,
     alignSelf: 'center',
     alignItems: 'center',
@@ -81,14 +127,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   time: {
-    height: 30,
+    height: 28,
     width: 50,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
   },
   set: {
-    height: 30,
+    height: 28,
     width: 50,
     borderWidth: 0.6,
     justifyContent: 'center',
