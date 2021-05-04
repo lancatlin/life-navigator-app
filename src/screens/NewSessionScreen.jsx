@@ -5,9 +5,11 @@ import {
 } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 
+const blankTimes = () => Array.from(new Array(17 * 7), (_, i) => i);
+
 const NewSessionScreen = () => {
   const [name, setName] = useState();
-  const [selected, setSelected] = useState();
+  const [selected, setSelected] = useState(new Array(17 * 7).fill(false));
   const weeks = [
     { day: 'Mon' },
     { day: 'Tue' },
@@ -21,8 +23,7 @@ const NewSessionScreen = () => {
   for (let j = 6; j < 23; j += 1) {
     timeShows.push(`${j}:00`);
   }
-  let times = new Array(17 * 7).fill('');
-  times = times.map((_, i) => `${i}`);
+  const times = blankTimes();
 
   return (
     <SafeAreaView>
@@ -70,12 +71,23 @@ const NewSessionScreen = () => {
           <FlatList
             style={{ position: 'absolute', top: 40 }}
             data={times}
-            keyExtractor={(time) => time}
-            extraData={selected}
+            keyExtractor={(item) => item}
+            // extraData={selected}
             numColumns={7}
-            renderItem={() => (
+            renderItem={({ item, index }) => (
               <TouchableOpacity
-                style={styles.set}
+                style={{
+                  ...styles.set,
+                  backgroundColor: selected[index]
+                    ? 'red'
+                    : null,
+                }}
+                onPress={() => {
+                  setSelected(
+                    selected.map((value, i) => (i === index ? !value : value)),
+                  );
+                  console.log(index);
+                }}
               />
             )}
           />
