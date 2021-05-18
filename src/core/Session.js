@@ -13,14 +13,14 @@ class Session {
     const beginMunites = now.getMinutes() / 10;
     let result = BigInt(0);
     for (let i = beginHour; i < beginHour + hours + 1; i += 1) {
-      result <<= 6n;
+      result <<= BigInt(6);
       const day = (beginDay + Math.floor(i / 24)) % 7;
       const hour = i % 24;
       const current = (this.times[day] >> (23 - hour)) % 2;
-      result += current === 1 ? 0b111111n : 0n;
+      result += current === 1 ? BigInt(0b111111) : BigInt(0);
     }
     result >>= BigInt(6 - beginMunites);
-    result %= (1n << BigInt(hours * 6));
+    result %= (BigInt(1) << BigInt(hours * 6));
     return new TimeBinary(now, hours, result);
   }
 

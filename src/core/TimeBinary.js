@@ -16,18 +16,18 @@ class TimeBinary {
       : hours * 6;
     let result = BigInt(0);
     for (let i = 0; i < hours * 6; i += 1) {
-      result <<= 1n;
-      result += begin <= i && i < end ? 1n : 0n;
+      result <<= BigInt(1);
+      result += begin <= i && i < end ? BigInt(1) : BigInt(0);
     }
     return new TimeBinary(now, hours, result);
   }
 
   static blankTime(now, hours) {
-    return new TimeBinary(now, hours, (1n << BigInt(hours * 6)) - 1n);
+    return new TimeBinary(now, hours, (BigInt(1) << BigInt(hours * 6)) - BigInt(1));
   }
 
   print(print = false) {
-    const n = 1n << BigInt(this.hours * 6);
+    const n = BigInt(1) << BigInt(this.hours * 6);
     const result = (n + this.binary).toString(2).slice(1);
     if (print) {
       console.log(result, result.length);
