@@ -10,6 +10,14 @@ class Goal {
     this.tasks = tasks ? [...props.tasks] : [];
   }
 
+  static fromList(goalsData) {
+    const result = [];
+    for (const goalData of goalsData) {
+      result.push(new Goal(goalData));
+    }
+    return result;
+  }
+
   progress() {
     return (this.executedTime / this.duration) * 100;
   }

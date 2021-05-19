@@ -5,14 +5,27 @@ import {
   TextInput,
 } from 'react-native';
 import { Text } from 'react-native-elements';
+import { useQuery } from 'react-query';
+import { fetchGoalDetail } from '../api/GoalsFetch';
 import StartButton from '../components/StartButton';
 import ProgressBar from '../components/ProgressBar';
 
 const GoalDetailScreen = ({ route }) => {
-  const { goal } = route.params;
+  const { id } = route.params;
+  const {
+    isLoading, isError, error, data: goal,
+  } = useQuery(['goal-detail', id], () => fetchGoalDetail(id));
+  if (isLoading) {
+    return <><Text>Loading...</Text></>;
+  }
+  if (isError) {
+    console.log(error);
+  }
+  console.log(goal);
   return (
     <>
       <View style={styles.containerStyle}>
+        <Text h1>{goal.name}</Text>
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.expireTextStyle}>
             {`Expire at ${goal.expireAt}`}

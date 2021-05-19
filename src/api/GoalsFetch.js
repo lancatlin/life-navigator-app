@@ -3,7 +3,11 @@ import api from './api';
 import Goal from '../core/Goal';
 
 export const fetchGoalList = async () => {
-  console.log(BigInt(1));
   const response = await api.get('/goals');
-  return response.data;
+  return Goal.fromList(response.data);
+};
+
+export const fetchGoalDetail = async (id) => {
+  const response = await api.get(`/goals/${id}`);
+  return new Goal(response.data);
 };

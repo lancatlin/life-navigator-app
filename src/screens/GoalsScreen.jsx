@@ -15,23 +15,21 @@ const GoalsScreen = ({ navigation }) => {
   const {
     isLoading, isError, error, data,
   } = useQuery('goals', fetchGoalList);
-  console.log(data);
   if (isLoading) {
     return <><Text>Loading...</Text></>;
   }
   if (isError) {
     console.log(error);
   }
+  console.log(data);
   return (
     <View>
       <FlatList
         data={data}
-        keyExtractor={(item) => item.goal}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate('Detail', {
-              goal: item,
-            })}
+            onPress={() => navigation.navigate('GoalDetail', { id: item.id })}
           >
             <View style={styles.itemStyle}>
               <View style={{ flexDirection: 'row' }}>
