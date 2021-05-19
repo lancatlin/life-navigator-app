@@ -1,3 +1,4 @@
+import './shim';
 import React, { useContext, useEffect } from 'react';
 import { Text, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -13,7 +14,7 @@ import GoalsScreen from './src/screens/GoalsScreen';
 import GoalDetailScreen from './src/screens/GoalDetailScreen';
 
 import GoalCreateScreen from './src/screens/GoalCreateScreen';
-import CalenderScreen from './src/screens/CalenderScreen';
+import ScheduleScreen from './src/screens/ScheduleScreen';
 import SettingScreen from './src/screens/SettingScreen';
 import ExecuteScreen from './src/screens/ExecuteScreen';
 
@@ -31,8 +32,8 @@ const Tab = createBottomTabNavigator();
 
 const goalsFlow = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Goals List" component={GoalsScreen} options={{ headerTitleAlign: 'center' }} />
-    <Stack.Screen name="Detail" component={GoalDetailScreen} options={({ route }) => ({ headerTitleAlign: 'center', title: route.params.goal })} />
+    <Stack.Screen name="GoalList" component={GoalsScreen} options={{ headerTitleAlign: 'center' }} />
+    <Stack.Screen name="GoalDetail" component={GoalDetailScreen} options={({ route }) => ({ headerTitleAlign: 'center', title: route.params.goal })} />
   </Stack.Navigator>
 );
 
@@ -42,9 +43,9 @@ const settings = () => (
   </Stack.Navigator>
 );
 
-const calenderFlow = () => (
+const scheduleFlow = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Calender" component={CalenderScreen} options={{ headerTitleAlign: 'center' }} />
+    <Stack.Screen name="Schedule" component={ScheduleScreen} options={{ headerTitleAlign: 'center' }} />
   </Stack.Navigator>
 );
 
@@ -77,14 +78,14 @@ const App = () => {
   return (
     <NavigationContainer>
       {
-        state.token
+        true
           ? (
             <Tab.Navigator>
               <Tab.Screen name="Sessions" component={sessionsFlow} />
               <Tab.Screen name="Create" component={StackCreate} />
               <Tab.Screen name="Home" component={HomeScreen} />
               <Tab.Screen name="Goals" component={goalsFlow} />
-              <Tab.Screen name="Calender" component={calenderFlow} />
+              <Tab.Screen name="Schedule" component={scheduleFlow} />
               <Tab.Screen name="Settings" component={settings} />
               <Tab.Screen name="Execute" component={ExecuteScreen} />
             </Tab.Navigator>

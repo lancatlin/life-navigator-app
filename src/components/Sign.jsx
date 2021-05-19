@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Text, Input } from 'react-native-elements';
-import { TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import Spacer from './Spacer';
 import { Context } from '../context/AuthContext';
 

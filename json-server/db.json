@@ -1,0 +1,21 @@
+{
+  "goals": [
+    {
+      "id": 1,
+      "name": "Calculus", 
+      "sessionId": 1,
+      "expireAt": "2021-01-01", 
+      "duration": 60, 
+      "frequency": 3, 
+      "eachTime": 2,
+      "executedTime": 5,
+      "subGoals": [
+        { "name": "Ch1", "completed": true },
+        { "name": "Ch2", "completed": false }
+      ]
+    }
+  ],
+  "sessions": [
+    { "id": 1, "name": "Default", "time": [ 65408, 65408, 65408, 65408, 65408, 65408, 65408 ]}
+  ]
+}
