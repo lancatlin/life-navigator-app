@@ -1,3 +1,4 @@
+import './shim';
 import React, { useContext, useEffect } from 'react';
 import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -31,8 +32,8 @@ const Tab = createBottomTabNavigator();
 
 const goalsFlow = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Goals List" component={GoalsScreen} options={{ headerTitleAlign: 'center' }} />
-    <Stack.Screen name="Detail" component={GoalDetailScreen} options={({ route }) => ({ headerTitleAlign: 'center', title: route.params.goal })} />
+    <Stack.Screen name="GoalList" component={GoalsScreen} options={{ headerTitleAlign: 'center' }} />
+    <Stack.Screen name="GoalDetail" component={GoalDetailScreen} options={({ route }) => ({ headerTitleAlign: 'center', title: route.params.goal })} />
   </Stack.Navigator>
 );
 
@@ -63,7 +64,7 @@ const App = () => {
   return (
     <NavigationContainer>
       {
-        state.token
+        true
           ? (
             <Tab.Navigator>
               <Tab.Screen name="Sessions" component={SessionsScreen} />
