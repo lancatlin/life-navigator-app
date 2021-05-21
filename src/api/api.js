@@ -3,7 +3,7 @@ import axios from 'axios';
 // import * as SecureStore from 'expo-secure-store';
 
 const instance = axios.create({
-  baseURL: 'http://192.168.42.188:3000',
+  baseURL: 'http://192.168.42.3:3000',
 });
 
 /*

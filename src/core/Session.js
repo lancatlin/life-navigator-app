@@ -7,6 +7,14 @@ class Session {
     this.times = times;
   }
 
+  static fromList(sessionsData) {
+    const result = [];
+    for (const sessionData of sessionsData) {
+      result.push(new Session(sessionData));
+    }
+    return result;
+  }
+
   toBinary(now, hours) {
     const beginDay = now.getDay();
     const beginHour = now.getHours();

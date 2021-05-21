@@ -4,7 +4,6 @@ import TimeBinary from './TimeBinary';
 
 class Goal {
   constructor(props) {
-    console.log(props);
     const { tasks, ...properties } = props;
     Object.assign(this, properties);
     this.tasks = tasks ? [...props.tasks] : [];

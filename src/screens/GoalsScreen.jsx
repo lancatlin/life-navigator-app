@@ -6,15 +6,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Text } from 'react-native-elements';
-import { useQuery } from 'react-query';
-import { fetchGoalList } from '../api/GoalsFetch';
+import { useGoals } from '../api/GoalsFetch';
 import StartButton from '../components/StartButton';
 import ProgressBar from '../components/ProgressBar';
 
 const GoalsScreen = ({ navigation }) => {
   const {
     isLoading, isError, error, data,
-  } = useQuery('goals', fetchGoalList);
+  } = useGoals();
   if (isLoading) {
     return <><Text>Loading...</Text></>;
   }
@@ -26,7 +25,7 @@ const GoalsScreen = ({ navigation }) => {
     <View>
       <FlatList
         data={data}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => navigation.navigate('GoalDetail', { id: item.id })}
