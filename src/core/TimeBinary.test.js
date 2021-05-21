@@ -23,7 +23,7 @@ test('time-to-binary', () => {
 });
 
 test('display-binary', () => {
-  const binary = new TimeBinary(null, 2, BigInt(0b001100101100));
+  const binary = new TimeBinary(null, 2, '001100101100');
   expect(binary.print()).toBe('001100101100');
 });
 

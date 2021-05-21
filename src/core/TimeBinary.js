@@ -1,10 +1,10 @@
 import { timeUnit } from './utils';
 
 class TimeBinary {
-  constructor(now, hours, binary) {
+  constructor(now, hours, array) {
     this.now = now;
     this.hours = hours;
-    this.binary = binary;
+    this.array = array;
   }
 
   static fromTime(now, hours, startTime = null, endTime = null) {
@@ -14,21 +14,19 @@ class TimeBinary {
     const end = endTime
       ? Math.ceil((endTime - now) / timeUnit)
       : hours * 6;
-    let result = BigInt(0);
-    for (let i = 0; i < hours * 6; i += 1) {
-      result <<= BigInt(1);
-      result += begin <= i && i < end ? BigInt(1) : BigInt(0);
+    const result = new Array(hours * 6);
+    for (const i in result) {
+      result[i] = begin <= i && i < end;
     }
     return new TimeBinary(now, hours, result);
   }
 
   static blankTime(now, hours) {
-    return new TimeBinary(now, hours, (BigInt(1) << BigInt(hours * 6)) - BigInt(1));
+    return new TimeBinary(now, hours, new Array(hours * 6).fill(1));
   }
 
   print(print = false) {
-    const n = BigInt(1) << BigInt(this.hours * 6);
-    const result = (n + this.binary).toString(2).slice(1);
+    const result = this.array.join('');
     if (print) {
       console.log(result, result.length);
     }
@@ -36,15 +34,15 @@ class TimeBinary {
   }
 
   mix(t) {
-    return new TimeBinary(this.now, this.hours, this.binary & t.binary);
+    return new TimeBinary(this.now, this.hours, this.array & t.binary);
   }
 
   not() {
-    return new TimeBinary(this.now, this.hours, ~this.binary);
+    return new TimeBinary(this.now, this.hours, ~this.array);
   }
 
   union(t) {
-    return new TimeBinary(this.now, this.hours, this.binary | t.binary);
+    return new TimeBinary(this.now, this.hours, this.array | t.binary);
   }
 }
 
