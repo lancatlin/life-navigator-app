@@ -46,15 +46,18 @@ class TimeBinary {
   }
 
   mix(t) {
-    return new TimeBinary(this.now, this.hours, this.array & t.binary);
+    const result = this.array.map((value, i) => (value && t.array[i]));
+    return new TimeBinary(this.now, this.hours, result);
   }
 
   not() {
-    return new TimeBinary(this.now, this.hours, ~this.array);
+    const result = this.array.map((value) => (!value));
+    return new TimeBinary(this.now, this.hours, result);
   }
 
   union(t) {
-    return new TimeBinary(this.now, this.hours, this.array | t.binary);
+    const result = this.array.map((value, i) => (value || t.array[i]));
+    return new TimeBinary(this.now, this.hours, result);
   }
 }
 

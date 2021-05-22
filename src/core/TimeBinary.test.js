@@ -30,3 +30,20 @@ test('display-binary', () => {
 test('blank-times', () => {
   expect(TimeBinary.blankTime(null, 3).toString()).toBe('111111111111111111');
 });
+
+test('mix', () => {
+  const b1 = TimeBinary.fromString(null, '00001111');
+  const b2 = TimeBinary.fromString(null, '00111100');
+  expect(b1.mix(b2).toString()).toStrictEqual('00001100');
+});
+
+test('not', () => {
+  const b1 = TimeBinary.fromString(null, '00001111');
+  expect(b1.not().toString()).toStrictEqual('11110000');
+});
+
+test('union', () => {
+  const b1 = TimeBinary.fromString(null, '00001111');
+  const b2 = TimeBinary.fromString(null, '00111100');
+  expect(b1.union(b2).toString()).toStrictEqual('00111111');
+});
