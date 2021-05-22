@@ -8,7 +8,7 @@ test('test-times-convertion', () => {
     endTime: new Date(2021, 0, 1, 2, 15),
   });
   // expect from 1:10 to 2:20
-  expect(task.times(now, 3).print()).toStrictEqual('000000011111110000');
+  expect(task.times(now, 3).toString()).toStrictEqual('000000011111110000');
 });
 
 test('test-set-time-from-time-unit', () => {
@@ -29,7 +29,7 @@ test('ignore-times', () => {
     startTime: new Date(2021, 0, 1, 21),
     endTime: new Date(2021, 0, 1, 22),
   });
-  expect(task.ignoreTimes(now, hours).print()).toBe(
+  expect(task.ignoreTimes(now, hours).toString()).toBe(
     '000000111111111111111111000000',
   );
 });
