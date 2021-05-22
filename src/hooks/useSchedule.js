@@ -4,18 +4,26 @@ import { fetchGoalList } from '../api/GoalsFetch';
 import { fetchSessions } from '../api/SessionsFetch';
 import Scheduler from '../core/Scheduler';
 
-const getSchedule = async () => {
-  /*
+const loadFromStorage = async () => {
   try {
-    const tasks = await AsyncStorage.getItem('schedule');
-    if (tasks) {
-      console.log(tasks);
-      return tasks;
+    const tasks = await AsyncStorage.getItem('@schedule');
+    console.log(tasks);
+    if (tasks !== null) {
+      return JSON.parse(tasks, (key, value) => {
+        console.log(key, value);
+        if (key === 'startTime' || key === 'endTime') {
+          return new Date(value);
+        }
+        return value;
+      });
     }
   } catch (e) {
     console.log(e);
   }
-  */
+  return [];
+};
+
+const getSchedule = async () => {
   const goals = await fetchGoalList();
   const sessions = await fetchSessions();
   for (const goal of goals) {
@@ -24,22 +32,29 @@ const getSchedule = async () => {
   const now = new Date();
   const scheduler = new Scheduler(now, 24 * 3, goals);
   const tasks = scheduler.schedule();
-  // await AsyncStorage.setItem('schedule', tasks);
   return tasks;
 };
 
 const useSchedule = () => {
   const [isLoading, setLoading] = useState(true);
   const [tasks, setTasks] = useState([]);
-  useEffect(() => {
-    const callback = async () => {
-      const result = await getSchedule();
-      setTasks(result);
-      setLoading(false);
-    };
-    callback();
-  }, []);
-  return { tasks, isLoading };
+  const load = async () => {
+    const result = await loadFromStorage();
+    setTasks(result);
+    setLoading(false);
+  };
+  useEffect(() => { load(); }, []);
+  const reload = async () => {
+    setLoading(true);
+    const result = await getSchedule();
+    const data = JSON.stringify(result);
+    await AsyncStorage.setItem('@schedule', data);
+    setTasks(result);
+    setLoading(false);
+  };
+  return {
+    tasks, isLoading, reload, load,
+  };
 };
 
 export default useSchedule;

@@ -8946,6 +8946,11 @@ react-native-elements@^3.2.0:
     react-native-ratings "^7.3.0"
     react-native-size-matters "^0.3.1"
 
+react-native-error-boundary@^1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/react-native-error-boundary/-/react-native-error-boundary-1.1.9.tgz#ba7259f8469a7158fb5f2c02b1200247ea3cef9f"
+  integrity sha512-sK07h0ekUrOXpCSojlt7OC5kOh/jd4uy2eq/JMPbIU7eOtxrkZyU1qrTGSCAbgxxVCPdUsvCSntnUQ30IxnEdQ==
+
 react-native-gesture-handler@~1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.8.0.tgz"
