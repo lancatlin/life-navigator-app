@@ -6,7 +6,6 @@ import useSchedule from '../hooks/useSchedule';
 
 const ScheduleScreen = () => {
   const { tasks, isLoading, reload } = useSchedule();
-  console.log(tasks);
   if (isLoading) {
     return <Text>Loading...</Text>;
   }

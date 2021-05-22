@@ -7,10 +7,8 @@ import Scheduler from '../core/Scheduler';
 const loadFromStorage = async () => {
   try {
     const tasks = await AsyncStorage.getItem('@schedule');
-    console.log(tasks);
     if (tasks !== null) {
       return JSON.parse(tasks, (key, value) => {
-        console.log(key, value);
         if (key === 'startTime' || key === 'endTime') {
           return new Date(value);
         }
@@ -30,7 +28,7 @@ const getSchedule = async () => {
     goal.session = sessions.find((session) => session.id === goal.sessionId);
   }
   const now = new Date();
-  const scheduler = new Scheduler(now, 24 * 3, goals);
+  const scheduler = new Scheduler(now, 24 * 7, goals);
   const tasks = scheduler.schedule();
   return tasks;
 };

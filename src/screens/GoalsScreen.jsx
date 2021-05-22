@@ -18,7 +18,7 @@ const GoalsScreen = ({ navigation }) => {
     return <><Text>Loading...</Text></>;
   }
   if (isError) {
-    console.log(error);
+    return <><Text>{error.message}</Text></>;
   }
   return (
     <View>
