@@ -43,7 +43,6 @@ class Goal {
   scheduleOneTask(now, hours, availableTime) {
     const remaining = this.remainingTimes(now, hours, availableTime);
     let count = 0;
-    remaining.print();
     for (let i = 0; i < hours * 6; i += 1) {
       const current = remaining.array[i];
       count = current ? count + 1 : 0;
