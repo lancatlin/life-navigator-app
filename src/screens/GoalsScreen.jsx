@@ -20,7 +20,6 @@ const GoalsScreen = ({ navigation }) => {
   if (isError) {
     console.log(error);
   }
-  console.log(data);
   return (
     <View>
       <FlatList

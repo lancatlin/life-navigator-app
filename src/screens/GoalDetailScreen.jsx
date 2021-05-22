@@ -21,7 +21,6 @@ const GoalDetailScreen = ({ route }) => {
   if (isError) {
     console.log(error);
   }
-  console.log(goal);
   return (
     <>
       <View style={styles.containerStyle}>
