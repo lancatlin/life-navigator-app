@@ -29,12 +29,12 @@ class TimeBinary {
     return new TimeBinary(now, hours, new Array(hours * 6).fill(1));
   }
 
-  static fromString(s) {
-    const result = new Array(s.length);
+  static fromString(now, s) {
+    const result = new Array(s.length).fill(false);
     for (const i in s) {
       result[i] = s[i] === '1';
     }
-    return result;
+    return new TimeBinary(now, result.length, result);
   }
 
   toString() {
