@@ -4,7 +4,11 @@ class TimeBinary {
   constructor(now, hours, array) {
     this.now = now;
     this.hours = hours;
-    this.array = array;
+    if (typeof array === 'string') {
+      this.array = TimeBinary.fromString(array);
+    } else {
+      this.array = array;
+    }
   }
 
   static fromTime(now, hours, startTime = null, endTime = null) {
@@ -14,7 +18,7 @@ class TimeBinary {
     const end = endTime
       ? Math.ceil((endTime - now) / timeUnit)
       : hours * 6;
-    const result = new Array(hours * 6);
+    const result = new Array(hours * 6).fill(false);
     for (const i in result) {
       result[i] = begin <= i && i < end;
     }
@@ -25,12 +29,20 @@ class TimeBinary {
     return new TimeBinary(now, hours, new Array(hours * 6).fill(1));
   }
 
-  print(print = false) {
-    const result = this.array.join('');
-    if (print) {
-      console.log(result, result.length);
+  static fromString(s) {
+    const result = new Array(s.length);
+    for (const i in s) {
+      result[i] = s[i] === '1';
     }
     return result;
+  }
+
+  toString() {
+    return this.array.map((value) => (value ? '1' : '0')).join('');
+  }
+
+  print() {
+    console.log(this.toString(), this.array.length);
   }
 
   mix(t) {
