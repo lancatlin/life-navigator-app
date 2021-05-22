@@ -8,15 +8,15 @@ test('session-to-binary', () => {
   // from Saturday 22:00 to Sunday 01:00
   const session = new Session({
     times: [
-      0b010000000000000000000000,
-      ...new Array(6).fill(0b100000000000101111111110),
+      '010000000000000000000000',
+      ...new Array(6).fill('100000000000101111111110'),
     ],
   });
-  expect(session.toBinary(now, hours).print())
+  expect(session.toBinary(now, hours).toString())
     .toBe('111110000000000001');
 });
 
 test('hours-to-session', () => {
   expect(Session.fromHours(6, 12).times)
-    .toStrictEqual(new Array(7).fill(0b000000111111000000000000));
+    .toStrictEqual(new Array(7).fill('000000111111000000000000'));
 });
