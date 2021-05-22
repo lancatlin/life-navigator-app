@@ -5,7 +5,6 @@ import { fetchSessions } from '../api/SessionsFetch';
 import Scheduler from '../core/Scheduler';
 
 const getSchedule = async () => {
-  console.log('get schedule');
   /*
   try {
     const tasks = await AsyncStorage.getItem('schedule');
@@ -22,31 +21,25 @@ const getSchedule = async () => {
   for (const goal of goals) {
     goal.session = sessions.find((session) => session.id === goal.sessionId);
   }
-  console.log('goals: ', goals);
   const now = new Date();
-  console.log('now: ', typeof now);
   const scheduler = new Scheduler(now, 24 * 3, goals);
-  console.log('scheduler: ', scheduler);
   const tasks = scheduler.schedule();
-  console.log('tasks: ', tasks);
-  await AsyncStorage.setItem('schedule', tasks);
+  // await AsyncStorage.setItem('schedule', tasks);
   return tasks;
 };
 
 const useSchedule = () => {
-  console.log('useSchedule');
+  const [isLoading, setLoading] = useState(true);
   const [tasks, setTasks] = useState([]);
   useEffect(() => {
-    console.log('useEffect');
     const callback = async () => {
       const result = await getSchedule();
-      console.log('result: ', result);
       setTasks(result);
+      setLoading(false);
     };
     callback();
-    console.log('set');
-  });
-  return tasks;
+  }, []);
+  return { tasks, isLoading };
 };
 
 export default useSchedule;

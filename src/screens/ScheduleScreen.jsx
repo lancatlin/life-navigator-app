@@ -4,15 +4,15 @@ import ScheduleDetail from '../components/ScheduleDetail';
 import useSchedule from '../hooks/useSchedule';
 
 const ScheduleScreen = () => {
-  const tasks = useSchedule();
+  const { tasks, isLoading } = useSchedule();
   console.log(tasks);
-  if (tasks.length === 0) {
+  if (isLoading) {
     return <Text>Loading...</Text>;
   }
   return (
     <FlatList
       data={tasks}
-      keyExtractor={(item) => item.id.toString()}
+      keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <ScheduleDetail
           task={item}
