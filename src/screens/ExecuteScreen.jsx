@@ -1,59 +1,65 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
-  View, Text, StyleSheet,
+  View, Text, StyleSheet, Alert,
 } from 'react-native';
-import CountDown from 'react-native-countdown-component';
 import { AntDesign } from '@expo/vector-icons';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const fakeTask = [
-  {
-    task: 'Calculus',
-    schedule: '1h30m',
-  },
-];
-const ExecuteScreen = () => (
-  <View margin={100}>
-    <View style={styles.view}>
-      <Text style={styles.taskTitle}>Calculus</Text>
+function trans_to_second(h, m) {
+  return h * 60 + m;
+}
+const ExecuteScreen = () => {
+  const [counter, setcounter] = React.useState(trans_to_second(1, 30));
+  useEffect(() => {
+    // eslint-disable-next-line no-unused-expressions
+    counter > 0
+    && setTimeout(() => {
+      setcounter(counter - 1);
+    }, 60000);
+  }, [counter]);
+  return (
+    <View margin={100}>
+      <View style={styles.view}>
+        <Text style={styles.taskTitle}>Calculus</Text>
+      </View>
+      <View style={styles.padding}>
+        <Text style={styles.clock}> {counter} </Text>
+      </View>
+      <View style={styles.view1}>
+        <Text style={styles.text}>Schedule: </Text>
+      </View>
+      <View style={styles.view1}>
+        <Text style={styles.text}>End Time: </Text>
+      </View>
+      <View style={styles.view2} textAlign="center" marginLeft={-70} justifyContent="space-around">
+        <Button
+          icon={(
+            <Icon
+              name="check-circle"
+              size={20}
+              color="white"
+            />
+          )}
+          title="Done"
+          flex={1}
+        />
+        <Button
+          icon={(
+            <Icon
+              name="stop-circle"
+              size={20}
+              color="white"
+            />
+          )}
+          title="Stop"
+          width="20%"
+          flex={1}
+        />
+      </View>
     </View>
-    <View style={styles.padding}>
-      <Text style={styles.clock}> 00 : 54</Text>
-    </View>
-    <View style={styles.view1}>
-      <Text style={styles.text}>Schedule: </Text>
-    </View>
-    <View style={styles.view1}>
-      <Text style={styles.text}>End Time: </Text>
-    </View>
-    <View style={styles.view2} textAlign="center" marginLeft={-70} justifyContent="space-around">
-      <Button
-        icon={(
-          <Icon
-            name="check-circle"
-            size={20}
-            color="white"
-          />
-        )}
-        title="Done"
-        flex={1}
-      />
-      <Button
-        icon={(
-          <Icon
-            name="stop-circle"
-            size={20}
-            color="white"
-          />
-        )}
-        title="Stop"
-        width="20%"
-        flex={1}
-      />
-    </View>
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   padding: {
