@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -7,11 +7,12 @@ import {
 } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useQuery } from 'react-query';
+import { Checkbox } from 'react-native-paper';
 import { fetchGoalList } from '../api/GoalsFetch';
 import StartButton from '../components/StartButton';
 import ProgressBar from '../components/ProgressBar';
 
-const GoalsScreen = ({ navigation }) => {
+const GoalsScreen = () => {
   const {
     isLoading, isError, error, data,
   } = useQuery('goals', fetchGoalList);
@@ -19,31 +20,77 @@ const GoalsScreen = ({ navigation }) => {
     return <><Text>Loading...</Text></>;
   }
   if (isError) {
-    console.log(error);
+    throw error;
   }
   console.log(data);
+
+  const ExpendComponent = ({ goal }) => {
+    const [isExpending, setisExpending] = useState(false);
+    const [expend, setexpend] = useState(false);
+
+    const onClick = () => {
+      setexpend(!isExpending);
+      setisExpending(!expend);
+    };
+
+    return (
+      <TouchableOpacity
+        onPress={onClick}
+      >
+        <View style={styles.itemStyle}>
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ flex: 1 }}>
+              <Text h2>{goal.name}</Text>
+              <Text style={styles.expireTextStyle}>
+                {`Expire at ${goal.expireAt}`}
+              </Text>
+            </View>
+            <StartButton />
+          </View>
+          <ProgressBar progress={Math.round(goal.progress())} />
+          {expend
+            ? (
+              <>
+                <Text>{`Duration: ${goal.duration}`}</Text>
+                <Text>{`Frequency: ${goal.frequency}`}</Text>
+                <Text>{`Each Time: ${goal.eachTime}`}</Text>
+                <Text>{`Executed Time: ${goal.executedTime}`}</Text>
+                <Text>{`Session id: ${goal.sessionId}`}</Text>
+              </>
+            )
+            : null}
+        </View>
+        {expend
+          ? (
+            <View style={styles.itemStyle}>
+              <Text h3>Sub Goals</Text>
+              <FlatList
+                data={goal.subGoals}
+                keyExtractor={(item) => item.name}
+                renderItem={({ item }) => (
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Checkbox
+                      status={item.completed ? 'checked' : 'unchecked'}
+                      color="blue"
+                    />
+                    <Text>{item.name}</Text>
+                  </View>
+                )}
+              />
+            </View>
+          )
+          : null}
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View>
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => navigation.navigate('GoalDetail', { id: item.id })}
-          >
-            <View style={styles.itemStyle}>
-              <View style={{ flexDirection: 'row' }}>
-                <View style={{ flex: 1 }}>
-                  <Text h3>{item.name}</Text>
-                  <Text style={styles.expireTextStyle}>
-                    {`Expire at ${item.expireAt}`}
-                  </Text>
-                </View>
-                <StartButton />
-              </View>
-              <ProgressBar progress={item.progress()} />
-            </View>
-          </TouchableOpacity>
+          <ExpendComponent goal={item} />
         )}
       />
     </View>
