@@ -10,6 +10,7 @@ function trans_to_second(h, m) {
   return h * 60 + m;
 }
 const ExecuteScreen = () => {
+  const [done, setdone] = React.useState(false);
   const [counter, setcounter] = React.useState(trans_to_second(1, 30));
   useEffect(() => {
     // eslint-disable-next-line no-unused-expressions
@@ -18,6 +19,9 @@ const ExecuteScreen = () => {
       setcounter(counter - 1);
     }, 60000);
   }, [counter]);
+  if (done === true) {
+    clearTimeout(counter);
+  }
   return (
     <View margin={100}>
       <View style={styles.view}>
@@ -30,7 +34,7 @@ const ExecuteScreen = () => {
         <Text style={styles.text}>Schedule: </Text>
       </View>
       <View style={styles.view1}>
-        <Text style={styles.text}>End Time: </Text>
+        <Text style={styles.text}>End Time: {done == true ? counter : ' '}</Text>
       </View>
       <View style={styles.view2} textAlign="center" marginLeft={-70} justifyContent="space-around">
         <Button
@@ -43,6 +47,7 @@ const ExecuteScreen = () => {
           )}
           title="Done"
           flex={1}
+          onPress={() => {setdone(true)}}
         />
         <Button
           icon={(
