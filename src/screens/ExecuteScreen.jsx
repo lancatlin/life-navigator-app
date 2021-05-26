@@ -1,26 +1,29 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
-  View, Text, StyleSheet, Alert,
+  View, Text, StyleSheet,
 } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function trans_to_second(h, m) {
+const hours = new Date().getHours();
+const min = new Date().getMinutes();
+
+function trans_to_minute(h, m) {
   return h * 60 + m;
 }
 const ExecuteScreen = () => {
   const [done, setdone] = React.useState(false);
-  const [counter, setcounter] = React.useState(trans_to_second(1, 30));
+  const [counter, setcounter] = React.useState(trans_to_minute(1, 30));
   useEffect(() => {
     // eslint-disable-next-line no-unused-expressions
-    counter > 0
-    && setTimeout(() => {
-      setcounter(counter - 1);
-    }, 60000);
+    if (counter > 0) {
+      const times = setTimeout(() => {
+        setcounter(counter - 1);
+      }, 60000);
+    }
   }, [counter]);
   if (done === true) {
-    clearTimeout(counter);
+    clearTimeout();
   }
   return (
     <View margin={100}>
@@ -28,10 +31,10 @@ const ExecuteScreen = () => {
         <Text style={styles.taskTitle}>Calculus</Text>
       </View>
       <View style={styles.padding}>
-        <Text style={styles.clock}> {counter} </Text>
+        <Text style={styles.clock}> {parseInt(counter / 60)} : {counter % 60} </Text>
       </View>
       <View style={styles.view1}>
-        <Text style={styles.text}>Schedule: </Text>
+        <Text style={styles.text}>Schedule: {hours + 1} : {min + 30}</Text>
       </View>
       <View style={styles.view1}>
         <Text style={styles.text}>End Time: {done == true ? counter : ' '}</Text>
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
     flex: 0,
   },
   text: {
-    fontSize: 25,
+    fontSize: 20,
     textAlign: 'center',
     flex: 0,
   },
