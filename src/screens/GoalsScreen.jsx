@@ -36,6 +36,7 @@ const GoalsScreen = () => {
     return (
       <TouchableOpacity
         onPress={onClick}
+        activeOpacity={expend ? 1 : null}
       >
         <View style={styles.itemStyle}>
           <View style={{ flexDirection: 'row' }}>
@@ -51,11 +52,26 @@ const GoalsScreen = () => {
           {expend
             ? (
               <>
-                <Text>{`Duration: ${goal.duration}`}</Text>
-                <Text>{`Frequency: ${goal.frequency}`}</Text>
-                <Text>{`Each Time: ${goal.eachTime}`}</Text>
-                <Text>{`Executed Time: ${goal.executedTime}`}</Text>
-                <Text>{`Session id: ${goal.sessionId}`}</Text>
+                <View style={styles.textShowContainer}>
+                  <Text style={styles.textStyle}>Duration</Text>
+                  <Text style={styles.numberStyle}>{goal.duration}</Text>
+                </View>
+                <View style={styles.textShowContainer}>
+                  <Text style={styles.textStyle}>Frequency</Text>
+                  <Text style={styles.numberStyle}>{goal.frequency}</Text>
+                </View>
+                <View style={styles.textShowContainer}>
+                  <Text style={styles.textStyle}>Each Time</Text>
+                  <Text style={styles.numberStyle}>{goal.eachTime}</Text>
+                </View>
+                <View style={styles.textShowContainer}>
+                  <Text style={styles.textStyle}>Executed Time</Text>
+                  <Text style={styles.numberStyle}>{goal.executedTime}</Text>
+                </View>
+                <View style={styles.textShowContainer}>
+                  <Text style={styles.textStyle}>Session id</Text>
+                  <Text style={styles.numberStyle}>{goal.sessionId}</Text>
+                </View>
               </>
             )
             : null}
@@ -88,7 +104,7 @@ const GoalsScreen = () => {
     <View>
       <FlatList
         data={data}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <ExpendComponent goal={item} />
         )}
@@ -116,6 +132,23 @@ const styles = StyleSheet.create({
   },
   startTextStyle: {
     fontSize: 10,
+  },
+  textShowContainer: {
+    flexDirection: 'row',
+    marginHorizontal: 30,
+    marginVertical: 10,
+    alignItems: 'center',
+  },
+  textStyle: {
+    fontSize: 20,
+    flex: 1,
+  },
+  numberStyle: {
+    paddingHorizontal: 30,
+    textAlign: 'center',
+    width: 90,
+    borderBottomWidth: 1,
+    fontSize: 20,
   },
 });
 
