@@ -1,97 +1,112 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View, Text, StyleSheet,
 } from 'react-native';
-import CountDown from 'react-native-countdown-component';
-import { AntDesign } from '@expo/vector-icons';
+import { Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const fakeTask = [
-  {
-    task: 'Calculus',
-    schedule: '1h30m',
-  },
-];
-function ExecuteScreen() {
+const hours = new Date().getHours();
+const min = new Date().getMinutes();
+
+function transToMinuses(h, m) {
+  return h * 60 + m;
+}
+
+const ExecuteScreen = () => {
+  const [done, setdone] = React.useState(false);
+  const [counter, setcounter] = React.useState(transToMinuses(1, 30));
+  useEffect(() => {
+    // eslint-disable-next-line no-unused-expressions
+    if (counter > 0) {
+      setTimeout(() => {
+        setcounter(counter - 1);
+      }, 60000);
+    }
+  }, [counter]);
+  if (done === true) {
+    clearTimeout();
+  }
   return (
-    <View margin={150}>
+    <View margin={100}>
       <View style={styles.view}>
         <Text style={styles.taskTitle}>Calculus</Text>
       </View>
       <View style={styles.padding}>
-        <CountDown
-          size={40}
-          until={10}
-          onFinish={() => alert('Finished')}
-          timeToShow={['H', 'M', 'S']}
-          timeLabels={{ m: null, s: null }}
-          showSeparator
+        <Text style={styles.clock}>{`${counter / 60} : ${counter % 60}`}</Text>
+      </View>
+      <View style={styles.view1}>
+        <Text style={styles.text}>{`Schedule: ${hours + 1} : ${min + 30}`}</Text>
+      </View>
+      <View style={styles.view1}>
+        <Text style={styles.text}>{`End Time: ${done ? counter : ' '}`}</Text>
+      </View>
+      <View style={styles.view2} textAlign="center" marginLeft={-70} justifyContent="space-around">
+        <Button
+          icon={(
+            <Icon
+              name="check-circle"
+              size={20}
+              color="white"
+            />
+          )}
+          title="Done"
+          flex={1}
+          onPress={() => { setdone(true); }}
+        />
+        <Button
+          icon={(
+            <Icon
+              name="stop-circle"
+              size={20}
+              color="white"
+            />
+          )}
+          title="Stop"
+          width="20%"
           flex={1}
         />
       </View>
-      <View style={styles.view1}>
-        <Text style={styles.text}>Schedule: </Text>
-        <Text style={styles.input} />
-      </View>
-      <View style={styles.view1}>
-        <Text style={styles.text}>End Time: </Text>
-        <Text style={styles.input} />
-      </View>
-      <View style={styles.view2} borderRadius={15}>
-        <AntDesign name="checkcircle" size={28} color="black" alignSelf="center" flex={1} />
-        <Text style={styles.button}>Done</Text>
-      </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   padding: {
     flexDirection: 'row',
-    alignSelf: 'center',
-    height: 120,
-    width: 320,
-    margin: 40,
+    width: 200,
+    marginVertical: 30,
+    marginStart: -10,
   },
   view: {
     flexDirection: 'row',
-    width: 160,
-    height: 60,
-    alignSelf: 'center',
+    width: 300,
+    marginVertical: 10,
+  },
+  clock: {
+    fontSize: 50,
+    textAlign: 'center',
+    flex: 0,
   },
   view1: {
     flexDirection: 'row',
     width: 160,
     height: 60,
     alignSelf: 'center',
-    justifyContent: 'space-between',
+    marginVertical: 20,
   },
   view2: {
     flexDirection: 'row',
-    width: 120,
-    height: 50,
-    alignSelf: 'center',
-    borderColor: 'black',
-    borderWidth: 1.8,
+    width: 300,
   },
   taskTitle: {
     fontSize: 40,
-    alignSelf: 'center',
+    textAlign: 'center',
     flex: 0,
   },
   text: {
-    fontSize: 25,
-    alignSelf: 'center',
+    fontSize: 20,
+    textAlign: 'center',
     flex: 0,
-  },
-  input: {
-    borderColor: 'black',
-    borderWidth: 1.8,
-    height: 30,
-    flex: 1,
-    alignSelf: 'center',
-  },
-  button: {
-    fontSize: 30,
   },
 });
 
