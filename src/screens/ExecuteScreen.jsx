@@ -8,16 +8,17 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const hours = new Date().getHours();
 const min = new Date().getMinutes();
 
-function trans_to_minute(h, m) {
+function transToMinuses(h, m) {
   return h * 60 + m;
 }
+
 const ExecuteScreen = () => {
   const [done, setdone] = React.useState(false);
-  const [counter, setcounter] = React.useState(trans_to_minute(1, 30));
+  const [counter, setcounter] = React.useState(transToMinuses(1, 30));
   useEffect(() => {
     // eslint-disable-next-line no-unused-expressions
     if (counter > 0) {
-      const times = setTimeout(() => {
+      setTimeout(() => {
         setcounter(counter - 1);
       }, 60000);
     }
@@ -31,13 +32,13 @@ const ExecuteScreen = () => {
         <Text style={styles.taskTitle}>Calculus</Text>
       </View>
       <View style={styles.padding}>
-        <Text style={styles.clock}> {parseInt(counter / 60)} : {counter % 60} </Text>
+        <Text style={styles.clock}>{`${counter / 60} : ${counter % 60}`}</Text>
       </View>
       <View style={styles.view1}>
-        <Text style={styles.text}>Schedule: {hours + 1} : {min + 30}</Text>
+        <Text style={styles.text}>{`Schedule: ${hours + 1} : ${min + 30}`}</Text>
       </View>
       <View style={styles.view1}>
-        <Text style={styles.text}>End Time: {done == true ? counter : ' '}</Text>
+        <Text style={styles.text}>{`End Time: ${done ? counter : ' '}`}</Text>
       </View>
       <View style={styles.view2} textAlign="center" marginLeft={-70} justifyContent="space-around">
         <Button
@@ -50,7 +51,7 @@ const ExecuteScreen = () => {
           )}
           title="Done"
           flex={1}
-          onPress={() => {setdone(true)}}
+          onPress={() => { setdone(true); }}
         />
         <Button
           icon={(
