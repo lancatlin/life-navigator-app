@@ -80,6 +80,7 @@ const goals = [
 
 test('integration-no-existed-tasks', () => {
   const scheduler = new Scheduler(now, hours, goals);
+  console.log(typeof scheduler.now);
   const tasks = scheduler.schedule();
   const shower = new TaskShower(now, tasks);
   console.log(shower.outputTable());

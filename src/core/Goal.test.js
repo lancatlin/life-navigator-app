@@ -33,7 +33,7 @@ test('remaining-time-binary', () => {
     new Date(2021, 0, 1, 12),
     new Date(2021, 0, 1, 16),
   );
-  expect(goal.remainingTimes(now, hours, availableTime).print())
+  expect(goal.remainingTimes(now, hours, availableTime).toString())
     .toBe('111111000000000000');
 });
 
@@ -53,7 +53,7 @@ test('remaining-time-include-tasks', () => {
     now, hours,
     new Date(2021, 0, 1, 21),
   );
-  expect(goal.remainingTimes(now, hours, availableTime).print())
+  expect(goal.remainingTimes(now, hours, availableTime).toString())
     .toBe('000000111111000000000000111111');
 });
 
@@ -71,7 +71,7 @@ test('schedule-one-task', () => {
     new Date(2021, 0, 1, 10, 10),
     new Date(2021, 0, 1, 15),
   );
-  // expect a task from 10:00 to 12:00
+  // expect a task from 10:10 to 12:40
   expect(goal.scheduleOneTask(now, hours, availableTime))
     .toStrictEqual(new Task({
       goalId: 1,
@@ -88,9 +88,7 @@ test('schedule-one-task-2', () => {
     id: 1,
     frequency: 1,
     eachTime: 2.5,
-    session: new Session(
-      { times: new Array(7).fill(0b000000000001111111100000) },
-    ),
+    session: Session.fromHours(11, 19),
     // from 11:00 to 19:00
   });
   const availableTime = TimeBinary.fromTime(
@@ -123,12 +121,12 @@ test('goal-ignore-times', () => {
       }),
     ],
   });
-  expect(goal.ignoreTimes(now, hours).print())
+  expect(goal.ignoreTimes(now, hours).toString())
     .toBe(`111111111111111111111111${
       TimeBinary.fromTime(
         new Date(2021, 0, 2),
         24,
         new Date(2021, 0, 2, 12),
         new Date(2021, 0, 3),
-      ).print()}`);
+      ).toString()}`);
 });

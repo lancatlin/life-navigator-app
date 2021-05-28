@@ -6,23 +6,21 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Text } from 'react-native-elements';
-import { useQuery } from 'react-query';
 import { Checkbox } from 'react-native-paper';
-import { fetchGoalList } from '../api/GoalsFetch';
+import { useGoals } from '../api/GoalsFetch';
 import StartButton from '../components/StartButton';
 import ProgressBar from '../components/ProgressBar';
 
 const GoalsScreen = () => {
   const {
     isLoading, isError, error, data,
-  } = useQuery('goals', fetchGoalList);
+  } = useGoals();
   if (isLoading) {
     return <><Text>Loading...</Text></>;
   }
   if (isError) {
     throw error;
   }
-  console.log(data);
 
   const ExpendComponent = ({ goal }) => {
     const [isExpending, setisExpending] = useState(false);

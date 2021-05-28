@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import {
   View, Text, Modal, StyleSheet, TouchableOpacity,
 } from 'react-native';
-import  moment  from 'moment';
-
+import moment from 'moment';
+import ErrorBoundary from 'react-native-error-boundary';
 
 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -14,37 +14,39 @@ function getMonth(date) {
 function ScheduleDetail({ task }) {
   const [open, setOpen] = useState(false);
   return (
-    <View>
-      <TouchableOpacity onPress={() => setOpen(true)}>
-        <View style={styles.dateAndSchedule}>
-          <View style={styles.date}>
-            <Text style={{ color: 'black' }}>{ getMonth(task.startTime) }</Text>
-            <Text style={{ fontSize: 16 }}>
-              { task.startTime.getDate() }
-            </Text>
-          </View>
-          <View style={styles.schedule}>
-            <View style={styles.scheduleName}>
+    <ErrorBoundary>
+      <View>
+        <TouchableOpacity onPress={() => setOpen(true)}>
+          <View style={styles.dateAndSchedule}>
+            <View style={styles.date}>
+              <Text style={{ color: 'black' }}>{ getMonth(task.startTime) }</Text>
               <Text style={{ fontSize: 16 }}>
-                { task.name }
+                { task.startTime.getDate() }
               </Text>
             </View>
-            <View style={styles.scheduleTime}>
-              <Text>
-                { moment(task.startTime).format('H:mm') }
-                -
-                { moment(task.endTime).format('H:mm') }
-              </Text>
+            <View style={styles.schedule}>
+              <View style={styles.scheduleName}>
+                <Text style={{ fontSize: 16 }}>
+                  { task.name }
+                </Text>
+              </View>
+              <View style={styles.scheduleTime}>
+                <Text>
+                  { moment(task.startTime).format('H:mm') }
+                  -
+                  { moment(task.endTime).format('H:mm') }
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
-      </TouchableOpacity>
-      <TaskModal
-        task={task}
-        open={open}
-        callback={() => setOpen(false)}
-      />
-    </View>
+        </TouchableOpacity>
+        <TaskModal
+          task={task}
+          open={open}
+          callback={() => setOpen(false)}
+        />
+      </View>
+    </ErrorBoundary>
   );
 }
 
@@ -58,11 +60,17 @@ function TaskModal({ task, open, callback }) {
     >
       <View style={styles.modal}>
         <View style={styles.modalText}>
-          <View style={{margin: 25}}>
+          <View style={{ margin: 25 }}>
             <View style={styles.taskTitle}>
               <Text style={{ fontSize: 25 }}>{task.name}</Text>
             </View>
-            <Text style={{ fontSize: 16 }}>Time: {moment(task.startTime).format('H:mm')} - {moment(task.endTime).format('H:mm')}</Text>
+            <Text style={{ fontSize: 16 }}>
+              Time:
+              {moment(task.startTime).format('H:mm')}
+              {' '}
+              -
+              {moment(task.endTime).format('H:mm')}
+            </Text>
             <Text style={{ fontSize: 16 }}>Note:</Text>
           </View>
         </View>
@@ -106,18 +114,18 @@ const styles = StyleSheet.create({
   scheduleName: {
     alignContent: 'flex-start',
     flexDirection: 'row',
-    left: 10
+    left: 10,
   },
   scheduleTime: {
     justifyContent: 'flex-end',
     flexDirection: 'row',
     flex: 1,
-    right: 10
+    right: 10,
   },
   taskTitle: {
     alignItems: 'center',
-    bottom: 10
-  }
+    bottom: 10,
+  },
 });
 
 export default ScheduleDetail;

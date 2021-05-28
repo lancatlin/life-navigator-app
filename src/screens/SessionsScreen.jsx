@@ -15,7 +15,7 @@ const SessionsScreen = ({ navigation }) => {
     return <></>;
   }
   if (isError) {
-    return <Text>{error}</Text>;
+    return <Text>{error.message}</Text>;
   }
   return (
     <View style={styles.border}>

@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Calculus", 
       "sessionId": 1,
-      "expireAt": "2021-01-01", 
+      "expireAt": "2021-06-31", 
       "duration": 60, 
       "frequency": 3, 
       "eachTime": 2,
@@ -13,10 +13,40 @@
         { "name": "Ch1", "completed": true },
         { "name": "Ch2", "completed": false }
       ]
+    },
+    {
+      "id": 2,
+      "name": "Programming", 
+      "sessionId": 1,
+      "expireAt": "2021-07-09", 
+      "duration": 60, 
+      "frequency": 5, 
+      "eachTime": 1.5,
+      "executedTime": 20,
+      "subGoals": [ ]
+    },
+    {
+      "id": 3,
+      "name": "Report", 
+      "sessionId": 1,
+      "expireAt": "2021-05-02", 
+      "duration": 20, 
+      "frequency": 2, 
+      "eachTime": 1,
+      "executedTime": 0,
+      "subGoals": [ ]
     }
   ],
   "sessions": [
-    { "id": 1, "name": "Default", "time": [ 65408, 65408, 65408, 65408, 65408, 65408, 65408 ]}
+    { "id": 1, "name": "Default", "times": [
+      "000000001111111111111000",
+      "000000001111111111111000",
+      "000000001111111111111000",
+      "000000001111111111111000",
+      "000000001111111111111000",
+      "000000001111111111111000",
+      "000000001111111111111000"
+    ]}
   ],
   "tasks": [
 

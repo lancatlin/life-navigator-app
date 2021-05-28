@@ -4,7 +4,6 @@ import TimeBinary from './TimeBinary';
 
 class Goal {
   constructor(props) {
-    console.log(props);
     const { tasks, ...properties } = props;
     Object.assign(this, properties);
     this.tasks = tasks ? [...props.tasks] : [];
@@ -34,7 +33,7 @@ class Goal {
   }
 
   ignoreTimes(now, hours) {
-    let result = new TimeBinary(now, hours, BigInt(0));
+    let result = TimeBinary.blankTime(now, hours).not();
     for (const task of this.tasks) {
       result = task.ignoreTimes(now, hours).union(result);
     }
@@ -42,15 +41,15 @@ class Goal {
   }
 
   scheduleOneTask(now, hours, availableTime) {
-    const remaining = this.remainingTimes(now, hours, availableTime).binary;
+    const remaining = this.remainingTimes(now, hours, availableTime);
     let count = 0;
     for (let i = 0; i < hours * 6; i += 1) {
-      const current = (remaining >> BigInt(hours * 6 - i)) % BigInt(2);
-      count = current === BigInt(1) ? count + 1 : 0;
+      const current = remaining.array[i];
+      count = current ? count + 1 : 0;
       if (count === this.eachTime * 6
         && this.remainingFrequency(timeUnitToDate(now, i - count)) > 0) {
         const task = Task.createTaskFromTimeUnit(
-          now, i - count, i, { goalId: this.id, name: this.name },
+          now, i - count + 1, i + 1, { goalId: this.id, name: this.name },
         );
         this.tasks.push(task);
         return task;

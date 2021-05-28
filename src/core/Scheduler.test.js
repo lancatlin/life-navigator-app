@@ -14,7 +14,7 @@ test('remaining-times', () => {
     new Task({ startTime: new Date(2021, 0, 1, 4), endTime: new Date(2021, 0, 1, 4, 30) }),
   ];
   const expectResult = '111110000000000001111110001111';
-  expect(scheduler.remainingTimes().print()).toStrictEqual(expectResult);
+  expect(scheduler.remainingTimes().toString()).toStrictEqual(expectResult);
 });
 
 test('schedule-tasks-once', () => {

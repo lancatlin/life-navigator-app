@@ -1,9 +1,10 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
+import { API_URL } from '@env';
 // import * as SecureStore from 'expo-secure-store';
 
 const instance = axios.create({
-  baseURL: 'http://192.168.80.101:3000',
+  baseURL: API_URL,
 });
 
 /*
