@@ -4,49 +4,55 @@ import { fetchGoalList } from '../api/GoalsFetch';
 import { fetchSessions } from '../api/SessionsFetch';
 import Scheduler from '../core/Scheduler';
 
-const getSchedule = async () => {
-  console.log('get schedule');
-  /*
+const loadFromStorage = async () => {
   try {
-    const tasks = await AsyncStorage.getItem('schedule');
-    if (tasks) {
-      console.log(tasks);
-      return tasks;
+    const tasks = await AsyncStorage.getItem('@schedule');
+    if (tasks !== null) {
+      return JSON.parse(tasks, (key, value) => {
+        if (key === 'startTime' || key === 'endTime') {
+          return new Date(value);
+        }
+        return value;
+      });
     }
   } catch (e) {
     console.log(e);
   }
-  */
+  return [];
+};
+
+const getSchedule = async () => {
   const goals = await fetchGoalList();
   const sessions = await fetchSessions();
   for (const goal of goals) {
     goal.session = sessions.find((session) => session.id === goal.sessionId);
   }
-  console.log('goals: ', goals);
   const now = new Date();
-  console.log('now: ', typeof now);
-  const scheduler = new Scheduler(now, 24 * 3, goals);
-  console.log('scheduler: ', scheduler);
+  const scheduler = new Scheduler(now, 24 * 7, goals);
   const tasks = scheduler.schedule();
-  console.log('tasks: ', tasks);
-  await AsyncStorage.setItem('schedule', tasks);
   return tasks;
 };
 
 const useSchedule = () => {
-  console.log('useSchedule');
+  const [isLoading, setLoading] = useState(true);
   const [tasks, setTasks] = useState([]);
-  useEffect(() => {
-    console.log('useEffect');
-    const callback = async () => {
-      const result = await getSchedule();
-      console.log('result: ', result);
-      setTasks(result);
-    };
-    callback();
-    console.log('set');
-  });
-  return tasks;
+  const load = async () => {
+    const result = await loadFromStorage();
+    setTasks(result);
+    setLoading(false);
+  };
+  useEffect(() => { load(); }, []);
+  const reload = async () => {
+    setLoading(true);
+    const result = await getSchedule();
+    const data = JSON.stringify(result);
+    await AsyncStorage.setItem('@schedule', data);
+    setTasks(result);
+    setLoading(false);
+  };
+  return {
+    tasks, isLoading, reload, load,
+  };
 };
 
 export default useSchedule;

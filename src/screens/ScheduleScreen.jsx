@@ -1,24 +1,30 @@
 import React from 'react';
-import { FlatList, Text } from 'react-native';
+import { View, FlatList, Text } from 'react-native';
+import { Button } from 'react-native-elements';
 import ScheduleDetail from '../components/ScheduleDetail';
 import useSchedule from '../hooks/useSchedule';
 
 const ScheduleScreen = () => {
-  const tasks = useSchedule();
-  console.log(tasks);
-  if (tasks.length === 0) {
+  const { tasks, isLoading, reload } = useSchedule();
+  if (isLoading) {
     return <Text>Loading...</Text>;
   }
   return (
-    <FlatList
-      data={tasks}
-      keyExtractor={(item) => item.id.toString()}
-      renderItem={({ item }) => (
-        <ScheduleDetail
-          task={item}
-        />
-      )}
-    />
+    <View>
+      <Button
+        title="Reload"
+        onPress={reload}
+      />
+      <FlatList
+        data={tasks}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <ScheduleDetail
+            task={item}
+          />
+        )}
+      />
+    </View>
   );
 };
 

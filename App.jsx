@@ -1,6 +1,5 @@
-import './shim';
 import React, { useContext, useEffect } from 'react';
-import { Text, TextInput } from 'react-native';
+import { Text, LogBox } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -19,6 +18,8 @@ import SettingScreen from './src/screens/SettingScreen';
 import ExecuteScreen from './src/screens/ExecuteScreen';
 
 import { Provider as AuthProvider, Context as AuthContext } from './src/context/AuthContext';
+
+LogBox.ignoreLogs(['Setting a timer']);
 
 const Stack = createStackNavigator();
 
