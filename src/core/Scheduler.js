@@ -7,6 +7,7 @@ class Scheduler {
     this.hours = hours;
     this.goals = goals;
     this.tasks = [];
+    console.log(typeof this.now);
   }
 
   sortGoals() {

@@ -7,7 +7,7 @@ import { useQuery } from 'react-query';
 import Spacer from '../components/Spacer';
 import { fetchSessions } from '../api/SessionsFetch';
 
-const SessionsScreen = () => {
+const SessionsScreen = ({ navigation }) => {
   const {
     isLoading, isError, data, error,
   } = useQuery('fetchSessions', fetchSessions);
@@ -15,7 +15,7 @@ const SessionsScreen = () => {
     return <></>;
   }
   if (isError) {
-    return <Text>{error}</Text>;
+    return <Text>{error.message}</Text>;
   }
   return (
     <View style={styles.border}>
@@ -29,7 +29,7 @@ const SessionsScreen = () => {
         )}
       />
       <Spacer>
-        <TouchableOpacity style={styles.NewButton}>
+        <TouchableOpacity style={styles.NewButton} onPress={() => navigation.navigate('NewSession')}>
           <Text>New</Text>
         </TouchableOpacity>
       </Spacer>

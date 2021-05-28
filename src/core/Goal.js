@@ -9,6 +9,18 @@ class Goal {
     this.tasks = tasks ? [...props.tasks] : [];
   }
 
+  static fromList(goalsData) {
+    const result = [];
+    for (const goalData of goalsData) {
+      result.push(new Goal(goalData));
+    }
+    return result;
+  }
+
+  progress() {
+    return (this.executedTime / this.duration) * 100;
+  }
+
   remainingFrequency(t) {
     const tasksExecuted = this.tasks.filter((task) => task.startTime > beginOfWeek(t));
     return this.frequency - tasksExecuted.length;
@@ -21,7 +33,7 @@ class Goal {
   }
 
   ignoreTimes(now, hours) {
-    let result = new TimeBinary(now, hours, 0n);
+    let result = TimeBinary.blankTime(now, hours).not();
     for (const task of this.tasks) {
       result = task.ignoreTimes(now, hours).union(result);
     }
@@ -29,15 +41,15 @@ class Goal {
   }
 
   scheduleOneTask(now, hours, availableTime) {
-    const remaining = this.remainingTimes(now, hours, availableTime).binary;
+    const remaining = this.remainingTimes(now, hours, availableTime);
     let count = 0;
     for (let i = 0; i < hours * 6; i += 1) {
-      const current = (remaining >> BigInt(hours * 6 - i)) % 2n;
-      count = current === 1n ? count + 1 : 0;
+      const current = remaining.array[i];
+      count = current ? count + 1 : 0;
       if (count === this.eachTime * 6
         && this.remainingFrequency(timeUnitToDate(now, i - count)) > 0) {
         const task = Task.createTaskFromTimeUnit(
-          now, i - count, i, { goalId: this.id, name: this.name },
+          now, i - count + 1, i + 1, { goalId: this.id, name: this.name },
         );
         this.tasks.push(task);
         return task;

@@ -7,7 +7,7 @@ const beginOfWeek = (date) => {
 
 const ceilTime = (t) => {
   const left = t % timeUnit;
-  return left === 0 ? t : t - left + timeUnit;
+  return left === 0 ? t : new Date(t - left + timeUnit);
 };
 
 const tomorrow = (date) => {

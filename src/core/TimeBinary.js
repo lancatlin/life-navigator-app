@@ -1,10 +1,14 @@
 import { timeUnit } from './utils';
 
 class TimeBinary {
-  constructor(now, hours, binary) {
+  constructor(now, hours, array) {
     this.now = now;
     this.hours = hours;
-    this.binary = binary;
+    if (typeof array === 'string') {
+      this.array = TimeBinary.fromString(array);
+    } else {
+      this.array = array;
+    }
   }
 
   static fromTime(now, hours, startTime = null, endTime = null) {
@@ -14,37 +18,46 @@ class TimeBinary {
     const end = endTime
       ? Math.ceil((endTime - now) / timeUnit)
       : hours * 6;
-    let result = BigInt(0);
-    for (let i = 0; i < hours * 6; i += 1) {
-      result <<= 1n;
-      result += begin <= i && i < end ? 1n : 0n;
+    const result = new Array(hours * 6).fill(false);
+    for (const i in result) {
+      result[i] = begin <= i && i < end;
     }
     return new TimeBinary(now, hours, result);
   }
 
   static blankTime(now, hours) {
-    return new TimeBinary(now, hours, (1n << BigInt(hours * 6)) - 1n);
+    return new TimeBinary(now, hours, new Array(hours * 6).fill(1));
   }
 
-  print(print = false) {
-    const n = 1n << BigInt(this.hours * 6);
-    const result = (n + this.binary).toString(2).slice(1);
-    if (print) {
-      console.log(result, result.length);
+  static fromString(now, s) {
+    const result = new Array(s.length).fill(false);
+    for (const i in s) {
+      result[i] = s[i] === '1';
     }
-    return result;
+    return new TimeBinary(now, result.length, result);
+  }
+
+  toString() {
+    return this.array.map((value) => (value ? '1' : '0')).join('');
+  }
+
+  print() {
+    console.log(this.toString(), this.array.length);
   }
 
   mix(t) {
-    return new TimeBinary(this.now, this.hours, this.binary & t.binary);
+    const result = this.array.map((value, i) => (value && t.array[i]));
+    return new TimeBinary(this.now, this.hours, result);
   }
 
   not() {
-    return new TimeBinary(this.now, this.hours, ~this.binary);
+    const result = this.array.map((value) => (!value));
+    return new TimeBinary(this.now, this.hours, result);
   }
 
   union(t) {
-    return new TimeBinary(this.now, this.hours, this.binary | t.binary);
+    const result = this.array.map((value, i) => (value || t.array[i]));
+    return new TimeBinary(this.now, this.hours, result);
   }
 }
 

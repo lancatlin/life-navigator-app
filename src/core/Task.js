@@ -1,8 +1,10 @@
+import uuid from 'react-native-uuid';
 import TimeBinary from './TimeBinary';
 import { tomorrow } from './utils';
 
 class Task {
   constructor(props) {
+    this.id = uuid.v4();
     Object.assign(this, props);
   }
 

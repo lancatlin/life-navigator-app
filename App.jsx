@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Text } from 'react-native';
+import { Text, LogBox } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -19,6 +19,8 @@ import ExecuteScreen from './src/screens/ExecuteScreen';
 
 import { Provider as AuthProvider, Context as AuthContext } from './src/context/AuthContext';
 
+LogBox.ignoreLogs(['Setting a timer']);
+
 const Stack = createStackNavigator();
 
 const StackCreate = () => (
@@ -31,8 +33,8 @@ const Tab = createBottomTabNavigator();
 
 const goalsFlow = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Goals List" component={GoalsScreen} options={{ headerTitleAlign: 'center' }} />
-    <Stack.Screen name="Detail" component={GoalDetailScreen} options={({ route }) => ({ headerTitleAlign: 'center', title: route.params.goal })} />
+    <Stack.Screen name="GoalList" component={GoalsScreen} options={{ headerTitleAlign: 'center' }} />
+    <Stack.Screen name="GoalDetail" component={GoalDetailScreen} options={({ route }) => ({ headerTitleAlign: 'center', title: route.params.goal })} />
   </Stack.Navigator>
 );
 
@@ -45,6 +47,20 @@ const settings = () => (
 const scheduleFlow = () => (
   <Stack.Navigator>
     <Stack.Screen name="Schedule" component={ScheduleScreen} options={{ headerTitleAlign: 'center' }} />
+  </Stack.Navigator>
+);
+
+const sessionsFlow = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Sessions" component={SessionsScreen} options={{ headerTitleAlign: 'center' }} />
+    <Stack.Screen
+      name="NewSession"
+      component={NewSessionScreen}
+      options={{
+        headerTitleAlign: 'center',
+      }}
+
+    />
   </Stack.Navigator>
 );
 
@@ -63,11 +79,10 @@ const App = () => {
   return (
     <NavigationContainer>
       {
-        state.token
+        true
           ? (
             <Tab.Navigator>
-              <Tab.Screen name="Sessions" component={SessionsScreen} />
-              <Tab.Screen name="NewSession" component={NewSessionScreen} />
+              <Tab.Screen name="Sessions" component={sessionsFlow} />
               <Tab.Screen name="Create" component={StackCreate} />
               <Tab.Screen name="Home" component={HomeScreen} />
               <Tab.Screen name="Goals" component={goalsFlow} />
