@@ -41,6 +41,7 @@
     "react-native-appearance": "^0.3.4",
     "react-native-common-date-picker": "^2.3.3",
     "react-native-countdown-component": "^2.7.1",
+    "react-native-dotenv": "^2.5.5",
     "react-native-element": "^1.2.1",
     "react-native-elements": "^3.2.0",
     "react-native-error-boundary": "^1.1.9",
